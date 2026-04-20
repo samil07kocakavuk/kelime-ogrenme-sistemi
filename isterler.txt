@@ -183,6 +183,12 @@ KOD KALITESI VE CLEAN CODE ONCELIGI
 - Kod kendi kendini mümkün olduğunca dokümante etmeli.
 - İsimlendirme açık ve alan odaklı olmalı.
 - Sürekli refactor yapılmalı.
+- Kodun önce insan tarafından okunacağı kabul edilmeli.
+- Yorumlar kodun ne yaptığını değil, neden o şekilde yazıldığını açıklamalı.
+- Parametre sayısı gereksiz şekilde artırılmamalı.
+- Derin hiyerarşi ve gereksiz inheritance yapılarından uzak durulmalı.
+- İnceleme, hata ayıklama ve geliştirme süresini azaltacak şekilde yazılmalı.
+- Projede clean code uygulama detayları ayrıca `CLEAN_CODE_RULES.md` içinde tutulmalıdır.
 
 AI ILE GELISTIRME NOTU
 - Proje yapay zeka desteğiyle geliştirilebilir; ancak çıktı mutlaka gözden geçirilmelidir.
