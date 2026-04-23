@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     tvEmptyState.setText("Tüm " + totalSeedCount + " kelime zaten havuzda.");
                     return;
                 }
-                tvEmptyState.setText(importedCount + " yeni kelime havuza eklendi.");
+                tvEmptyState.setText(importedCount + " yeni kelime internetten havuza eklendi.");
             });
         });
     }
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updatePoolButton(int currentWordCount) {
         int totalSeedCount = AppContainer.from(this).wordRepository.getSeedWordCount();
-        btnUpdatePool.setText(currentWordCount == 0 ? "Havuz Oluştur" : "Havuz Güncelle (50)");
+        btnUpdatePool.setText(currentWordCount == 0 ? "Havuz Oluştur" : "Havuz Güncelle (20)");
         btnUpdatePool.setEnabled(currentWordCount < totalSeedCount);
     }
 
