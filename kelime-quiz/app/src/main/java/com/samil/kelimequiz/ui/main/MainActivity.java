@@ -1,31 +1,160 @@
 package com.samil.kelimequiz.ui.main;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.samil.kelimequiz.R;
+import com.samil.kelimequiz.data.local.entity.WordEntity;
+import com.samil.kelimequiz.domain.model.WordDetails;
 import com.samil.kelimequiz.ui.auth.LoginActivity;
+import com.samil.kelimequiz.ui.word.AddWordActivity;
+import com.samil.kelimequiz.util.AppContainer;
+import com.samil.kelimequiz.util.AppExecutors;
 import com.samil.kelimequiz.util.SessionManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+    private final List<WordEntity> loadedWords = new ArrayList<>();
+    private ArrayAdapter<String> wordAdapter;
+    private TextView tvEmptyState;
+    private SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SessionManager sessionManager = new SessionManager(this);
+        sessionManager = new SessionManager(this);
         if (!sessionManager.isLoggedIn()) {
             openLoginAndClose();
             return;
         }
 
+        tvEmptyState = findViewById(R.id.tvEmptyState);
+        ListView listWords = findViewById(R.id.listWords);
+        wordAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>());
+        listWords.setAdapter(wordAdapter);
+
+        MaterialButton btnAddWord = findViewById(R.id.btnAddWord);
         MaterialButton btnLogout = findViewById(R.id.btnLogout);
+        btnAddWord.setOnClickListener(v -> startActivity(new Intent(this, AddWordActivity.class)));
         btnLogout.setOnClickListener(v -> {
             sessionManager.clear();
             openLoginAndClose();
+        });
+
+        listWords.setOnItemClickListener((parent, view, position, id) -> showWordDetails(loadedWords.get(position).wordId));
+        listWords.setOnItemLongClickListener((parent, view, position, id) -> {
+            showDeleteDialog(loadedWords.get(position));
+            return true;
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (sessionManager != null && sessionManager.isLoggedIn()) {
+            loadWords();
+        }
+    }
+
+    private void loadWords() {
+        int userId = sessionManager.getUserId();
+        AppExecutors.io().execute(() -> {
+            List<WordEntity> words = AppContainer.from(this).wordRepository.listWords(userId);
+            runOnUiThread(() -> showWords(words));
+        });
+    }
+
+    private void showWords(List<WordEntity> words) {
+        loadedWords.clear();
+        loadedWords.addAll(words);
+
+        List<String> lines = new ArrayList<>();
+        for (WordEntity word : words) {
+            lines.add(word.engWord + "  •  " + word.trWord);
+        }
+
+        wordAdapter.clear();
+        wordAdapter.addAll(lines);
+        wordAdapter.notifyDataSetChanged();
+        tvEmptyState.setText(words.isEmpty() ? "Henüz kelime eklenmedi." : "Bir kelimeye dokunup detaylarını görebilirsin.");
+    }
+
+    private void showWordDetails(int wordId) {
+        int userId = sessionManager.getUserId();
+        AppExecutors.io().execute(() -> {
+            WordDetails details = AppContainer.from(this).wordRepository.getWordDetails(userId, wordId);
+            runOnUiThread(() -> showWordDialog(details));
+        });
+    }
+
+    private void showWordDialog(WordDetails details) {
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_word_details, null, false);
+        ImageView ivWordImage = dialogView.findViewById(R.id.ivWordImage);
+        TextView tvMeaning = dialogView.findViewById(R.id.tvMeaning);
+        TextView tvSamples = dialogView.findViewById(R.id.tvSamples);
+
+        tvMeaning.setText(details.getTrWord());
+        tvSamples.setText(buildSamplesText(details));
+        bindWordImage(ivWordImage, details.getPicturePath());
+
+        new AlertDialog.Builder(this)
+                .setTitle(details.getEngWord())
+                .setView(dialogView)
+                .setPositiveButton("Tamam", null)
+                .show();
+    }
+
+    private String buildSamplesText(WordDetails details) {
+        if (details.getSampleTexts().isEmpty()) {
+            return "Örnek cümle yok.";
+        }
+
+        StringBuilder builder = new StringBuilder();
+        for (String sample : details.getSampleTexts()) {
+            builder.append("- ").append(sample).append("\n");
+        }
+        return builder.toString().trim();
+    }
+
+    private void bindWordImage(ImageView imageView, String picturePath) {
+        if (picturePath == null || picturePath.trim().isEmpty()) {
+            imageView.setVisibility(View.GONE);
+            return;
+        }
+
+        imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+        imageView.setVisibility(View.VISIBLE);
+    }
+
+    private void showDeleteDialog(WordEntity word) {
+        new AlertDialog.Builder(this)
+                .setTitle("Kelimeyi sil")
+                .setMessage(word.engWord + " kelimesini silmek istiyor musun?")
+                .setNegativeButton("Vazgeç", null)
+                .setPositiveButton("Sil", (dialog, which) -> deleteWord(word.wordId))
+                .show();
+    }
+
+    private void deleteWord(int wordId) {
+        int userId = sessionManager.getUserId();
+        AppExecutors.io().execute(() -> {
+            AppContainer.from(this).wordRepository.deleteWord(userId, wordId);
+            runOnUiThread(this::loadWords);
         });
     }
 

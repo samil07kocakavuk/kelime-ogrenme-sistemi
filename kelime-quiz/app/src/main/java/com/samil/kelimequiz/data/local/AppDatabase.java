@@ -7,13 +7,21 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.samil.kelimequiz.data.local.dao.UserDao;
+import com.samil.kelimequiz.data.local.dao.WordDao;
+import com.samil.kelimequiz.data.local.dao.WordSampleDao;
 import com.samil.kelimequiz.data.local.entity.UserEntity;
+import com.samil.kelimequiz.data.local.entity.WordEntity;
+import com.samil.kelimequiz.data.local.entity.WordSampleEntity;
 
-@Database(entities = {UserEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {UserEntity.class, WordEntity.class, WordSampleEntity.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase instance;
 
     public abstract UserDao userDao();
+
+    public abstract WordDao wordDao();
+
+    public abstract WordSampleDao wordSampleDao();
 
     public static AppDatabase getInstance(Context context) {
         if (instance == null) {
