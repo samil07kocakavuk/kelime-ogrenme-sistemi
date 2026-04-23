@@ -1,0 +1,72 @@
+package com.samil.kelimequiz.ui.auth;
+
+import android.os.Bundle;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.samil.kelimequiz.R;
+import com.samil.kelimequiz.domain.model.AuthResult;
+import com.samil.kelimequiz.util.AppContainer;
+import com.samil.kelimequiz.util.AppExecutors;
+
+public class RegisterActivity extends AppCompatActivity {
+    private TextInputEditText etUsername;
+    private TextInputEditText etPassword;
+    private TextInputEditText etPasswordRepeat;
+    private TextView tvStatusMessage;
+    private MaterialButton btnRegister;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+
+        etUsername = findViewById(R.id.etUsername);
+        etPassword = findViewById(R.id.etPassword);
+        etPasswordRepeat = findViewById(R.id.etPasswordRepeat);
+        tvStatusMessage = findViewById(R.id.tvStatusMessage);
+        btnRegister = findViewById(R.id.btnRegister);
+
+        AppExecutors.io().execute(() -> AppContainer.from(this));
+        btnRegister.setOnClickListener(v -> register());
+    }
+
+    private void register() {
+        String username = getInput(etUsername);
+        String password = getInput(etPassword);
+        String passwordRepeat = getInput(etPasswordRepeat);
+        if (!password.equals(passwordRepeat)) {
+            showStatus("Şifreler eşleşmiyor.");
+            return;
+        }
+
+        showStatus("Kayıt oluşturuluyor...");
+        btnRegister.setEnabled(false);
+        AppExecutors.io().execute(() -> {
+            AuthResult result = AppContainer.from(this).authRepository.register(username, password);
+            runOnUiThread(() -> handleRegisterResult(result));
+        });
+    }
+
+    private void handleRegisterResult(AuthResult result) {
+        btnRegister.setEnabled(true);
+        if (!result.isSuccess()) {
+            showStatus(result.getMessage());
+            return;
+        }
+
+        showStatus("Kayıt başarılı.");
+        finish();
+    }
+
+    private void showStatus(String message) {
+        tvStatusMessage.setText(message);
+    }
+
+    private String getInput(TextInputEditText input) {
+        return input.getText() == null ? "" : input.getText().toString();
+    }
+}
