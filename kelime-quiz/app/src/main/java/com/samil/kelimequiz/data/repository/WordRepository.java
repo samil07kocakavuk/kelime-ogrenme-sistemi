@@ -11,13 +11,17 @@ import com.samil.kelimequiz.domain.model.WordDetails;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class WordRepository {
-    private static final int DEFAULT_BATCH_SIZE = 50;
+    private static final int DEFAULT_BATCH_SIZE = 20;
+    private static final String REMOTE_WORD_POOL_URL = "https://raw.githubusercontent.com/samil07kocakavuk/kelime-quiz/story-2-word-module/word-pool/remote_words_100.json";
 
     private final Context context;
     private final WordDao wordDao;
@@ -46,7 +50,7 @@ public class WordRepository {
     }
 
     public int getSeedWordCount() {
-        return loadSeedWords().size();
+        return loadAvailableSeedWords().size();
     }
 
     public void addWord(int userId, String engWord, String trWord, String picturePath, String samplesText) {
@@ -136,30 +140,57 @@ public class WordRepository {
         return trimmed.isEmpty() ? null : trimmed;
     }
 
-    private List<SeedWord> loadSeedWords() {
+    private List<SeedWord> loadAvailableSeedWords() {
+        try {
+            return loadRemoteSeedWords();
+        } catch (Exception ignored) {
+            return loadLocalSeedWords();
+        }
+    }
+
+    private List<SeedWord> loadLocalSeedWords() {
         try (InputStream inputStream = context.getAssets().open("seed_words_100.json");
              Scanner scanner = new Scanner(inputStream).useDelimiter("\\A")) {
             String json = scanner.hasNext() ? scanner.next() : "[]";
-            JSONArray items = new JSONArray(json);
-            List<SeedWord> words = new ArrayList<>();
-            for (int i = 0; i < items.length(); i++) {
-                JSONObject item = items.getJSONObject(i);
-                words.add(new SeedWord(
-                        item.getString("engWord"),
-                        item.getString("trWord"),
-                        item.getString("picturePath"),
-                        item.getString("samplesText")
-                ));
-            }
-            return words;
+            return parseSeedWords(json);
         } catch (Exception e) {
             throw new IllegalStateException("Hazır kelime havuzu yüklenemedi.", e);
         }
     }
 
+    private List<SeedWord> loadRemoteSeedWords() throws Exception {
+        HttpURLConnection connection = (HttpURLConnection) new URL(REMOTE_WORD_POOL_URL).openConnection();
+        connection.setConnectTimeout(7000);
+        connection.setReadTimeout(7000);
+        connection.setRequestMethod("GET");
+
+        try (InputStream inputStream = new BufferedInputStream(connection.getInputStream());
+             Scanner scanner = new Scanner(inputStream).useDelimiter("\\A")) {
+            String json = scanner.hasNext() ? scanner.next() : "[]";
+            return parseSeedWords(json);
+        } finally {
+            connection.disconnect();
+        }
+    }
+
+    private List<SeedWord> parseSeedWords(String json) throws Exception {
+        JSONArray items = new JSONArray(json);
+        List<SeedWord> words = new ArrayList<>();
+        for (int i = 0; i < items.length(); i++) {
+            JSONObject item = items.getJSONObject(i);
+            words.add(new SeedWord(
+                    item.getString("engWord"),
+                    item.getString("trWord"),
+                    item.getString("picturePath"),
+                    item.getString("samplesText")
+            ));
+        }
+        return words;
+    }
+
     private List<SeedWord> findMissingSeedWords(int userId) {
         List<SeedWord> missingWords = new ArrayList<>();
-        for (SeedWord seedWord : loadSeedWords()) {
+        for (SeedWord seedWord : loadAvailableSeedWords()) {
             if (wordDao.findByUserAndEnglishWord(userId, seedWord.engWord) == null) {
                 missingWords.add(seedWord);
             }
