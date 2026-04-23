@@ -11,6 +11,7 @@ import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.domain.model.AuthResult;
 import com.samil.kelimequiz.util.AppContainer;
 import com.samil.kelimequiz.util.AppExecutors;
+import com.samil.kelimequiz.util.NavigationHelper;
 
 public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText etUsername;
@@ -30,6 +31,8 @@ public class RegisterActivity extends AppCompatActivity {
         tvStatusMessage = findViewById(R.id.tvStatusMessage);
         btnRegister = findViewById(R.id.btnRegister);
 
+        NavigationHelper.bindTopBar(this);
+        NavigationHelper.bindBottomBar(this);
         AppExecutors.io().execute(() -> AppContainer.from(this));
         btnRegister.setOnClickListener(v -> register());
     }

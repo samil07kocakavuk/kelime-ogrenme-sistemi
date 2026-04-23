@@ -87,6 +87,10 @@ public class AuthRepository {
         return AuthResult.success(user.userId, "Şifre güncellendi.");
     }
 
+    public UserEntity findUserById(int userId) {
+        return userDao.findById(userId);
+    }
+
     private AuthResult validateCredentials(String username, String password) {
         if (username.isEmpty()) {
             return AuthResult.fail("Kullanıcı adı boş bırakılamaz.");

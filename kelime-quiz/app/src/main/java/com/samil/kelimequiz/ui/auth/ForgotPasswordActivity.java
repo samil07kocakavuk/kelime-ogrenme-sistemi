@@ -11,6 +11,7 @@ import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.domain.model.AuthResult;
 import com.samil.kelimequiz.util.AppContainer;
 import com.samil.kelimequiz.util.AppExecutors;
+import com.samil.kelimequiz.util.NavigationHelper;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
     private TextInputEditText etUsername;
@@ -30,6 +31,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         tvStatusMessage = findViewById(R.id.tvStatusMessage);
         btnResetPassword = findViewById(R.id.btnResetPassword);
 
+        NavigationHelper.bindTopBar(this);
+        NavigationHelper.bindBottomBar(this);
         AppExecutors.io().execute(() -> AppContainer.from(this));
         btnResetPassword.setOnClickListener(v -> resetPassword());
     }

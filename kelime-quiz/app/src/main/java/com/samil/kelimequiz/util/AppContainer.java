@@ -16,7 +16,7 @@ public class AppContainer {
     private AppContainer(Context context) {
         AppDatabase database = AppDatabase.getInstance(context);
         authRepository = new AuthRepository(database.userDao(), new PasswordHasher());
-        wordRepository = new WordRepository(database.wordDao(), database.wordSampleDao());
+        wordRepository = new WordRepository(context, database.wordDao(), database.wordSampleDao());
     }
 
     public static AppContainer from(Context context) {
