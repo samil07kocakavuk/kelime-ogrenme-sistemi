@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvEmptyState;
     private ListView listWords;
     private MaterialButton btnViewWords;
+    private MaterialButton btnUpdatePool;
+    private MaterialButton btnLogout;
     private SessionManager sessionManager;
 
     @Override
@@ -51,10 +53,12 @@ public class MainActivity extends AppCompatActivity {
         listWords.setAdapter(wordAdapter);
 
         btnViewWords = findViewById(R.id.btnViewWords);
-        MaterialButton btnLogout = findViewById(R.id.btnLogout);
+        btnUpdatePool = findViewById(R.id.btnUpdatePool);
+        btnLogout = findViewById(R.id.btnLogout);
         NavigationHelper.bindTopBar(this);
         NavigationHelper.bindBottomBar(this);
         btnViewWords.setOnClickListener(v -> toggleWordList());
+        btnUpdatePool.setOnClickListener(v -> updatePool());
         btnLogout.setOnClickListener(v -> {
             sessionManager.clear();
             openLoginAndClose();
@@ -79,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
     private void loadWords() {
         int userId = sessionManager.getUserId();
         AppExecutors.io().execute(() -> {
-            AppContainer.from(this).wordRepository.ensureSeedWords(userId);
             List<WordEntity> words = AppContainer.from(this).wordRepository.listWords(userId);
             runOnUiThread(() -> showWords(words));
         });
@@ -96,6 +99,31 @@ public class MainActivity extends AppCompatActivity {
         if (words.isEmpty()) {
             setWordListVisible(false);
         }
+        updatePoolButton(words.size());
+    }
+
+    private void updatePool() {
+        int userId = sessionManager.getUserId();
+        tvEmptyState.setText("Kelime havuzu güncelleniyor...");
+        btnUpdatePool.setEnabled(false);
+        btnViewWords.setEnabled(false);
+        btnLogout.setEnabled(false);
+        AppExecutors.io().execute(() -> {
+            int importedCount = AppContainer.from(this).wordRepository.addNextSeedBatch(userId);
+            int totalSeedCount = AppContainer.from(this).wordRepository.getSeedWordCount();
+            List<WordEntity> words = AppContainer.from(this).wordRepository.listWords(userId);
+            runOnUiThread(() -> {
+                btnUpdatePool.setEnabled(true);
+                btnViewWords.setEnabled(true);
+                btnLogout.setEnabled(true);
+                showWords(words);
+                if (importedCount == 0) {
+                    tvEmptyState.setText("Tüm " + totalSeedCount + " kelime zaten havuzda.");
+                    return;
+                }
+                tvEmptyState.setText(importedCount + " yeni kelime havuza eklendi.");
+            });
+        });
     }
 
     private void toggleWordList() {
@@ -109,6 +137,12 @@ public class MainActivity extends AppCompatActivity {
         if (loadedWords.isEmpty()) {
             tvEmptyState.setText("Henüz kelime eklenmedi.");
         }
+    }
+
+    private void updatePoolButton(int currentWordCount) {
+        int totalSeedCount = AppContainer.from(this).wordRepository.getSeedWordCount();
+        btnUpdatePool.setText(currentWordCount == 0 ? "Havuz Oluştur" : "Havuz Güncelle (50)");
+        btnUpdatePool.setEnabled(currentWordCount < totalSeedCount);
     }
 
     private void showWordDetails(WordEntity word) {

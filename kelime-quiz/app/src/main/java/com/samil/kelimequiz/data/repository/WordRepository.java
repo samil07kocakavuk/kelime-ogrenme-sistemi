@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class WordRepository {
+    private static final int DEFAULT_BATCH_SIZE = 50;
+
     private final Context context;
     private final WordDao wordDao;
     private final WordSampleDao wordSampleDao;
@@ -27,14 +29,24 @@ public class WordRepository {
         this.wordSampleDao = wordSampleDao;
     }
 
-    public void ensureSeedWords(int userId) {
-        if (wordDao.countByUser(userId) > 0) {
-            return;
-        }
+    public int addNextSeedBatch(int userId) {
+        return addNextSeedBatch(userId, DEFAULT_BATCH_SIZE);
+    }
 
-        for (SeedWord seedWord : loadSeedWords()) {
+    public int addNextSeedBatch(int userId, int batchSize) {
+        int importedCount = 0;
+        for (SeedWord seedWord : findMissingSeedWords(userId)) {
             addWord(userId, seedWord.engWord, seedWord.trWord, seedWord.picturePath, seedWord.samplesText);
+            importedCount++;
+            if (importedCount >= batchSize) {
+                break;
+            }
         }
+        return importedCount;
+    }
+
+    public int getSeedWordCount() {
+        return loadSeedWords().size();
     }
 
     public void addWord(int userId, String engWord, String trWord, String picturePath, String samplesText) {
@@ -143,6 +155,16 @@ public class WordRepository {
         } catch (Exception e) {
             throw new IllegalStateException("Hazır kelime havuzu yüklenemedi.", e);
         }
+    }
+
+    private List<SeedWord> findMissingSeedWords(int userId) {
+        List<SeedWord> missingWords = new ArrayList<>();
+        for (SeedWord seedWord : loadSeedWords()) {
+            if (wordDao.findByUserAndEnglishWord(userId, seedWord.engWord) == null) {
+                missingWords.add(seedWord);
+            }
+        }
+        return missingWords;
     }
 
     private static final class SeedWord {
