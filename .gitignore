@@ -1,3 +1,7 @@
 deneme1/
-"Dönem Projesi(6 Sefer tekrar prensibi içeren kelime ezberleme oyunu).docx"
+.idea/
+*/.idea/
+*/.gradle/
+*/build/
+*/local.properties
 "Yazılım Yapımı - Birleşik Notlar.pdf"
