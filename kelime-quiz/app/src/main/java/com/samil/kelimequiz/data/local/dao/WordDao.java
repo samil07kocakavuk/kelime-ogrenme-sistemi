@@ -24,6 +24,9 @@ public interface WordDao {
     @Query("SELECT * FROM words WHERE userId = :userId ORDER BY createdAt DESC")
     List<WordEntity> listByUser(int userId);
 
+    @Query("SELECT COUNT(*) FROM words WHERE userId = :userId")
+    int countByUser(int userId);
+
     @Query("SELECT * FROM words WHERE userId = :userId AND wordId = :wordId LIMIT 1")
     WordEntity findByUserAndId(int userId, int wordId);
 

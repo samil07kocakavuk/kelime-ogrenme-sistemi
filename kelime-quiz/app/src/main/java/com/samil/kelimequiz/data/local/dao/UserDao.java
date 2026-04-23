@@ -16,4 +16,7 @@ public interface UserDao {
 
     @Query("UPDATE users SET passwordHash = :hash, passwordSalt = :salt, passwordIterations = :iterations WHERE userId = :userId")
     void updatePassword(int userId, String hash, String salt, int iterations);
+
+    @Query("SELECT * FROM users WHERE userId = :userId LIMIT 1")
+    UserEntity findById(int userId);
 }

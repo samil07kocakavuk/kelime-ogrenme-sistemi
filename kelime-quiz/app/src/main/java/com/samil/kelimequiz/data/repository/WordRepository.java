@@ -1,21 +1,40 @@
 package com.samil.kelimequiz.data.repository;
 
+import android.content.Context;
+
 import com.samil.kelimequiz.data.local.dao.WordDao;
 import com.samil.kelimequiz.data.local.dao.WordSampleDao;
 import com.samil.kelimequiz.data.local.entity.WordEntity;
 import com.samil.kelimequiz.data.local.entity.WordSampleEntity;
 import com.samil.kelimequiz.domain.model.WordDetails;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class WordRepository {
+    private final Context context;
     private final WordDao wordDao;
     private final WordSampleDao wordSampleDao;
 
-    public WordRepository(WordDao wordDao, WordSampleDao wordSampleDao) {
+    public WordRepository(Context context, WordDao wordDao, WordSampleDao wordSampleDao) {
+        this.context = context.getApplicationContext();
         this.wordDao = wordDao;
         this.wordSampleDao = wordSampleDao;
+    }
+
+    public void ensureSeedWords(int userId) {
+        if (wordDao.countByUser(userId) > 0) {
+            return;
+        }
+
+        for (SeedWord seedWord : loadSeedWords()) {
+            addWord(userId, seedWord.engWord, seedWord.trWord, seedWord.picturePath, seedWord.samplesText);
+        }
     }
 
     public void addWord(int userId, String engWord, String trWord, String picturePath, String samplesText) {
@@ -103,5 +122,40 @@ public class WordRepository {
         }
         String trimmed = value.trim();
         return trimmed.isEmpty() ? null : trimmed;
+    }
+
+    private List<SeedWord> loadSeedWords() {
+        try (InputStream inputStream = context.getAssets().open("seed_words_100.json");
+             Scanner scanner = new Scanner(inputStream).useDelimiter("\\A")) {
+            String json = scanner.hasNext() ? scanner.next() : "[]";
+            JSONArray items = new JSONArray(json);
+            List<SeedWord> words = new ArrayList<>();
+            for (int i = 0; i < items.length(); i++) {
+                JSONObject item = items.getJSONObject(i);
+                words.add(new SeedWord(
+                        item.getString("engWord"),
+                        item.getString("trWord"),
+                        item.getString("picturePath"),
+                        item.getString("samplesText")
+                ));
+            }
+            return words;
+        } catch (Exception e) {
+            throw new IllegalStateException("Hazır kelime havuzu yüklenemedi.", e);
+        }
+    }
+
+    private static final class SeedWord {
+        private final String engWord;
+        private final String trWord;
+        private final String picturePath;
+        private final String samplesText;
+
+        private SeedWord(String engWord, String trWord, String picturePath, String samplesText) {
+            this.engWord = engWord;
+            this.trWord = trWord;
+            this.picturePath = picturePath;
+            this.samplesText = samplesText;
+        }
     }
 }

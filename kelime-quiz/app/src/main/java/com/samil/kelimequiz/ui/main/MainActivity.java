@@ -6,21 +6,21 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.data.local.entity.WordEntity;
 import com.samil.kelimequiz.domain.model.WordDetails;
 import com.samil.kelimequiz.ui.auth.LoginActivity;
-import com.samil.kelimequiz.ui.word.AddWordActivity;
 import com.samil.kelimequiz.util.AppContainer;
 import com.samil.kelimequiz.util.AppExecutors;
+import com.samil.kelimequiz.util.NavigationHelper;
 import com.samil.kelimequiz.util.SessionManager;
 
 import java.util.ArrayList;
@@ -28,8 +28,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private final List<WordEntity> loadedWords = new ArrayList<>();
-    private ArrayAdapter<String> wordAdapter;
+    private WordCardAdapter wordAdapter;
     private TextView tvEmptyState;
+    private ListView listWords;
+    private MaterialButton btnViewWords;
     private SessionManager sessionManager;
 
     @Override
@@ -44,23 +46,26 @@ public class MainActivity extends AppCompatActivity {
         }
 
         tvEmptyState = findViewById(R.id.tvEmptyState);
-        ListView listWords = findViewById(R.id.listWords);
-        wordAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>());
+        listWords = findViewById(R.id.listWords);
+        wordAdapter = new WordCardAdapter(this, loadedWords, this::showWordDetails);
         listWords.setAdapter(wordAdapter);
 
-        MaterialButton btnAddWord = findViewById(R.id.btnAddWord);
+        btnViewWords = findViewById(R.id.btnViewWords);
         MaterialButton btnLogout = findViewById(R.id.btnLogout);
-        btnAddWord.setOnClickListener(v -> startActivity(new Intent(this, AddWordActivity.class)));
+        NavigationHelper.bindTopBar(this);
+        NavigationHelper.bindBottomBar(this);
+        btnViewWords.setOnClickListener(v -> toggleWordList());
         btnLogout.setOnClickListener(v -> {
             sessionManager.clear();
             openLoginAndClose();
         });
 
-        listWords.setOnItemClickListener((parent, view, position, id) -> showWordDetails(loadedWords.get(position).wordId));
         listWords.setOnItemLongClickListener((parent, view, position, id) -> {
             showDeleteDialog(loadedWords.get(position));
             return true;
         });
+
+        setWordListVisible(false);
     }
 
     @Override
@@ -74,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadWords() {
         int userId = sessionManager.getUserId();
         AppExecutors.io().execute(() -> {
+            AppContainer.from(this).wordRepository.ensureSeedWords(userId);
             List<WordEntity> words = AppContainer.from(this).wordRepository.listWords(userId);
             runOnUiThread(() -> showWords(words));
         });
@@ -83,15 +89,30 @@ public class MainActivity extends AppCompatActivity {
         loadedWords.clear();
         loadedWords.addAll(words);
 
-        List<String> lines = new ArrayList<>();
-        for (WordEntity word : words) {
-            lines.add(word.engWord + "  •  " + word.trWord);
-        }
-
         wordAdapter.clear();
-        wordAdapter.addAll(lines);
+        wordAdapter.addAll(words);
         wordAdapter.notifyDataSetChanged();
-        tvEmptyState.setText(words.isEmpty() ? "Henüz kelime eklenmedi." : "Bir kelimeye dokunup detaylarını görebilirsin.");
+        tvEmptyState.setText(words.isEmpty() ? "Henüz kelime eklenmedi." : "Eklenen kelimeleri butonla görüntüleyebilirsin.");
+        if (words.isEmpty()) {
+            setWordListVisible(false);
+        }
+    }
+
+    private void toggleWordList() {
+        boolean shouldShow = listWords.getVisibility() != View.VISIBLE;
+        setWordListVisible(shouldShow);
+    }
+
+    private void setWordListVisible(boolean visible) {
+        listWords.setVisibility(visible ? View.VISIBLE : View.GONE);
+        btnViewWords.setText(visible ? "Eklenen Kelimeleri Gizle" : "Eklenen Kelimeleri Gör");
+        if (loadedWords.isEmpty()) {
+            tvEmptyState.setText("Henüz kelime eklenmedi.");
+        }
+    }
+
+    private void showWordDetails(WordEntity word) {
+        showWordDetails(word.wordId);
     }
 
     private void showWordDetails(int wordId) {
@@ -137,7 +158,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+        Glide.with(this)
+                .load(picturePath)
+                .into(imageView);
         imageView.setVisibility(View.VISIBLE);
     }
 

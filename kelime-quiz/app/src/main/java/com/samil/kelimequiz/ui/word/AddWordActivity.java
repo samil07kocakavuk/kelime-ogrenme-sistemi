@@ -10,12 +10,15 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.util.AppContainer;
 import com.samil.kelimequiz.util.AppExecutors;
 import com.samil.kelimequiz.util.ImageStorage;
+import com.samil.kelimequiz.util.NavigationHelper;
 import com.samil.kelimequiz.util.SessionManager;
 
 public class AddWordActivity extends AppCompatActivity {
@@ -47,6 +50,8 @@ public class AddWordActivity extends AppCompatActivity {
         btnSaveWord = findViewById(R.id.btnSaveWord);
         MaterialButton btnChooseImage = findViewById(R.id.btnChooseImage);
 
+        NavigationHelper.bindTopBar(this);
+        NavigationHelper.bindBottomBar(this);
         ivSelectedImage.setVisibility(View.GONE);
         btnChooseImage.setOnClickListener(v -> imagePickerLauncher.launch("image/*"));
         btnSaveWord.setOnClickListener(v -> saveWord());
@@ -91,7 +96,7 @@ public class AddWordActivity extends AppCompatActivity {
             return;
         }
         tvSelectedImage.setText("Görsel seçildi.");
-        ivSelectedImage.setImageURI(uri);
+        Glide.with(this).load(uri).into(ivSelectedImage);
         ivSelectedImage.setVisibility(View.VISIBLE);
     }
 
