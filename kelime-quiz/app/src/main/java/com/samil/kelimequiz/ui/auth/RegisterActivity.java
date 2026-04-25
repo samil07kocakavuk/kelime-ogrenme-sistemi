@@ -1,8 +1,6 @@
 package com.samil.kelimequiz.ui.auth;
 
 import android.os.Bundle;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +13,7 @@ import com.samil.kelimequiz.domain.model.AuthResult;
 import com.samil.kelimequiz.util.AppContainer;
 import com.samil.kelimequiz.util.AppExecutors;
 import com.samil.kelimequiz.util.NavigationHelper;
+import com.samil.kelimequiz.util.PasswordVisibilityToggle;
 
 public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText etUsername;
@@ -24,8 +23,6 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputLayout tilPasswordRepeat;
     private TextView tvStatusMessage;
     private MaterialButton btnRegister;
-    private boolean passwordVisible;
-    private boolean passwordRepeatVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,35 +38,14 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
 
         NavigationHelper.bindTopBar(this);
-        NavigationHelper.bindBottomBar(this);
         AppExecutors.io().execute(() -> AppContainer.from(this));
         bindPasswordToggles();
         btnRegister.setOnClickListener(v -> register());
     }
 
     private void bindPasswordToggles() {
-        setPasswordVisible(false);
-        setPasswordRepeatVisible(false);
-        tilPassword.setEndIconOnClickListener(v -> setPasswordVisible(!passwordVisible));
-        tilPasswordRepeat.setEndIconOnClickListener(v -> setPasswordRepeatVisible(!passwordRepeatVisible));
-    }
-
-    private void setPasswordVisible(boolean visible) {
-        passwordVisible = visible;
-        etPassword.setTransformationMethod(visible
-                ? HideReturnsTransformationMethod.getInstance()
-                : PasswordTransformationMethod.getInstance());
-        tilPassword.setEndIconDrawable(visible ? R.drawable.ic_eye : R.drawable.ic_eye_off);
-        etPassword.setSelection(etPassword.length());
-    }
-
-    private void setPasswordRepeatVisible(boolean visible) {
-        passwordRepeatVisible = visible;
-        etPasswordRepeat.setTransformationMethod(visible
-                ? HideReturnsTransformationMethod.getInstance()
-                : PasswordTransformationMethod.getInstance());
-        tilPasswordRepeat.setEndIconDrawable(visible ? R.drawable.ic_eye : R.drawable.ic_eye_off);
-        etPasswordRepeat.setSelection(etPasswordRepeat.length());
+        new PasswordVisibilityToggle(tilPassword, etPassword).bind();
+        new PasswordVisibilityToggle(tilPasswordRepeat, etPasswordRepeat).bind();
     }
 
     private void register() {

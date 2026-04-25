@@ -6,6 +6,8 @@ import com.samil.kelimequiz.domain.model.AuthResult;
 import com.samil.kelimequiz.util.security.HashResult;
 import com.samil.kelimequiz.util.security.PasswordHasher;
 
+import java.util.Locale;
+
 public class AuthRepository {
     private static final int MIN_PASSWORD_LENGTH = 6;
 
@@ -105,6 +107,6 @@ public class AuthRepository {
         if (username == null) {
             return "";
         }
-        return username.trim().toLowerCase();
+        return username.trim().toLowerCase(Locale.ROOT);
     }
 }

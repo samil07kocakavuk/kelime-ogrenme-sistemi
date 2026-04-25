@@ -116,6 +116,4 @@
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </ScrollView>
-
-    <include layout="@layout/include_bottom_nav" />
 </LinearLayout>

@@ -124,11 +124,6 @@ public class WordPoolActivity extends AppCompatActivity implements WordCardAdapt
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        NavigationHelper.redirectToMain(this);
-    }
-
     private void openLoginAndClose() {
         startActivity(new Intent(this, LoginActivity.class));
         finish();

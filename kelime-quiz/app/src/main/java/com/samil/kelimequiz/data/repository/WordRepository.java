@@ -28,14 +28,12 @@ public class WordRepository {
     }
 
     public int addInitialSeedWords(int userId) {
-        if (!wordDao.listByUser(userId).isEmpty()) {
-            return 0;
-        }
-
         int importedCount = 0;
         for (SeedWord seedWord : loadAvailableSeedWords()) {
-            addWord(userId, seedWord.engWord, seedWord.trWord, seedWord.picturePath, seedWord.samplesText);
-            importedCount++;
+            if (wordDao.findByUserAndEnglishWord(userId, seedWord.engWord) == null) {
+                addWord(userId, seedWord.engWord, seedWord.trWord, seedWord.picturePath, seedWord.samplesText);
+                importedCount++;
+            }
         }
         return importedCount;
     }

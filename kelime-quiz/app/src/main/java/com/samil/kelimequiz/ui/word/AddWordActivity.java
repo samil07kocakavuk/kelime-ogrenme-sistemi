@@ -1,5 +1,6 @@
 package com.samil.kelimequiz.ui.word;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.samil.kelimequiz.R;
+import com.samil.kelimequiz.ui.auth.LoginActivity;
 import com.samil.kelimequiz.util.AppContainer;
 import com.samil.kelimequiz.util.AppExecutors;
 import com.samil.kelimequiz.util.ImageStorage;
@@ -41,6 +43,11 @@ public class AddWordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!new SessionManager(this).isLoggedIn()) {
+            openLoginAndClose();
+            return;
+        }
+
         setContentView(R.layout.activity_add_word);
 
         tilEngWord = findViewById(R.id.tilEngWord);
@@ -110,11 +117,6 @@ public class AddWordActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        NavigationHelper.redirectToMain(this);
-    }
-
     private void onImagePicked(Uri uri) {
         selectedImageUri = uri;
         if (uri == null) {
@@ -134,5 +136,10 @@ public class AddWordActivity extends AppCompatActivity {
 
     private void showStatus(String message) {
         Snackbar.make(btnSaveWord, message, Snackbar.LENGTH_SHORT).show();
+    }
+
+    private void openLoginAndClose() {
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 }
