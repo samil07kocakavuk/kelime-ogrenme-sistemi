@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        NavigationHelper.bindTopBar(this);
+        NavigationHelper.bindTopBar(this, false);
         NavigationHelper.bindBottomBar(this);
     }
 

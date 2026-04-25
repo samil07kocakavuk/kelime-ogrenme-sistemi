@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.samil.kelimequiz.R;
@@ -22,11 +22,9 @@ import com.samil.kelimequiz.util.AppExecutors;
 import com.samil.kelimequiz.util.NavigationHelper;
 import com.samil.kelimequiz.util.SessionManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class WordPoolActivity extends AppCompatActivity {
-    private final List<WordEntity> loadedWords = new ArrayList<>();
+public class WordPoolActivity extends AppCompatActivity implements WordCardAdapter.WordActionListener {
     private WordCardAdapter wordAdapter;
     private TextView tvEmptyState;
     private SessionManager sessionManager;
@@ -43,16 +41,12 @@ public class WordPoolActivity extends AppCompatActivity {
         }
 
         tvEmptyState = findViewById(R.id.tvEmptyState);
-        ListView listWords = findViewById(R.id.listWords);
-        wordAdapter = new WordCardAdapter(this, loadedWords, this::showWordDetails);
-        listWords.setAdapter(wordAdapter);
+        RecyclerView rvWords = findViewById(R.id.rvWords);
+        wordAdapter = new WordCardAdapter(this);
+        rvWords.setAdapter(wordAdapter);
 
-        NavigationHelper.bindTopBar(this);
+        NavigationHelper.bindTopBar(this, false);
         NavigationHelper.bindBottomBar(this);
-        listWords.setOnItemLongClickListener((parent, view, position, id) -> {
-            showDeleteDialog(loadedWords.get(position));
-            return true;
-        });
     }
 
     @Override
@@ -69,20 +63,15 @@ public class WordPoolActivity extends AppCompatActivity {
         AppExecutors.io().execute(() -> {
             AppContainer.from(this).wordRepository.addInitialSeedWords(userId);
             List<WordEntity> words = AppContainer.from(this).wordRepository.listWords(userId);
-            runOnUiThread(() -> showWords(words));
+            runOnUiThread(() -> {
+                wordAdapter.setWords(words);
+                tvEmptyState.setText(words.isEmpty() ? "Henüz kelime eklenmedi." : "Kelime kartlarına dokunarak detayları görebilirsin.");
+            });
         });
     }
 
-    private void showWords(List<WordEntity> words) {
-        loadedWords.clear();
-        loadedWords.addAll(words);
-        wordAdapter.clear();
-        wordAdapter.addAll(words);
-        wordAdapter.notifyDataSetChanged();
-        tvEmptyState.setText(words.isEmpty() ? "Henüz kelime eklenmedi." : "Kelime kartlarına dokunarak detayları görebilirsin.");
-    }
-
-    private void showWordDetails(WordEntity word) {
+    @Override
+    public void onDetailRequested(WordEntity word) {
         int userId = sessionManager.getUserId();
         AppExecutors.io().execute(() -> {
             WordDetails details = AppContainer.from(this).wordRepository.getWordDetails(userId, word.wordId);
@@ -90,21 +79,19 @@ public class WordPoolActivity extends AppCompatActivity {
         });
     }
 
-    private void showWordDialog(WordDetails details) {
-        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_word_details, null, false);
-        ImageView ivWordImage = dialogView.findViewById(R.id.ivWordImage);
-        TextView tvMeaning = dialogView.findViewById(R.id.tvMeaning);
-        TextView tvSamples = dialogView.findViewById(R.id.tvSamples);
-
-        tvMeaning.setText(details.getTrWord());
-        tvSamples.setText(buildSamplesText(details));
-        bindWordImage(ivWordImage, details.getPicturePath());
-
+    @Override
+    public void onDeleteRequested(WordEntity word) {
         new AlertDialog.Builder(this)
-                .setTitle(details.getEngWord())
-                .setView(dialogView)
-                .setPositiveButton("Tamam", null)
+                .setTitle("Kelimeyi sil")
+                .setMessage(word.engWord + " kelimesini silmek istiyor musun?")
+                .setNegativeButton("Vazgeç", null)
+                .setPositiveButton("Sil", (dialog, which) -> deleteWord(word.wordId))
                 .show();
+    }
+
+    private void showWordDialog(WordDetails details) {
+        WordDetailBottomSheet bottomSheet = new WordDetailBottomSheet(details);
+        bottomSheet.show(getSupportFragmentManager(), "WordDetail");
     }
 
     private String buildSamplesText(WordDetails details) {
@@ -129,21 +116,17 @@ public class WordPoolActivity extends AppCompatActivity {
         imageView.setVisibility(View.VISIBLE);
     }
 
-    private void showDeleteDialog(WordEntity word) {
-        new AlertDialog.Builder(this)
-                .setTitle("Kelimeyi sil")
-                .setMessage(word.engWord + " kelimesini silmek istiyor musun?")
-                .setNegativeButton("Vazgeç", null)
-                .setPositiveButton("Sil", (dialog, which) -> deleteWord(word.wordId))
-                .show();
-    }
-
     private void deleteWord(int wordId) {
         int userId = sessionManager.getUserId();
         AppExecutors.io().execute(() -> {
             AppContainer.from(this).wordRepository.deleteWord(userId, wordId);
             runOnUiThread(this::loadWords);
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        NavigationHelper.redirectToMain(this);
     }
 
     private void openLoginAndClose() {

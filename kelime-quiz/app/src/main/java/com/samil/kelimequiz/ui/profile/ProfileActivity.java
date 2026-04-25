@@ -34,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
         MaterialButton btnWordPool = findViewById(R.id.btnWordPool);
         MaterialButton btnLogout = findViewById(R.id.btnLogout);
 
-        NavigationHelper.bindTopBar(this);
+        NavigationHelper.bindTopBar(this, false);
         NavigationHelper.bindBottomBar(this);
         btnWordPool.setOnClickListener(v -> startActivity(new Intent(this, WordPoolActivity.class)));
         btnLogout.setOnClickListener(v -> {
@@ -55,6 +55,11 @@ public class ProfileActivity extends AppCompatActivity {
             return;
         }
         tvProfileInfo.setText("Kullanıcı adı: " + user.username);
+    }
+
+    @Override
+    public void onBackPressed() {
+        NavigationHelper.redirectToMain(this);
     }
 
     private void openLoginAndClose() {
