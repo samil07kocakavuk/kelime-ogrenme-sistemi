@@ -1,9 +1,16 @@
 <resources>
-    <color name="purple_500">#5B4CF0</color>
-    <color name="purple_700">#4033BE</color>
-    <color name="teal_200">#5EEAD4</color>
-    <color name="surface">#F8FAFC</color>
-    <color name="text_primary">#0F172A</color>
-    <color name="text_secondary">#475569</color>
+    <color name="purple_500">#7C3AED</color>
+    <color name="purple_700">#5B21B6</color>
+    <color name="teal_200">#2DD4BF</color>
+    <color name="surface">#08111F</color>
+    <color name="surface_soft">#101B2E</color>
+    <color name="surface_elevated">#172338</color>
+    <color name="card">#F8FBFF</color>
+    <color name="card_muted">#EEF4FF</color>
+    <color name="accent">#FBBF24</color>
+    <color name="text_primary">#EAF1FF</color>
+    <color name="text_secondary">#9FB0C8</color>
+    <color name="text_dark">#0F172A</color>
+    <color name="text_dark_secondary">#64748B</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

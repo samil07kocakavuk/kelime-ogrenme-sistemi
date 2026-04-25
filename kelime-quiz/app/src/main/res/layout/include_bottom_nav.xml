@@ -2,18 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:elevation="8dp"
+    android:background="@drawable/bg_bottom_nav"
+    android:elevation="12dp"
     android:gravity="center"
     android:orientation="horizontal"
     android:paddingStart="12dp"
-    android:paddingTop="8dp"
+    android:paddingTop="10dp"
     android:paddingEnd="12dp"
-    android:paddingBottom="8dp">
+    android:paddingBottom="12dp">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnNavHome"
-        style="@style/Widget.Material3.Button.TextButton"
+        style="@style/AppButtonGhost"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -21,7 +21,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnNavAdd"
-        style="@style/Widget.Material3.Button"
+        style="@style/AppButtonPrimary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -29,7 +29,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnNavProfile"
-        style="@style/Widget.Material3.Button.TextButton"
+        style="@style/AppButtonGhost"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

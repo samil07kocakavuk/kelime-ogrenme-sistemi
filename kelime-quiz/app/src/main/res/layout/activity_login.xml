@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/surface">
+    android:background="@drawable/bg_app_gradient">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,8 +15,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
+            app:cardBackgroundColor="@color/card"
             app:cardCornerRadius="24dp"
-            app:cardElevation="4dp">
+            app:cardElevation="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -28,7 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Kelime Quiz"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/text_dark"
                     android:textSize="28sp"
                     android:textStyle="bold" />
 
@@ -37,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Güvenli kullanıcı girişi"
-                    android:textColor="@color/text_secondary" />
+                    android:textColor="@color/text_dark_secondary" />
 
                 <TextView
                     android:id="@+id/tvStatusMessage"
@@ -48,6 +49,7 @@
                     android:textColor="@color/purple_700" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/AppInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
@@ -61,6 +63,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/AppInput"
                     android:id="@+id/tilPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -74,11 +77,13 @@
                         android:id="@+id/etPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:textColor="@color/text_dark" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnLogin"
+                    style="@style/AppButtonPrimary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
@@ -86,7 +91,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnGoRegister"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    style="@style/AppButtonSecondary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -94,7 +99,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnForgotPassword"
-                    style="@style/Widget.Material3.Button.TextButton"
+                    style="@style/AppButtonGhost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
