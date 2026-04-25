@@ -26,6 +26,14 @@ public class SessionManager {
     }
 
     public void clear() {
+        clearSavedSession(prefs);
+    }
+
+    public static void clearSavedSession(Context context) {
+        clearSavedSession(context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE));
+    }
+
+    private static void clearSavedSession(SharedPreferences prefs) {
         prefs.edit().clear().apply();
     }
 }

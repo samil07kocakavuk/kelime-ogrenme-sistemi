@@ -32,7 +32,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         btnResetPassword = findViewById(R.id.btnResetPassword);
 
         NavigationHelper.bindTopBar(this);
-        NavigationHelper.bindBottomBar(this);
         AppExecutors.io().execute(() -> AppContainer.from(this));
         btnResetPassword.setOnClickListener(v -> resetPassword());
     }

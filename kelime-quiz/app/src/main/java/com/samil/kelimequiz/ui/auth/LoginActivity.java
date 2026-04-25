@@ -2,8 +2,6 @@ package com.samil.kelimequiz.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +14,7 @@ import com.samil.kelimequiz.domain.model.AuthResult;
 import com.samil.kelimequiz.ui.main.MainActivity;
 import com.samil.kelimequiz.util.AppContainer;
 import com.samil.kelimequiz.util.AppExecutors;
+import com.samil.kelimequiz.util.PasswordVisibilityToggle;
 import com.samil.kelimequiz.util.SessionManager;
 
 public class LoginActivity extends AppCompatActivity {
@@ -25,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvStatusMessage;
     private MaterialButton btnLogin;
     private SessionManager sessionManager;
-    private boolean passwordVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void bindPasswordToggle() {
-        setPasswordVisible(false);
-        tilPassword.setEndIconOnClickListener(v -> setPasswordVisible(!passwordVisible));
-    }
-
-    private void setPasswordVisible(boolean visible) {
-        passwordVisible = visible;
-        etPassword.setTransformationMethod(visible
-                ? HideReturnsTransformationMethod.getInstance()
-                : PasswordTransformationMethod.getInstance());
-        tilPassword.setEndIconDrawable(visible ? R.drawable.ic_eye : R.drawable.ic_eye_off);
-        etPassword.setSelection(etPassword.length());
+        new PasswordVisibilityToggle(tilPassword, etPassword).bind();
     }
 
     private void login() {
