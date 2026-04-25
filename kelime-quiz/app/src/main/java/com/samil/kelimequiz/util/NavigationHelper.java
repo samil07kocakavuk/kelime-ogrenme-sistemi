@@ -16,10 +16,28 @@ public final class NavigationHelper {
     private NavigationHelper() {
     }
 
-    public static void bindTopBar(AppCompatActivity activity) {
+    public static void bindTopBar(AppCompatActivity activity, boolean showBackButton) {
         ImageButton btnBack = activity.findViewById(R.id.btnBack);
         if (btnBack != null) {
-            btnBack.setOnClickListener(v -> activity.getOnBackPressedDispatcher().onBackPressed());
+            btnBack.setVisibility(showBackButton ? View.VISIBLE : View.GONE);
+            if (showBackButton) {
+                btnBack.setOnClickListener(v -> redirectToMain(activity));
+            }
+        }
+    }
+
+    public static void bindTopBar(AppCompatActivity activity) {
+        bindTopBar(activity, true);
+    }
+
+    public static void redirectToMain(AppCompatActivity activity) {
+        if (activity instanceof MainActivity) {
+            activity.finish();
+        } else {
+            Intent intent = new Intent(activity, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            activity.startActivity(intent);
+            activity.finish();
         }
     }
 

@@ -13,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.util.AppContainer;
 import com.samil.kelimequiz.util.AppExecutors;
@@ -22,10 +24,10 @@ import com.samil.kelimequiz.util.NavigationHelper;
 import com.samil.kelimequiz.util.SessionManager;
 
 public class AddWordActivity extends AppCompatActivity {
+    private TextInputLayout tilEngWord, tilTrWord;
     private TextInputEditText etEngWord;
     private TextInputEditText etTrWord;
     private TextInputEditText etSamples;
-    private TextView tvStatusMessage;
     private TextView tvSelectedImage;
     private ImageView ivSelectedImage;
     private MaterialButton btnSaveWord;
@@ -41,10 +43,11 @@ public class AddWordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_word);
 
+        tilEngWord = findViewById(R.id.tilEngWord);
+        tilTrWord = findViewById(R.id.tilTrWord);
         etEngWord = findViewById(R.id.etEngWord);
         etTrWord = findViewById(R.id.etTrWord);
         etSamples = findViewById(R.id.etSamples);
-        tvStatusMessage = findViewById(R.id.tvStatusMessage);
         tvSelectedImage = findViewById(R.id.tvSelectedImage);
         ivSelectedImage = findViewById(R.id.ivSelectedImage);
         btnSaveWord = findViewById(R.id.btnSaveWord);
@@ -54,18 +57,38 @@ public class AddWordActivity extends AppCompatActivity {
         NavigationHelper.bindBottomBar(this);
         ivSelectedImage.setVisibility(View.GONE);
         btnChooseImage.setOnClickListener(v -> imagePickerLauncher.launch("image/*"));
-        btnSaveWord.setOnClickListener(v -> saveWord());
+        btnSaveWord.setOnClickListener(v -> validateAndSave());
     }
 
-    private void saveWord() {
+    private void validateAndSave() {
+        String engWord = getInput(etEngWord);
+        String trWord = getInput(etTrWord);
+        boolean isValid = true;
+
+        tilEngWord.setError(null);
+        tilTrWord.setError(null);
+
+        if (engWord.isEmpty()) {
+            tilEngWord.setError("Lütfen İngilizce kelimeyi girin.");
+            isValid = false;
+        }
+        if (trWord.isEmpty()) {
+            tilTrWord.setError("Lütfen Türkçe karşılığını girin.");
+            isValid = false;
+        }
+
+        if (isValid) {
+            saveWord(engWord, trWord);
+        }
+    }
+
+    private void saveWord(String engWord, String trWord) {
         int userId = new SessionManager(this).getUserId();
         if (userId <= 0) {
             showStatus("Oturum bulunamadı.");
             return;
         }
 
-        String engWord = getInput(etEngWord);
-        String trWord = getInput(etTrWord);
         String samples = getInput(etSamples);
 
         showStatus("Kelime kaydediliyor...");
@@ -75,16 +98,21 @@ public class AddWordActivity extends AppCompatActivity {
                 String picturePath = selectedImageUri == null ? null : ImageStorage.copyToAppStorage(this, selectedImageUri);
                 AppContainer.from(this).wordRepository.addWord(userId, engWord, trWord, picturePath, samples);
                 runOnUiThread(() -> {
-                    showStatus("Kelime kaydedildi.");
+                    showStatus("Kelime başarıyla kaydedildi.");
                     finish();
                 });
             } catch (RuntimeException e) {
                 runOnUiThread(() -> {
                     btnSaveWord.setEnabled(true);
-                    showStatus(e.getMessage());
+                    showStatus("Hata: " + e.getMessage());
                 });
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        NavigationHelper.redirectToMain(this);
     }
 
     private void onImagePicked(Uri uri) {
@@ -101,10 +129,10 @@ public class AddWordActivity extends AppCompatActivity {
     }
 
     private String getInput(TextInputEditText input) {
-        return input.getText() == null ? "" : input.getText().toString();
+        return input.getText() == null ? "" : input.getText().toString().trim();
     }
 
     private void showStatus(String message) {
-        tvStatusMessage.setText(message);
+        Snackbar.make(btnSaveWord, message, Snackbar.LENGTH_SHORT).show();
     }
 }
