@@ -1,6 +1,7 @@
 package com.samil.kelimequiz.data.local;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.room.Database;
 import androidx.room.Room;
@@ -15,6 +16,11 @@ import com.samil.kelimequiz.data.local.entity.WordSampleEntity;
 
 @Database(entities = {UserEntity.class, WordEntity.class, WordSampleEntity.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
+    private static final String DATABASE_NAME = "kelime_quiz.db";
+    private static final String RESET_PREF_NAME = "kelime_quiz_database_reset";
+    private static final String SESSION_PREF_NAME = "kelime_quiz_session";
+    private static final String KEY_RESET_V3_DONE = "reset_v3_done";
+
     private static volatile AppDatabase instance;
 
     public abstract UserDao userDao();
@@ -24,13 +30,15 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract WordSampleDao wordSampleDao();
 
     public static AppDatabase getInstance(Context context) {
+        Context appContext = context.getApplicationContext();
         if (instance == null) {
             synchronized (AppDatabase.class) {
                 if (instance == null) {
+                    resetDatabaseOnce(appContext);
                     instance = Room.databaseBuilder(
-                                    context.getApplicationContext(),
+                                    appContext,
                                     AppDatabase.class,
-                                    "kelime_quiz.db"
+                                    DATABASE_NAME
                             )
                             .fallbackToDestructiveMigration()
                             .build();
@@ -38,5 +46,16 @@ public abstract class AppDatabase extends RoomDatabase {
             }
         }
         return instance;
+    }
+
+    private static void resetDatabaseOnce(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(RESET_PREF_NAME, Context.MODE_PRIVATE);
+        if (prefs.getBoolean(KEY_RESET_V3_DONE, false)) {
+            return;
+        }
+
+        context.deleteDatabase(DATABASE_NAME);
+        context.getSharedPreferences(SESSION_PREF_NAME, Context.MODE_PRIVATE).edit().clear().apply();
+        prefs.edit().putBoolean(KEY_RESET_V3_DONE, true).apply();
     }
 }

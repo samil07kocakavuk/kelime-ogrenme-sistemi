@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KelimeQuiz">
         <activity android:name=".ui.profile.ProfileActivity" />
+        <activity android:name=".ui.word.WordPoolActivity" />
         <activity android:name=".ui.word.AddWordActivity" />
         <activity android:name=".ui.auth.ForgotPasswordActivity" />
         <activity android:name=".ui.auth.RegisterActivity" />

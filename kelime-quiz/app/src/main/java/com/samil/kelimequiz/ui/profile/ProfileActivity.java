@@ -10,6 +10,7 @@ import com.google.android.material.button.MaterialButton;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.data.local.entity.UserEntity;
 import com.samil.kelimequiz.ui.auth.LoginActivity;
+import com.samil.kelimequiz.ui.word.WordPoolActivity;
 import com.samil.kelimequiz.util.AppContainer;
 import com.samil.kelimequiz.util.AppExecutors;
 import com.samil.kelimequiz.util.NavigationHelper;
@@ -30,10 +31,12 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         tvProfileInfo = findViewById(R.id.tvProfileInfo);
+        MaterialButton btnWordPool = findViewById(R.id.btnWordPool);
         MaterialButton btnLogout = findViewById(R.id.btnLogout);
 
         NavigationHelper.bindTopBar(this);
         NavigationHelper.bindBottomBar(this);
+        btnWordPool.setOnClickListener(v -> startActivity(new Intent(this, WordPoolActivity.class)));
         btnLogout.setOnClickListener(v -> {
             sessionManager.clear();
             openLoginAndClose();

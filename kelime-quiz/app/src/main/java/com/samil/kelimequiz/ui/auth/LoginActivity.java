@@ -2,12 +2,15 @@ package com.samil.kelimequiz.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.domain.model.AuthResult;
 import com.samil.kelimequiz.ui.main.MainActivity;
@@ -18,15 +21,18 @@ import com.samil.kelimequiz.util.SessionManager;
 public class LoginActivity extends AppCompatActivity {
     private TextInputEditText etUsername;
     private TextInputEditText etPassword;
+    private TextInputLayout tilPassword;
     private TextView tvStatusMessage;
     private MaterialButton btnLogin;
     private SessionManager sessionManager;
+    private boolean passwordVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        AppContainer.from(this);
         sessionManager = new SessionManager(this);
         if (sessionManager.isLoggedIn()) {
             openMainAndClose();
@@ -35,15 +41,30 @@ public class LoginActivity extends AppCompatActivity {
 
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
+        tilPassword = findViewById(R.id.tilPassword);
         tvStatusMessage = findViewById(R.id.tvStatusMessage);
         btnLogin = findViewById(R.id.btnLogin);
         MaterialButton btnGoRegister = findViewById(R.id.btnGoRegister);
         MaterialButton btnForgotPassword = findViewById(R.id.btnForgotPassword);
 
-        AppExecutors.io().execute(() -> AppContainer.from(this));
+        bindPasswordToggle();
         btnLogin.setOnClickListener(v -> login());
         btnGoRegister.setOnClickListener(v -> startActivity(new Intent(this, RegisterActivity.class)));
         btnForgotPassword.setOnClickListener(v -> startActivity(new Intent(this, ForgotPasswordActivity.class)));
+    }
+
+    private void bindPasswordToggle() {
+        setPasswordVisible(false);
+        tilPassword.setEndIconOnClickListener(v -> setPasswordVisible(!passwordVisible));
+    }
+
+    private void setPasswordVisible(boolean visible) {
+        passwordVisible = visible;
+        etPassword.setTransformationMethod(visible
+                ? HideReturnsTransformationMethod.getInstance()
+                : PasswordTransformationMethod.getInstance());
+        tilPassword.setEndIconDrawable(visible ? R.drawable.ic_eye : R.drawable.ic_eye_off);
+        etPassword.setSelection(etPassword.length());
     }
 
     private void login() {
