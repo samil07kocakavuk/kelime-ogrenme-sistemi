@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/surface"
+    android:background="@drawable/bg_app_gradient"
     android:orientation="vertical">
 
     <include layout="@layout/include_top_bar" />
@@ -26,7 +26,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:cardCornerRadius="24dp">
+                app:cardBackgroundColor="@color/card"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -38,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Yeni hesap oluştur"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/text_dark"
                     android:textSize="26sp"
                     android:textStyle="bold" />
 
@@ -51,6 +53,7 @@
                     android:textColor="@color/purple_700" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/AppInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -60,10 +63,12 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etUsername"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_dark" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/AppInput"
                     android:id="@+id/tilPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -77,10 +82,12 @@
                         android:id="@+id/etPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:textColor="@color/text_dark" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/AppInput"
                     android:id="@+id/tilPasswordRepeat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -94,11 +101,13 @@
                         android:id="@+id/etPasswordRepeat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:textColor="@color/text_dark" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnRegister"
+                    style="@style/AppButtonPrimary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"

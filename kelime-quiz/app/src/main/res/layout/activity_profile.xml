@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/surface"
+    android:background="@drawable/bg_app_gradient"
     android:orientation="vertical">
 
     <include layout="@layout/include_top_bar" />
@@ -16,7 +16,9 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
         android:layout_weight="1"
-        app:cardCornerRadius="24dp">
+        app:cardBackgroundColor="@color/card"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Profil"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/text_dark"
                 android:textSize="28sp"
                 android:textStyle="bold" />
 
@@ -38,11 +40,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Kullanıcı bilgisi yükleniyor..."
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/text_dark_secondary"
                 android:textSize="16sp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnWordPool"
+                style="@style/AppButtonPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -55,7 +58,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogout"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/AppButtonSecondary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Çıkış Yap" />

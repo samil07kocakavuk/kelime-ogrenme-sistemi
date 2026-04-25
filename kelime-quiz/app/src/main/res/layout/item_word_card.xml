@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="22dp"
-    app:cardElevation="2dp"
-    app:strokeColor="#E2E8F0"
+    app:cardBackgroundColor="@color/card"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="6dp"
+    app:strokeColor="#D8E4F8"
     app:strokeWidth="1dp">
 
     <LinearLayout
@@ -27,7 +27,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/text_dark"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -53,7 +53,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDetail"
-            style="@style/Widget.Material3.Button.OutlinedButton"
+            style="@style/AppButtonSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"

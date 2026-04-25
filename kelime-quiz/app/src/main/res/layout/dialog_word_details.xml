@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_card_modern">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:adjustViewBounds="true"
+            android:background="@drawable/bg_image_preview"
             android:scaleType="centerCrop" />
 
         <TextView
@@ -21,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Türkçe karşılığı"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/text_dark_secondary"
             android:textStyle="bold" />
 
         <TextView
@@ -29,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:textColor="@color/text_primary"
+            android:textColor="@color/text_dark"
             android:textSize="18sp" />
 
         <TextView
@@ -37,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:text="Örnek cümleler"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/text_dark_secondary"
             android:textStyle="bold" />
 
         <TextView
@@ -45,6 +47,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:textColor="@color/text_primary" />
+            android:textColor="@color/text_dark" />
     </LinearLayout>
 </ScrollView>
