@@ -61,12 +61,14 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:hint="Şifre"
                     app:boxBackgroundMode="filled"
-                    app:endIconMode="password_toggle">
+                    app:endIconDrawable="@drawable/ic_eye_off"
+                    app:endIconMode="custom">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPassword"

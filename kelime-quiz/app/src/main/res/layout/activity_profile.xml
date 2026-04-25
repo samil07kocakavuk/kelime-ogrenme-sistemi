@@ -11,11 +11,11 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
+        android:layout_weight="1"
         app:cardCornerRadius="24dp">
 
         <LinearLayout
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:text="Profil"
                 android:textColor="@color/text_primary"
-                android:textSize="26sp"
+                android:textSize="28sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -37,14 +37,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:text="Kullanıcı bilgisi yükleniyor..."
                 android:textColor="@color/text_secondary"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLogout"
+                android:id="@+id/btnWordPool"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:text="Kelime Havuzu" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogout"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Çıkış Yap" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
