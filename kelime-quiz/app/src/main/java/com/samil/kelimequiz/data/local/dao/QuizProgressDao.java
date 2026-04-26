@@ -40,4 +40,9 @@ public interface QuizProgressDao {
 
     @Query("SELECT COUNT(*) FROM quiz_progress WHERE userId = :userId AND learned = 0")
     int countActiveWords(int userId);
+
+    @Query("SELECT COUNT(*) FROM quiz_progress qp "
+            + "INNER JOIN words w ON qp.wordId = w.wordId "
+            + "WHERE qp.userId = :userId AND qp.level > 0 AND w.category = :category")
+    int countCorrectByCategory(int userId, String category);
 }

@@ -11,7 +11,6 @@ import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.domain.model.QuizSummary;
 import com.samil.kelimequiz.ui.auth.LoginActivity;
 import com.samil.kelimequiz.ui.quiz.QuizActivity;
-import com.samil.kelimequiz.ui.word.AddWordActivity;
 import com.samil.kelimequiz.util.AppContainer;
 import com.samil.kelimequiz.util.AppExecutors;
 import com.samil.kelimequiz.util.NavigationHelper;
@@ -43,12 +42,10 @@ public class MainActivity extends AppCompatActivity {
         tvQuizLimit = findViewById(R.id.tvQuizLimit);
         tvQuizSummary = findViewById(R.id.tvQuizSummary);
         btnStartQuiz = findViewById(R.id.btnStartQuiz);
-        MaterialButton btnAddFirstWord = findViewById(R.id.btnAddFirstWord);
 
         userId = sessionManager.getUserId();
         btnStartQuiz.setEnabled(false);
         btnStartQuiz.setOnClickListener(v -> openQuizIfWordsExist());
-        btnAddFirstWord.setOnClickListener(v -> startActivity(new Intent(this, AddWordActivity.class)));
         loadQuizSummary();
     }
 
@@ -76,9 +73,7 @@ public class MainActivity extends AppCompatActivity {
         quizSummaryLoaded = true;
         totalWordCount = summary.getTotalWords();
         tvQuizSummary.setText(getString(
-                R.string.quiz_summary,
-                getString(R.string.total_words_label),
-                summary.getTotalWords(),
+                R.string.quiz_summary_short,
                 getString(R.string.active_words_label),
                 summary.getActiveWords(),
                 getString(R.string.learned_words_label),

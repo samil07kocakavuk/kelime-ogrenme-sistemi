@@ -1,68 +1,62 @@
-# Kelime Quiz
+# Kelime Quiz - Android Application
 
-Android tabanlı, kelime ezberleme ve tekrar odaklı bir uygulama. Proje Java, Room, Glide ve Material bileşenleriyle geliştirilmiştir.
+[![Android](https://img.shields.io/badge/Platform-Android-green.svg)](https://developer.android.com/)
+[![Java](https://img.shields.io/badge/Language-Java%2017-orange.svg)](https://www.oracle.com/java/)
+[![Room](https://img.shields.io/badge/Database-Room-blue.svg)](https://developer.android.com/training/data-storage/room)
 
-## Genel Bakış
+Bu dizin, **Kelime Quiz** uygulamasının ana Android projesini içerir. Uygulama, 6 aşamalı tekrar algoritması (SRS) kullanarak kelime öğrenimini kolaylaştırmak amacıyla geliştirilmiştir.
 
-Uygulama kullanıcı bazlı çalışır. Her kullanıcının kelime havuzu, öğrenme ilerlemesi ve quiz geçmişi birbirinden bağımsız tutulur.
+## 📱 Uygulama Hakkında
 
-## Özellikler
+Kelime Quiz, kullanıcı bazlı çalışan bir sistemdir. Her kullanıcının kendi kelime listesi, öğrenme durumu ve quiz ayarları yerel veritabanında (Room) güvenli bir şekilde saklanır.
 
-- Kullanıcı kayıt, giriş ve şifre sıfırlama akışı
-- Kullanıcıya özel kelime havuzu
-- Kelime ekleme, silme ve detay görüntüleme
-- Görsel ve örnek cümle desteği
-- Quiz / tekrar modülü
-- Tekrar zamanı gelen kelimeleri önce soran SRS mantığı
-- Doğru cevapta seviyeyi artıran, yanlış cevapta sıfırlayan ilerleme sistemi
-- Öğrenilmiş kelimeleri quiz havuzundan çıkarma
-- Profil ekranından açık / koyu tema seçimi
-- Profil ekranından quiz soru sayısı ayarı
-- Ana ekranda quiz özeti ve hızlı başlatma
+## 🛠️ Teknik Özellikler
 
-## Quiz Mantığı
+- **Mimarisi:** MVVM (Data, Domain, UI katmanları)
+- **Veritabanı:** Room Persistence Library
+- **Kullanıcı Güvenliği:** PBKDF2 Hashing algoritması ile yerel şifre doğrulama.
+- **UI Bileşenleri:** Material Design 3 (Material Components for Android).
+- **Görsel Yükleme:** Glide ile verimli resim önbelleğe alma ve görüntüleme.
+- **Arka Plan İşlemleri:** ExecutorService ve Handler ile asenkron veritabanı işlemleri.
 
-Quiz sistemi kullanıcı bazlı ilerler:
+## 🧠 Quiz Algoritması
 
-1. Doğru cevap kelime seviyesini artırır.
-2. Yanlış cevap seviyeyi sıfırlar.
-3. Seviye 1'den 6'ya kadar tekrar aralıkları sırasıyla 1 gün, 1 hafta, 1 ay, 3 ay, 6 ay ve 1 yıldır.
-4. 6. doğru tekrar tamamlandığında kelime öğrenilmiş kabul edilir.
-5. Öğrenilmiş kelimeler normal quiz havuzuna tekrar girmez.
+Sistem, **6 Tekrar Prensibine** göre çalışır. Bir kelimenin "Öğrenilmiş" statüsüne geçmesi için 6 farklı zaman diliminde doğru cevaplanması gerekir:
 
-## Teknoloji Yığını
+- 1. Tekrar: 1 Gün sonra
+- 2. Tekrar: 1 Hafta sonra
+- 3. Tekrar: 1 Ay sonra
+- 4. Tekrar: 3 Ay sonra
+- 5. Tekrar: 6 Ay sonra
+- 6. Tekrar: 1 Yıl sonra
 
-- Java 17
-- Android SDK 34
-- Room
-- Material Design
-- Glide
-- JUnit
+*Not: Herhangi bir aşamada yanlış cevap verilirse, kelimenin seviyesi 0'a düşer.*
 
-## Proje Yapısı
+## 📂 Paket Yapısı
 
-- `app/src/main/java/com/samil/kelimequiz/data` veri katmanı
-- `app/src/main/java/com/samil/kelimequiz/domain` iş kuralları ve modeller
-- `app/src/main/java/com/samil/kelimequiz/ui` ekranlar
-- `app/src/main/res` layout, drawable ve renk kaynakları
+- `com.samil.kelimequiz.data`: Entity'ler, DAO'lar ve Database sınıfları.
+- `com.samil.kelimequiz.domain`: Business logic, yardımcı sınıflar (Helper) ve modeller.
+- `com.samil.kelimequiz.ui`: Activity, Fragment ve Adapter sınıfları.
 
-## Çalıştırma
+## 🚀 Çalıştırma ve Test
 
-Proje kök dizininden:
+### Derleme (Build)
 
 ```bash
-gradlew.bat assembleDebug
+./gradlew assembleDebug
 ```
 
-Uygulamayı test etmek için:
+Derleme sonrası APK dosyasına `app/build/outputs/apk/debug/app-debug.apk` yolundan ulaşabilirsiniz.
+
+### Testler
 
 ```bash
-gradlew.bat testDebugUnitTest lintDebug
+./gradlew test        # Unit Testleri çalıştırır
+./gradlew lint        # Kod kalitesi kontrolü
 ```
 
-## Notlar
+## 📝 Notlar
 
-- Uygulama giriş yapılmadan korumalı ekranları açmaz.
-- Quiz soru limiti profil ekranından değiştirilebilir.
-- Tema değişimi profil ekranından yapılır ve uygulama genelinde uygulanır.
-- `lint` temiz geçecek şekilde tutulmuştur.
+- Uygulama ilk açılışta giriş ekranı ile başlar.
+- Yeni kelime eklerken cihaz galerisinden resim seçilebilir.
+- Quiz soru sayısı ve tema ayarları profil ekranından yönetilebilir.
