@@ -19,13 +19,13 @@ import com.samil.kelimequiz.util.SessionManager;
 
 @Database(
         entities = {UserEntity.class, WordEntity.class, WordSampleEntity.class, QuizProgressEntity.class},
-        version = 4,
+        version = 5,
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "kelime_quiz.db";
     private static final String RESET_PREF_NAME = "kelime_quiz_database_reset";
-    private static final String KEY_RESET_DONE = "reset_v4_done";
+    private static final String KEY_RESET_DONE = "reset_v5_done";
 
     private static volatile AppDatabase instance;
 

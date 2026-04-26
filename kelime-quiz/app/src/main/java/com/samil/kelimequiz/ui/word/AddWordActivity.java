@@ -27,7 +27,20 @@ import com.samil.kelimequiz.util.NavigationHelper;
 import com.samil.kelimequiz.util.SessionManager;
 
 public class AddWordActivity extends AppCompatActivity {
-    private static final String[] CATEGORIES = {"İsim", "Sıfat", "Fiil", "Zarf"};
+    private static final String[] CATEGORIES = {
+            "Hayvanlar",
+            "Meslekler",
+            "Sporlar",
+            "Yiyecekler",
+            "Ev ve Eşyalar",
+            "Okul",
+            "Ulaşım",
+            "Doğa",
+            "Sıfatlar",
+            "Fiiller",
+            "Sağlık ve Vücut",
+            "Günlük Yaşam"
+    };
 
     private TextInputLayout tilEngWord, tilTrWord;
     private TextInputEditText etEngWord;
@@ -140,7 +153,13 @@ public class AddWordActivity extends AppCompatActivity {
             return;
         }
         tvSelectedImage.setText(R.string.image_selected);
-        Glide.with(this).load(uri).into(ivSelectedImage);
+        Glide.with(this)
+                .load(uri)
+                .thumbnail(0.25f)
+                .override(480, 360)
+                .centerCrop()
+                .dontAnimate()
+                .into(ivSelectedImage);
         ivSelectedImage.setVisibility(View.VISIBLE);
     }
 

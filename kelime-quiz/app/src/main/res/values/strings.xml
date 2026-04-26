@@ -51,20 +51,7 @@
     <string name="no_sample_sentences">Örnek cümle yok.</string>
     <string name="close_action">Kapat</string>
 
-    <string name="quiz_module_title">Sınav Modülü</string>
-    <string name="quiz_limit_default">Bu quizde 10 soru sorulacak.</string>
-    <plurals name="quiz_limit_message">
-        <item quantity="one">Bu quizde %1$d soru sorulacak.</item>
-        <item quantity="other">Bu quizde %1$d soru sorulacak.</item>
-    </plurals>
-    <string name="quiz_summary_loading">Özet yükleniyor…</string>
-    <string name="quiz_summary">%1$s: %2$d\n%3$s: %4$d\n%5$s: %6$d</string>
-    <string name="quiz_summary_short">%1$s: %2$d\n%3$s: %4$d</string>
-    <string name="total_words_label">Toplam kelime</string>
-    <string name="active_words_label">Süreçteki kelime</string>
-    <string name="learned_words_label">Öğrenilen kelime</string>
     <string name="start_quiz_action">Quiz Başlat</string>
-    <string name="add_word_action">Kelime Ekle</string>
     <string name="add_word_first_action">Önce Kelime Ekle</string>
     <string name="quiz_summary_wait">Quiz özeti hazırlanıyor. Lütfen birkaç saniye sonra tekrar deneyin.</string>
     <string name="quiz_requires_words">Quiz başlatmak için önce kelime havuzuna en az bir kelime ekleyin.</string>
@@ -108,10 +95,10 @@
     <string name="empty_quiz_message">Tekrar zamanı gelen veya yeni sorulacak kelime yok. Yeni kelime ekleyin ya da tekrar zamanını bekleyin.</string>
 
     <string name="report_title">Raporlama</string>
-    <string name="report_subtitle">Kategori bazlı doğru cevaplama durumun</string>
+    <string name="report_subtitle">Kategori bazlı son sınav başarı durumun</string>
     <string name="report_loading">Rapor yükleniyor…</string>
     <string name="report_no_data">Henüz kategori verisi yok.</string>
-    <string name="report_category_format">%1$s: %2$d / %3$d (%4$d%%)</string>
+    <string name="report_category_format">%1$s: doğru %2$d/%3$d - başarı %4$d%%</string>
     <string name="category_hint">Kategori</string>
     <string name="print_report_action">Raporu Yazdır / PDF</string>
     <string name="print_report_job_name">Kelime Quiz Rapor</string>

@@ -195,7 +195,10 @@ public class QuizActivity extends AppCompatActivity {
         ivQuizWordImage.setVisibility(View.VISIBLE);
         Glide.with(this)
                 .load(picturePath)
+                .thumbnail(0.25f)
+                .override(216, 216)
                 .centerCrop()
+                .dontAnimate()
                 .into(ivQuizWordImage);
     }
 

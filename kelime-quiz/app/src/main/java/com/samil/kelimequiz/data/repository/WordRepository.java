@@ -146,7 +146,7 @@ public class WordRepository {
                     item.getString("trWord"),
                     item.getString("picturePath"),
                     item.getString("samplesText"),
-                    item.optString("category", "Noun")
+                    item.optString("category", "Günlük Yaşam")
             ));
         }
         return words;
