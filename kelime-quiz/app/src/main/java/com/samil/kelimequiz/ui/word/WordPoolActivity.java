@@ -112,7 +112,13 @@ public class WordPoolActivity extends AppCompatActivity implements WordCardAdapt
             return;
         }
 
-        Glide.with(this).load(picturePath).into(imageView);
+        Glide.with(this)
+                .load(picturePath)
+                .thumbnail(0.25f)
+                .override(240, 180)
+                .centerCrop()
+                .dontAnimate()
+                .into(imageView);
         imageView.setVisibility(View.VISIBLE);
     }
 

@@ -1,1066 +1,2102 @@
-[
-  {
-    "engWord": "apple",
-    "trWord": "elma",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F34E.png",
-    "samplesText": "The apple is red.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "banana",
-    "trWord": "muz",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F34C.png",
-    "samplesText": "The banana is yellow.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "orange",
-    "trWord": "portakal",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F34A.png",
-    "samplesText": "The orange smells fresh.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "grapes",
-    "trWord": "üzüm",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F347.png",
-    "samplesText": "The grapes are sweet.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "pear",
-    "trWord": "armut",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F350.png",
-    "samplesText": "The pear is on the plate.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "peach",
-    "trWord": "şeftali",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F351.png",
-    "samplesText": "The peach is soft.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "cherry",
-    "trWord": "kiraz",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F352.png",
-    "samplesText": "The cherry is small and red.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "lemon",
-    "trWord": "limon",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F34B.png",
-    "samplesText": "The lemon tastes sour.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "watermelon",
-    "trWord": "karpuz",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F349.png",
-    "samplesText": "The watermelon is very big.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "strawberry",
-    "trWord": "çilek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F353.png",
-    "samplesText": "The strawberry is fresh.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "pineapple",
-    "trWord": "ananas",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F34D.png",
-    "samplesText": "The pineapple has a hard skin.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "coconut",
-    "trWord": "hindistan cevizi",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F965.png",
-    "samplesText": "The coconut is round.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "carrot",
-    "trWord": "havuç",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F955.png",
-    "samplesText": "The rabbit eats a carrot.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "corn",
-    "trWord": "mısır",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F33D.png",
-    "samplesText": "The corn is hot.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "potato",
-    "trWord": "patates",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F954.png",
-    "samplesText": "The potato is in the basket.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "tomato",
-    "trWord": "domates",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F345.png",
-    "samplesText": "The tomato is red and juicy.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "pepper",
-    "trWord": "biber",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F336.png",
-    "samplesText": "The pepper is green.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "broccoli",
-    "trWord": "brokoli",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F966.png",
-    "samplesText": "The broccoli is healthy.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "garlic",
-    "trWord": "sarımsak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F9C4.png",
-    "samplesText": "The soup has garlic.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "onion",
-    "trWord": "soğan",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F9C5.png",
-    "samplesText": "The onion makes me cry.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "bread",
-    "trWord": "ekmek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F35E.png",
-    "samplesText": "The bread is warm.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "cheese",
-    "trWord": "peynir",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F9C0.png",
-    "samplesText": "The cheese is on the table.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "egg",
-    "trWord": "yumurta",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F95A.png",
-    "samplesText": "The egg is in the pan.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "milk",
-    "trWord": "süt",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F95B.png",
-    "samplesText": "The milk is cold.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "coffee",
-    "trWord": "kahve",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/2615.png",
-    "samplesText": "The coffee is hot.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "tea",
-    "trWord": "çay",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F375.png",
-    "samplesText": "The tea smells nice.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "cake",
-    "trWord": "pasta",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F370.png",
-    "samplesText": "The cake is sweet.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "cookie",
-    "trWord": "kurabiye",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F36A.png",
-    "samplesText": "The cookie is crunchy.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "pizza",
-    "trWord": "pizza",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F355.png",
-    "samplesText": "The pizza is delicious.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "hamburger",
-    "trWord": "hamburger",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F354.png",
-    "samplesText": "The hamburger is big.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "dog",
-    "trWord": "köpek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F436.png",
-    "samplesText": "The dog runs fast.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "cat",
-    "trWord": "kedi",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F431.png",
-    "samplesText": "The cat is sleeping.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "mouse",
-    "trWord": "fare",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F42D.png",
-    "samplesText": "The mouse is small.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "rabbit",
-    "trWord": "tavşan",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F430.png",
-    "samplesText": "The rabbit jumps high.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "bear",
-    "trWord": "ayı",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F43B.png",
-    "samplesText": "The bear is strong.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "panda",
-    "trWord": "panda",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F43C.png",
-    "samplesText": "The panda eats bamboo.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "lion",
-    "trWord": "aslan",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F981.png",
-    "samplesText": "The lion is loud.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "tiger",
-    "trWord": "kaplan",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F42F.png",
-    "samplesText": "The tiger has stripes.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "cow",
-    "trWord": "inek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F42E.png",
-    "samplesText": "The cow gives milk.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "pig",
-    "trWord": "domuz",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F437.png",
-    "samplesText": "The pig is pink.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "frog",
-    "trWord": "kurbağa",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F438.png",
-    "samplesText": "The frog is near the water.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "monkey",
-    "trWord": "maymun",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F412.png",
-    "samplesText": "The monkey climbs the tree.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "chicken",
-    "trWord": "tavuk",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F414.png",
-    "samplesText": "The chicken is in the yard.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "bird",
-    "trWord": "kuş",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F426.png",
-    "samplesText": "The bird sings in the morning.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "penguin",
-    "trWord": "penguen",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F427.png",
-    "samplesText": "The penguin lives in the cold.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "duck",
-    "trWord": "ördek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F986.png",
-    "samplesText": "The duck swims in the lake.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "eagle",
-    "trWord": "kartal",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F985.png",
-    "samplesText": "The eagle flies high.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "owl",
-    "trWord": "baykuş",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F989.png",
-    "samplesText": "The owl is awake at night.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "fish",
-    "trWord": "balık",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F41F.png",
-    "samplesText": "The fish is in the water.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "whale",
-    "trWord": "balina",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F433.png",
-    "samplesText": "The whale is very large.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "dolphin",
-    "trWord": "yunus",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F42C.png",
-    "samplesText": "The dolphin jumps from the sea.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "shark",
-    "trWord": "köpekbalığı",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F988.png",
-    "samplesText": "The shark swims fast.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "octopus",
-    "trWord": "ahtapot",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F419.png",
-    "samplesText": "The octopus has eight arms.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "crab",
-    "trWord": "yengeç",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F980.png",
-    "samplesText": "The crab walks sideways.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "butterfly",
-    "trWord": "kelebek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F98B.png",
-    "samplesText": "The butterfly sits on a flower.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "bee",
-    "trWord": "arı",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F41D.png",
-    "samplesText": "The bee makes honey.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "ladybug",
-    "trWord": "uğur böceği",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F41E.png",
-    "samplesText": "The ladybug is on the leaf.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "snail",
-    "trWord": "salyangoz",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F40C.png",
-    "samplesText": "The snail moves slowly.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "spider",
-    "trWord": "örümcek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F577.png",
-    "samplesText": "The spider builds a web.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "turtle",
-    "trWord": "kaplumbağa",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F422.png",
-    "samplesText": "The turtle is under the rock.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "tree",
-    "trWord": "ağaç",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F333.png",
-    "samplesText": "The tree is very tall.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "flower",
-    "trWord": "çiçek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F33C.png",
-    "samplesText": "The flower is beautiful.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "rose",
-    "trWord": "gül",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F339.png",
-    "samplesText": "The rose smells good.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "sunflower",
-    "trWord": "ayçiçeği",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F33B.png",
-    "samplesText": "The sunflower is yellow.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "cactus",
-    "trWord": "kaktüs",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F335.png",
-    "samplesText": "The cactus grows in the desert.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "leaf",
-    "trWord": "yaprak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F342.png",
-    "samplesText": "The leaf falls in autumn.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "mushroom",
-    "trWord": "mantar",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F344.png",
-    "samplesText": "The mushroom grows in the forest.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "house",
-    "trWord": "ev",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F3E0.png",
-    "samplesText": "The house is near the park.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "school",
-    "trWord": "okul",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F3EB.png",
-    "samplesText": "The school opens at eight.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "hospital",
-    "trWord": "hastane",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F3E5.png",
-    "samplesText": "The hospital is clean.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "bank",
-    "trWord": "banka",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F3E6.png",
-    "samplesText": "The bank is in the city center.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "hotel",
-    "trWord": "otel",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F3E8.png",
-    "samplesText": "The hotel has many rooms.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "church",
-    "trWord": "kilise",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/26EA.png",
-    "samplesText": "The church is very old.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "factory",
-    "trWord": "fabrika",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F3ED.png",
-    "samplesText": "The factory is outside the town.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "car",
-    "trWord": "araba",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F697.png",
-    "samplesText": "The car is blue.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "bus",
-    "trWord": "otobüs",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F68C.png",
-    "samplesText": "The bus is full.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "train",
-    "trWord": "tren",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F686.png",
-    "samplesText": "The train arrives on time.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "airplane",
-    "trWord": "uçak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/2708.png",
-    "samplesText": "The airplane is in the sky.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "ship",
-    "trWord": "gemi",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F6A2.png",
-    "samplesText": "The ship is on the sea.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "bicycle",
-    "trWord": "bisiklet",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F6B2.png",
-    "samplesText": "The bicycle is near the door.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "motorcycle",
-    "trWord": "motosiklet",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F3CD-FE0F.png",
-    "samplesText": "The motorcycle is very fast.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "rocket",
-    "trWord": "roket",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F680.png",
-    "samplesText": "The rocket goes into space.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "book",
-    "trWord": "kitap",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F4D6.png",
-    "samplesText": "The book is on the desk.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "pencil",
-    "trWord": "kalem",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/270F.png",
-    "samplesText": "The pencil is sharp.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "scissors",
-    "trWord": "makas",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/2702.png",
-    "samplesText": "The scissors are on the table.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "key",
-    "trWord": "anahtar",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F511.png",
-    "samplesText": "The key opens the door.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "lock",
-    "trWord": "kilit",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F512.png",
-    "samplesText": "The lock is strong.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "phone",
-    "trWord": "telefon",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F4F1.png",
-    "samplesText": "The phone is ringing.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "computer",
-    "trWord": "bilgisayar",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F4BB.png",
-    "samplesText": "The computer is on the desk.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "television",
-    "trWord": "televizyon",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F4FA.png",
-    "samplesText": "The television is in the room.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "camera",
-    "trWord": "kamera",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F4F7.png",
-    "samplesText": "The camera takes clear photos.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "clock",
-    "trWord": "saat",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F552.png",
-    "samplesText": "The clock shows the time.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "lamp",
-    "trWord": "lamba",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F4A1.png",
-    "samplesText": "The lamp is very bright.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "chair",
-    "trWord": "sandalye",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1FA91.png",
-    "samplesText": "The chair is near the table.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "bed",
-    "trWord": "yatak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F6CF-FE0F.png",
-    "samplesText": "The bed is comfortable.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "door",
-    "trWord": "kapı",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F6AA.png",
-    "samplesText": "The door is open.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "toothbrush",
-    "trWord": "diş fırçası",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1FAA5.png",
-    "samplesText": "The toothbrush is in the bathroom.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "soap",
-    "trWord": "sabun",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F9FC.png",
-    "samplesText": "The soap smells clean.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "tooth",
-    "trWord": "diş",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F9B7.png",
-    "samplesText": "The tooth hurts today.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "shirt",
-    "trWord": "gömlek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F455.png",
-    "samplesText": "The shirt is white.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "dress",
-    "trWord": "elbise",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F457.png",
-    "samplesText": "The dress is elegant.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "shoe",
-    "trWord": "ayakkabı",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F45F.png",
-    "samplesText": "The shoe is under the bed.",
-    "category": "İsim"
-  },
-  {
-    "engWord": "happy",
-    "trWord": "mutlu",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F600.png",
-    "samplesText": "She looks very happy today.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "sad",
-    "trWord": "üzgün",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F622.png",
-    "samplesText": "The boy feels sad.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "angry",
-    "trWord": "kızgın",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F620.png",
-    "samplesText": "He was angry about the news.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "tired",
-    "trWord": "yorgun",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F634.png",
-    "samplesText": "I am very tired after work.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "hungry",
-    "trWord": "aç",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F924.png",
-    "samplesText": "The children are hungry.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "cold",
-    "trWord": "soğuk",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F976.png",
-    "samplesText": "The weather is very cold.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "hot",
-    "trWord": "sıcak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F975.png",
-    "samplesText": "The summer is hot.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "fast",
-    "trWord": "hızlı",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F3CE-FE0F.png",
-    "samplesText": "The car is very fast.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "slow",
-    "trWord": "yavaş",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F422.png",
-    "samplesText": "The turtle is slow.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "big",
-    "trWord": "büyük",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F418.png",
-    "samplesText": "The elephant is big.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "small",
-    "trWord": "küçük",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F42D.png",
-    "samplesText": "The mouse is small.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "beautiful",
-    "trWord": "güzel",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F338.png",
-    "samplesText": "The garden is beautiful.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "ugly",
-    "trWord": "çirkin",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F47A.png",
-    "samplesText": "The monster looks ugly.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "strong",
-    "trWord": "güçlü",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F4AA.png",
-    "samplesText": "The man is very strong.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "weak",
-    "trWord": "zayıf",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F915.png",
-    "samplesText": "He feels weak after the illness.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "clean",
-    "trWord": "temiz",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F9FC.png",
-    "samplesText": "The room is clean.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "dirty",
-    "trWord": "kirli",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F4A9.png",
-    "samplesText": "The shoes are dirty.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "new",
-    "trWord": "yeni",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/2728.png",
-    "samplesText": "I bought a new phone.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "old",
-    "trWord": "eski",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F3DA-FE0F.png",
-    "samplesText": "The building is very old.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "rich",
-    "trWord": "zengin",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F4B0.png",
-    "samplesText": "The businessman is rich.",
-    "category": "Sıfat"
-  },
-  {
-    "engWord": "run",
-    "trWord": "koşmak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F3C3.png",
-    "samplesText": "I run every morning.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "walk",
-    "trWord": "yürümek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F6B6.png",
-    "samplesText": "We walk to school.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "eat",
-    "trWord": "yemek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F37D-FE0F.png",
-    "samplesText": "I eat breakfast at seven.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "drink",
-    "trWord": "içmek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F964.png",
-    "samplesText": "She drinks water every day.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "sleep",
-    "trWord": "uyumak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F634.png",
-    "samplesText": "The baby sleeps at night.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "read",
-    "trWord": "okumak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F4D6.png",
-    "samplesText": "He reads a book every day.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "write",
-    "trWord": "yazmak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/270D-FE0F.png",
-    "samplesText": "She writes a letter.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "swim",
-    "trWord": "yüzmek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F3CA.png",
-    "samplesText": "They swim in the pool.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "fly",
-    "trWord": "uçmak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F985.png",
-    "samplesText": "Birds fly in the sky.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "sing",
-    "trWord": "şarkı söylemek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F3A4.png",
-    "samplesText": "She sings a beautiful song.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "dance",
-    "trWord": "dans etmek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F483.png",
-    "samplesText": "They dance at the party.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "cook",
-    "trWord": "pişirmek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F373.png",
-    "samplesText": "My mother cooks dinner.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "play",
-    "trWord": "oynamak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/26BD.png",
-    "samplesText": "The kids play in the garden.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "study",
-    "trWord": "ders çalışmak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F4DA.png",
-    "samplesText": "I study for the exam.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "listen",
-    "trWord": "dinlemek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F3B5.png",
-    "samplesText": "We listen to music.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "speak",
-    "trWord": "konuşmak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F5E3-FE0F.png",
-    "samplesText": "He speaks three languages.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "think",
-    "trWord": "düşünmek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F914.png",
-    "samplesText": "I think about the future.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "laugh",
-    "trWord": "gülmek",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F602.png",
-    "samplesText": "The joke made everyone laugh.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "cry",
-    "trWord": "ağlamak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F62D.png",
-    "samplesText": "The baby started to cry.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "buy",
-    "trWord": "satın almak",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F6D2.png",
-    "samplesText": "I want to buy a gift.",
-    "category": "Fiil"
-  },
-  {
-    "engWord": "quickly",
-    "trWord": "hızlıca",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F4A8.png",
-    "samplesText": "She ran quickly to the bus.",
-    "category": "Zarf"
-  },
-  {
-    "engWord": "slowly",
-    "trWord": "yavaşça",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F40C.png",
-    "samplesText": "He walked slowly in the park.",
-    "category": "Zarf"
-  },
-  {
-    "engWord": "always",
-    "trWord": "her zaman",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/267E-FE0F.png",
-    "samplesText": "She always arrives on time.",
-    "category": "Zarf"
-  },
-  {
-    "engWord": "never",
-    "trWord": "asla",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F6AB.png",
-    "samplesText": "I never eat fast food.",
-    "category": "Zarf"
-  },
-  {
-    "engWord": "often",
-    "trWord": "sık sık",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F504.png",
-    "samplesText": "We often go to the cinema.",
-    "category": "Zarf"
-  },
-  {
-    "engWord": "sometimes",
-    "trWord": "bazen",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F3B2.png",
-    "samplesText": "Sometimes I read before bed.",
-    "category": "Zarf"
-  },
-  {
-    "engWord": "early",
-    "trWord": "erken",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F305.png",
-    "samplesText": "He wakes up early.",
-    "category": "Zarf"
-  },
-  {
-    "engWord": "late",
-    "trWord": "geç",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F303.png",
-    "samplesText": "She came late to the meeting.",
-    "category": "Zarf"
-  },
-  {
-    "engWord": "together",
-    "trWord": "birlikte",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/1F91D.png",
-    "samplesText": "We study together.",
-    "category": "Zarf"
-  },
-  {
-    "engWord": "already",
-    "trWord": "zaten",
-    "picturePath": "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/618x618/2705.png",
-    "samplesText": "I have already finished my homework.",
-    "category": "Zarf"
-  }
+﻿[
+    {
+        "engWord":  "dog",
+        "trWord":  "köpek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F415.png",
+        "samplesText":  "The dog is friendly.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "cat",
+        "trWord":  "kedi",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F408.png",
+        "samplesText":  "The cat sleeps on the sofa.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "bird",
+        "trWord":  "kuş",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F426.png",
+        "samplesText":  "The bird can fly.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "fish",
+        "trWord":  "balık",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F41F.png",
+        "samplesText":  "The fish swims in the water.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "horse",
+        "trWord":  "at",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F40E.png",
+        "samplesText":  "The horse runs fast.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "cow",
+        "trWord":  "inek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F404.png",
+        "samplesText":  "The cow is on the farm.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "sheep",
+        "trWord":  "koyun",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F411.png",
+        "samplesText":  "The sheep is white.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "chicken",
+        "trWord":  "tavuk",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F414.png",
+        "samplesText":  "The chicken is in the garden.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "elephant",
+        "trWord":  "fil",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F418.png",
+        "samplesText":  "The elephant is very big.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "lion",
+        "trWord":  "aslan",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F981.png",
+        "samplesText":  "The lion is strong.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "doctor",
+        "trWord":  "doktor",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "The doctor helps sick people.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "teacher",
+        "trWord":  "öğretmen",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3EB.png",
+        "samplesText":  "The teacher explains the lesson.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "engineer",
+        "trWord":  "mühendis",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F527.png",
+        "samplesText":  "The engineer builds a bridge.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "farmer",
+        "trWord":  "çiftçi",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F33E.png",
+        "samplesText":  "The farmer grows vegetables.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "cook",
+        "trWord":  "aşçı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F373.png",
+        "samplesText":  "The cook makes soup.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "artist",
+        "trWord":  "sanatçı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3A8.png",
+        "samplesText":  "The artist paints a picture.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "police officer",
+        "trWord":  "polis memuru",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F46E.png",
+        "samplesText":  "The police officer works in the city.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "pilot",
+        "trWord":  "pilot",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2708-FE0F.png",
+        "samplesText":  "The pilot flies a plane.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "scientist",
+        "trWord":  "bilim insanı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F52C.png",
+        "samplesText":  "The scientist works in a lab.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "firefighter",
+        "trWord":  "itfaiyeci",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F692.png",
+        "samplesText":  "The firefighter stops the fire.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "football",
+        "trWord":  "futbol",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Football is a popular sport.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "basketball",
+        "trWord":  "basketbol",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C0.png",
+        "samplesText":  "Basketball needs a ball and a basket.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "tennis",
+        "trWord":  "tenis",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3BE.png",
+        "samplesText":  "Tennis is played with a racket.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "swimming",
+        "trWord":  "yüzme",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3CA.png",
+        "samplesText":  "Swimming is good exercise.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "running",
+        "trWord":  "koşu",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "Running makes you strong.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "cycling",
+        "trWord":  "bisiklet sporu",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F6B4.png",
+        "samplesText":  "Cycling is fun in the park.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "boxing",
+        "trWord":  "boks",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F94A.png",
+        "samplesText":  "Boxing needs gloves.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "baseball",
+        "trWord":  "beyzbol",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BE.png",
+        "samplesText":  "Baseball is played with a bat.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "volleyball",
+        "trWord":  "voleybol",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3D0.png",
+        "samplesText":  "Volleyball is played over a net.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "golf",
+        "trWord":  "golf",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26F3.png",
+        "samplesText":  "Golf is played on a large field.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "apple",
+        "trWord":  "elma",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F34E.png",
+        "samplesText":  "The apple is red.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "banana",
+        "trWord":  "muz",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F34C.png",
+        "samplesText":  "The banana is yellow.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "bread",
+        "trWord":  "ekmek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F35E.png",
+        "samplesText":  "Bread is on the table.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "milk",
+        "trWord":  "süt",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F95B.png",
+        "samplesText":  "I drink milk in the morning.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "egg",
+        "trWord":  "yumurta",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F95A.png",
+        "samplesText":  "An egg is in the bowl.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "cheese",
+        "trWord":  "peynir",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F9C0.png",
+        "samplesText":  "Cheese is delicious.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "rice",
+        "trWord":  "pirinç",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F35A.png",
+        "samplesText":  "Rice is hot.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "soup",
+        "trWord":  "çorba",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F372.png",
+        "samplesText":  "The soup is warm.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "water",
+        "trWord":  "su",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4A7.png",
+        "samplesText":  "Water is important.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "cake",
+        "trWord":  "kek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F370.png",
+        "samplesText":  "The cake is sweet.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "house",
+        "trWord":  "ev",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "The house is small.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "room",
+        "trWord":  "oda",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F6CB-FE0F.png",
+        "samplesText":  "My room is clean.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "bed",
+        "trWord":  "yatak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F6CF-FE0F.png",
+        "samplesText":  "The bed is comfortable.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "chair",
+        "trWord":  "sandalye",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA91.png",
+        "samplesText":  "The chair is near the desk.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "door",
+        "trWord":  "kapı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F6AA.png",
+        "samplesText":  "Please open the door.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "key",
+        "trWord":  "anahtar",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F511.png",
+        "samplesText":  "The key is in my bag.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "clock",
+        "trWord":  "saat",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F550.png",
+        "samplesText":  "The clock is on the wall.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "phone",
+        "trWord":  "telefon",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4F1.png",
+        "samplesText":  "My phone is new.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "computer",
+        "trWord":  "bilgisayar",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BB.png",
+        "samplesText":  "The computer is on the desk.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "book",
+        "trWord":  "kitap",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4D6.png",
+        "samplesText":  "The book is interesting.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "school",
+        "trWord":  "okul",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3EB.png",
+        "samplesText":  "The school is near my house.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "student",
+        "trWord":  "öğrenci",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "The student reads a book.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "lesson",
+        "trWord":  "ders",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4DA.png",
+        "samplesText":  "The lesson starts at nine.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "pen",
+        "trWord":  "kalem",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F58A-FE0F.png",
+        "samplesText":  "I write with a pen.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "pencil",
+        "trWord":  "kurşun kalem",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/270F-FE0F.png",
+        "samplesText":  "The pencil is sharp.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "notebook",
+        "trWord":  "defter",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4D3.png",
+        "samplesText":  "My notebook is blue.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "backpack",
+        "trWord":  "sırt çantası",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F392.png",
+        "samplesText":  "The backpack is heavy.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "ruler",
+        "trWord":  "cetvel",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4CF.png",
+        "samplesText":  "Use a ruler for straight lines.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "exam",
+        "trWord":  "sınav",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4DD.png",
+        "samplesText":  "The exam is difficult.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "library",
+        "trWord":  "kütüphane",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4DA.png",
+        "samplesText":  "The library is quiet.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "car",
+        "trWord":  "araba",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "The car is red.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "bus",
+        "trWord":  "otobüs",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F68C.png",
+        "samplesText":  "The bus is full.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "train",
+        "trWord":  "tren",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F686.png",
+        "samplesText":  "The train is fast.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "bicycle",
+        "trWord":  "bisiklet",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F6B2.png",
+        "samplesText":  "I ride a bicycle.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "airplane",
+        "trWord":  "uçak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2708-FE0F.png",
+        "samplesText":  "The airplane is in the sky.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "ship",
+        "trWord":  "gemi",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F6A2.png",
+        "samplesText":  "The ship is on the sea.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "taxi",
+        "trWord":  "taksi",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F695.png",
+        "samplesText":  "The taxi is yellow.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "truck",
+        "trWord":  "kamyon",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F69A.png",
+        "samplesText":  "The truck carries boxes.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "subway",
+        "trWord":  "metro",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F687.png",
+        "samplesText":  "The subway is underground.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "rocket",
+        "trWord":  "roket",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F680.png",
+        "samplesText":  "The rocket goes to space.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "sun",
+        "trWord":  "güneş",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2600-FE0F.png",
+        "samplesText":  "The sun is bright.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "moon",
+        "trWord":  "ay",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F319.png",
+        "samplesText":  "The moon is in the sky.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "star",
+        "trWord":  "yıldız",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2B50.png",
+        "samplesText":  "A star shines at night.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "rain",
+        "trWord":  "yağmur",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F327-FE0F.png",
+        "samplesText":  "Rain falls from the clouds.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "snow",
+        "trWord":  "kar",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2744-FE0F.png",
+        "samplesText":  "Snow is cold and white.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "tree",
+        "trWord":  "ağaç",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "The tree is tall.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "flower",
+        "trWord":  "çiçek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F33C.png",
+        "samplesText":  "The flower smells nice.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "mountain",
+        "trWord":  "dağ",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26F0-FE0F.png",
+        "samplesText":  "The mountain is high.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "sea",
+        "trWord":  "deniz",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F30A.png",
+        "samplesText":  "The sea is blue.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "fire",
+        "trWord":  "ateş",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F525.png",
+        "samplesText":  "Fire is hot.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "happy",
+        "trWord":  "mutlu",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F600.png",
+        "samplesText":  "She is happy today.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "sad",
+        "trWord":  "üzgün",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F622.png",
+        "samplesText":  "He is sad after the game.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "angry",
+        "trWord":  "kızgın",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F620.png",
+        "samplesText":  "The man is angry.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "fast",
+        "trWord":  "hızlı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4A8.png",
+        "samplesText":  "The train is fast.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "slow",
+        "trWord":  "yavaş",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F40C.png",
+        "samplesText":  "The turtle is slow.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "hot",
+        "trWord":  "sıcak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F525.png",
+        "samplesText":  "The tea is hot.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "cold",
+        "trWord":  "soğuk",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2744-FE0F.png",
+        "samplesText":  "The water is cold.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "big",
+        "trWord":  "büyük",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F418.png",
+        "samplesText":  "The box is big.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "small",
+        "trWord":  "küçük",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F41C.png",
+        "samplesText":  "The ant is small.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "beautiful",
+        "trWord":  "güzel",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F33A.png",
+        "samplesText":  "The flower is beautiful.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "run",
+        "trWord":  "koşmak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "I run every morning.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "eat",
+        "trWord":  "yemek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D-FE0F.png",
+        "samplesText":  "We eat dinner at home.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "drink",
+        "trWord":  "içmek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F964.png",
+        "samplesText":  "I drink water.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "read",
+        "trWord":  "okumak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4D6.png",
+        "samplesText":  "She reads a book.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "write",
+        "trWord":  "yazmak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/270D-FE0F.png",
+        "samplesText":  "He writes a letter.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "listen",
+        "trWord":  "dinlemek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3A7.png",
+        "samplesText":  "I listen to music.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "speak",
+        "trWord":  "konuşmak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F5E3-FE0F.png",
+        "samplesText":  "They speak English.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "sleep",
+        "trWord":  "uyumak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F634.png",
+        "samplesText":  "The baby sleeps at night.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "work",
+        "trWord":  "çalışmak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "My father works in an office.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "play",
+        "trWord":  "oynamak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3AE.png",
+        "samplesText":  "Children play in the park.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "head",
+        "trWord":  "baş",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F464.png",
+        "samplesText":  "My head hurts.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "hand",
+        "trWord":  "el",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/270B.png",
+        "samplesText":  "Raise your hand.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "eye",
+        "trWord":  "göz",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F441-FE0F.png",
+        "samplesText":  "I have two eyes.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "ear",
+        "trWord":  "kulak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F442.png",
+        "samplesText":  "My ear is cold.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "mouth",
+        "trWord":  "ağız",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F444.png",
+        "samplesText":  "Open your mouth.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "foot",
+        "trWord":  "ayak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F9B6.png",
+        "samplesText":  "My foot hurts.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "heart",
+        "trWord":  "kalp",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2764-FE0F.png",
+        "samplesText":  "The heart is important.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "brain",
+        "trWord":  "beyin",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F9E0.png",
+        "samplesText":  "The brain controls the body.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "medicine",
+        "trWord":  "ilaç",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F48A.png",
+        "samplesText":  "Medicine can help you.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "hospital",
+        "trWord":  "hastane",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E5.png",
+        "samplesText":  "The hospital is open.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "morning",
+        "trWord":  "sabah",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F305.png",
+        "samplesText":  "I wake up in the morning.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "night",
+        "trWord":  "gece",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F303.png",
+        "samplesText":  "The city is quiet at night.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "family",
+        "trWord":  "aile",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F46A.png",
+        "samplesText":  "My family is at home.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "friend",
+        "trWord":  "arkadaş",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F9D1-200D-1F91D-200D-1F9D1.png",
+        "samplesText":  "My friend is kind.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "money",
+        "trWord":  "para",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4B0.png",
+        "samplesText":  "Money is in the wallet.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "market",
+        "trWord":  "market",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F6D2.png",
+        "samplesText":  "The market is busy.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "street",
+        "trWord":  "sokak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F6E3-FE0F.png",
+        "samplesText":  "The street is long.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "bag",
+        "trWord":  "çanta",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F45C.png",
+        "samplesText":  "The bag is on the chair.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "clothes",
+        "trWord":  "kıyafetler",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F455.png",
+        "samplesText":  "My clothes are clean.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "birthday",
+        "trWord":  "doğum günü",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F382.png",
+        "samplesText":  "Today is my birthday.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "wolf",
+        "trWord":  "kurt",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "The wolf hunts in a pack.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "fox",
+        "trWord":  "tilki",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "The fox moves quietly at night.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "deer",
+        "trWord":  "geyik",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "A deer crossed the forest path.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "eagle",
+        "trWord":  "kartal",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "The eagle watches from above.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "owl",
+        "trWord":  "baykuş",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "The owl is awake at night.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "shark",
+        "trWord":  "köpek balığı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "The shark swims near the reef.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "whale",
+        "trWord":  "balina",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "The whale is a huge animal.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "dolphin",
+        "trWord":  "yunus",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "The dolphin jumps out of the sea.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "turtle",
+        "trWord":  "kaplumbağa",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "The turtle moves slowly.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "rabbit",
+        "trWord":  "tavşan",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "The rabbit hides in the grass.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "goat",
+        "trWord":  "keçi",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "The goat climbs the hill.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "duck",
+        "trWord":  "ördek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "The duck swims across the pond.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "bee",
+        "trWord":  "arı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "The bee collects nectar.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "ant",
+        "trWord":  "karınca",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "The ant carries food.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "architect",
+        "trWord":  "mimar",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The architect designed a modern house.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "lawyer",
+        "trWord":  "avukat",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The lawyer explained the case.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "journalist",
+        "trWord":  "gazeteci",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The journalist wrote an article.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "pharmacist",
+        "trWord":  "eczacı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The pharmacist prepared the medicine.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "dentist",
+        "trWord":  "dişçi",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The dentist checked my teeth.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "mechanic",
+        "trWord":  "tamirci",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The mechanic repaired the car.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "electrician",
+        "trWord":  "elektrikçi",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The electrician fixed the cable.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "carpenter",
+        "trWord":  "marangoz",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The carpenter made a wooden table.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "accountant",
+        "trWord":  "muhasebeci",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The accountant checked the numbers.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "designer",
+        "trWord":  "tasarımcı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The designer chose new colors.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "translator",
+        "trWord":  "çevirmen",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The translator worked on a book.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "veterinarian",
+        "trWord":  "veteriner",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The veterinarian helped the sick dog.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "skiing",
+        "trWord":  "kayak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Skiing is popular in winter.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "skating",
+        "trWord":  "paten",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Skating can improve balance.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "wrestling",
+        "trWord":  "güreş",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Wrestling is a traditional sport.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "hockey",
+        "trWord":  "hokey",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Hockey is played with sticks.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "athletics",
+        "trWord":  "atletizm",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Athletics includes many events.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "gymnastics",
+        "trWord":  "jimnastik",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Gymnastics requires flexibility.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "climbing",
+        "trWord":  "tırmanış",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Climbing can be difficult and exciting.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "butter",
+        "trWord":  "tereyağı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "Butter melts on hot toast.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "honey",
+        "trWord":  "bal",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "Honey tastes sweet.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "pasta",
+        "trWord":  "makarna",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "Pasta is easy to cook.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "salad",
+        "trWord":  "salata",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "A salad can be very colorful.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "beef",
+        "trWord":  "sığır eti",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "Beef is used in many dishes.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "pepper",
+        "trWord":  "biber",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "The pepper is very spicy.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "onion",
+        "trWord":  "soğan",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "Onion gives flavor to food.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "garlic",
+        "trWord":  "sarımsak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "Garlic has a strong smell.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "yogurt",
+        "trWord":  "yoğurt",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "Yogurt is common at breakfast.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "cereal",
+        "trWord":  "mısır gevreği",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "Cereal is a quick breakfast.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "curtain",
+        "trWord":  "perde",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "The curtain blocks the sunlight.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "pillow",
+        "trWord":  "yastık",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "The pillow is soft.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "blanket",
+        "trWord":  "battaniye",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "The blanket keeps me warm.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "mirror",
+        "trWord":  "ayna",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "The mirror is in the hallway.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "shelf",
+        "trWord":  "raf",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "The books are on the shelf.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "drawer",
+        "trWord":  "çekmece",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "I put the keys in the drawer.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "carpet",
+        "trWord":  "halı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "The carpet is under the table.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "lamp",
+        "trWord":  "lamba",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "The lamp is beside the bed.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "fridge",
+        "trWord":  "buzdolabı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "The fridge keeps food cold.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "oven",
+        "trWord":  "fırın",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "The oven is very hot.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "kettle",
+        "trWord":  "su ısıtıcısı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "The kettle boils water quickly.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "plate",
+        "trWord":  "tabak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "The plate is on the table.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "bowl",
+        "trWord":  "kase",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "The bowl is full of soup.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "fork",
+        "trWord":  "çatal",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "Use a fork to eat pasta.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "spoon",
+        "trWord":  "kaşık",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3E0.png",
+        "samplesText":  "The spoon is clean.",
+        "category":  "Ev ve Eşyalar"
+    },
+    {
+        "engWord":  "subject",
+        "trWord":  "ders konusu",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "Math is my favorite subject.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "homework",
+        "trWord":  "ödev",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "I finished my homework early.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "dictionary",
+        "trWord":  "sözlük",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "The dictionary explains new words.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "laboratory",
+        "trWord":  "laboratuvar",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "Students worked in the laboratory.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "principal",
+        "trWord":  "müdür",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "The principal spoke to the class.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "classmate",
+        "trWord":  "sınıf arkadaşı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "My classmate helped me.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "degree",
+        "trWord":  "derece",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "She earned a university degree.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "lecture",
+        "trWord":  "konferans",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "The lecture lasted one hour.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "assignment",
+        "trWord":  "görev",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "The assignment is due tomorrow.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "attendance",
+        "trWord":  "devam durumu",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "Attendance is important at school.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "scholarship",
+        "trWord":  "burs",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "He received a scholarship.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "tram",
+        "trWord":  "tramvay",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "The tram stops near my house.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "ferry",
+        "trWord":  "vapur",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "The ferry crosses the sea.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "helicopter",
+        "trWord":  "helikopter",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "The helicopter flew over the city.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "scooter",
+        "trWord":  "scooter",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "A scooter is useful for short trips.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "van",
+        "trWord":  "minibüs",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "The van delivered packages.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "airport",
+        "trWord":  "havaalanı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "The airport is far from the center.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "station",
+        "trWord":  "istasyon",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "We met at the train station.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "ticket",
+        "trWord":  "bilet",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "I bought a ticket online.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "traffic",
+        "trWord":  "trafik",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "Traffic is heavy this morning.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "route",
+        "trWord":  "rota",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "This route is shorter.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "journey",
+        "trWord":  "yolculuk",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "The journey took three hours.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "valley",
+        "trWord":  "vadi",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "The valley is green in spring.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "desert",
+        "trWord":  "çöl",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "The desert is hot and dry.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "island",
+        "trWord":  "ada",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "The island has clear water.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "cave",
+        "trWord":  "mağara",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "The cave was dark inside.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "cliff",
+        "trWord":  "uçurum",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "The cliff is very steep.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "waterfall",
+        "trWord":  "şelale",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "The waterfall looks beautiful.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "wave",
+        "trWord":  "dalga",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "A big wave hit the shore.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "storm",
+        "trWord":  "fırtına",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "The storm damaged the trees.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "thunder",
+        "trWord":  "gök gürültüsü",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "Thunder scared the children.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "lightning",
+        "trWord":  "şimşek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "Lightning lit up the sky.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "fog",
+        "trWord":  "sis",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "Fog covered the road.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "climate",
+        "trWord":  "iklim",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "The climate is changing.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "soil",
+        "trWord":  "toprak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "Plants need healthy soil.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "branch",
+        "trWord":  "dal",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "A branch fell from the tree.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "root",
+        "trWord":  "kök",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F333.png",
+        "samplesText":  "The root grows under the ground.",
+        "category":  "Doğa"
+    },
+    {
+        "engWord":  "brave",
+        "trWord":  "cesur",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "The brave child helped his friend.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "calm",
+        "trWord":  "sakin",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "She stayed calm during the exam.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "clever",
+        "trWord":  "zeki",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "The clever student found the answer.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "polite",
+        "trWord":  "kibar",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "He is always polite to guests.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "rude",
+        "trWord":  "kaba",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "That was a rude comment.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "ancient",
+        "trWord":  "antik",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "They visited an ancient city.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "modern",
+        "trWord":  "modern",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "This is a modern building.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "narrow",
+        "trWord":  "dar",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "The street is narrow.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "wide",
+        "trWord":  "geniş",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "The room is wide and bright.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "empty",
+        "trWord":  "boş",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "The bottle is empty.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "full",
+        "trWord":  "dolu",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "The glass is full of water.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "noisy",
+        "trWord":  "gürültülü",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "The street is noisy at night.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "silent",
+        "trWord":  "sessiz",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "The classroom became silent.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "ordinary",
+        "trWord":  "sıradan",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "It was an ordinary day.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "valuable",
+        "trWord":  "değerli",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/2728.png",
+        "samplesText":  "This information is valuable.",
+        "category":  "Sıfatlar"
+    },
+    {
+        "engWord":  "decide",
+        "trWord":  "karar vermek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "We must decide quickly.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "explain",
+        "trWord":  "açıklamak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "Please explain the rule again.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "improve",
+        "trWord":  "geliştirmek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "Practice can improve your speaking.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "increase",
+        "trWord":  "artırmak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "The company wants to increase sales.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "reduce",
+        "trWord":  "azaltmak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "We should reduce waste.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "compare",
+        "trWord":  "karşılaştırmak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "Compare the two answers.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "prepare",
+        "trWord":  "hazırlamak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "I prepare breakfast every day.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "protect",
+        "trWord":  "korumak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "Parents protect their children.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "discover",
+        "trWord":  "keşfetmek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "Scientists discover new facts.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "describe",
+        "trWord":  "tanımlamak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "Can you describe the picture?",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "suggest",
+        "trWord":  "önermek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "I suggest a different solution.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "remember",
+        "trWord":  "hatırlamak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "Remember to lock the door.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "forget",
+        "trWord":  "unutmak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "Do not forget your notebook.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "allow",
+        "trWord":  "izin vermek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "The teacher will allow extra time.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "avoid",
+        "trWord":  "kaçınmak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F3C3.png",
+        "samplesText":  "Avoid making the same mistake.",
+        "category":  "Fiiller"
+    },
+    {
+        "engWord":  "shoulder",
+        "trWord":  "omuz",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "My shoulder hurts after training.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "elbow",
+        "trWord":  "dirsek",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "He hit his elbow on the table.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "knee",
+        "trWord":  "diz",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "Her knee is injured.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "ankle",
+        "trWord":  "ayak bileği",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "I twisted my ankle.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "finger",
+        "trWord":  "parmak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "He cut his finger.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "toe",
+        "trWord":  "ayak parmağı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "My toe is cold.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "stomach",
+        "trWord":  "mide",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "My stomach feels full.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "fever",
+        "trWord":  "ateş",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "The child has a fever.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "cough",
+        "trWord":  "öksürük",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "A cough can last for days.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "pain",
+        "trWord":  "ağrı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "The pain disappeared slowly.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "wound",
+        "trWord":  "yara",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "Clean the wound carefully.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "exercise",
+        "trWord":  "egzersiz",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "Exercise helps your body stay strong.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "appointment",
+        "trWord":  "randevu",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "I have an appointment at noon.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "conversation",
+        "trWord":  "konuşma",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "Their conversation was short.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "decision",
+        "trWord":  "karar",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "This decision is important.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "habit",
+        "trWord":  "alışkanlık",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "Reading is a useful habit.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "schedule",
+        "trWord":  "program",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "My schedule is full today.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "message",
+        "trWord":  "mesaj",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "She sent a message.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "neighbor",
+        "trWord":  "komşu",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "Our neighbor is friendly.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "receipt",
+        "trWord":  "fiş",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "Keep the receipt after shopping.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "wallet",
+        "trWord":  "cüzdan",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "My wallet is in my bag.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "umbrella",
+        "trWord":  "şemsiye",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "Take an umbrella because it may rain.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "calendar",
+        "trWord":  "takvim",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "The calendar is on the wall.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "meeting",
+        "trWord":  "toplantı",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "The meeting starts soon.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "problem",
+        "trWord":  "problem",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "We solved the problem together.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "solution",
+        "trWord":  "çözüm",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "The solution was simple.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "opinion",
+        "trWord":  "fikir",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4AC.png",
+        "samplesText":  "Everyone has a different opinion.",
+        "category":  "Günlük Yaşam"
+    },
+    {
+        "engWord":  "leopard",
+        "trWord":  "leopar",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F43E.png",
+        "samplesText":  "The leopard climbs a tree easily.",
+        "category":  "Hayvanlar"
+    },
+    {
+        "engWord":  "nurse",
+        "trWord":  "hemşire",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The nurse checked the patient.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "manager",
+        "trWord":  "yönetici",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The manager planned the work.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "developer",
+        "trWord":  "geliştirici",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F4BC.png",
+        "samplesText":  "The developer fixed the application.",
+        "category":  "Meslekler"
+    },
+    {
+        "engWord":  "archery",
+        "trWord":  "okçuluk",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Archery requires focus.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "sailing",
+        "trWord":  "yelken",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Sailing depends on the wind.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "judo",
+        "trWord":  "judo",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Judo teaches balance and control.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "karate",
+        "trWord":  "karate",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Karate needs discipline.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "diving",
+        "trWord":  "dalış",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Diving lets you see underwater life.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "surfing",
+        "trWord":  "sörf",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Surfing is done on waves.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "badminton",
+        "trWord":  "badminton",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Badminton is played with a shuttlecock.",
+        "category":  "Sporlar"
+    },
+    {
+        "engWord":  "mushroom",
+        "trWord":  "mantar",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "Mushroom soup is delicious.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "carrot",
+        "trWord":  "havuç",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "A carrot is orange and crunchy.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "potato",
+        "trWord":  "patates",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "Potato can be fried or boiled.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "tomato",
+        "trWord":  "domates",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "The tomato is red and fresh.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "cucumber",
+        "trWord":  "salatalık",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F37D.png",
+        "samplesText":  "Cucumber is used in salads.",
+        "category":  "Yiyecekler"
+    },
+    {
+        "engWord":  "essay",
+        "trWord":  "kompozisyon",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "The essay has three paragraphs.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "quiz",
+        "trWord":  "kısa sınav",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "The quiz has ten questions.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "grade",
+        "trWord":  "not",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "Her grade improved this term.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "campus",
+        "trWord":  "kampüs",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F393.png",
+        "samplesText":  "The campus is large.",
+        "category":  "Okul"
+    },
+    {
+        "engWord":  "crossroad",
+        "trWord":  "kavşak",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "The crossroad is busy.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "platform",
+        "trWord":  "peron",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "The train arrives at platform two.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "highway",
+        "trWord":  "otoyol",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "The highway is very long.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "bridge",
+        "trWord":  "köprü",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1F697.png",
+        "samplesText":  "The bridge connects two towns.",
+        "category":  "Ulaşım"
+    },
+    {
+        "engWord":  "muscle",
+        "trWord":  "kas",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "Exercise builds muscle.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "bone",
+        "trWord":  "kemik",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "A bone can break in an accident.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "skin",
+        "trWord":  "cilt",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/1FA7A.png",
+        "samplesText":  "Skin protects the body.",
+        "category":  "Sağlık ve Vücut"
+    },
+    {
+        "engWord":  "pickleball",
+        "trWord":  "pickleball",
+        "picturePath":  "https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji/color/72x72/26BD.png",
+        "samplesText":  "Pickleball is a fast and popular racket sport.",
+        "category":  "Sporlar"
+    }
 ]

@@ -2,7 +2,7 @@ package com.samil.kelimequiz.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,16 +14,13 @@ import com.samil.kelimequiz.ui.quiz.QuizActivity;
 import com.samil.kelimequiz.util.AppContainer;
 import com.samil.kelimequiz.util.AppExecutors;
 import com.samil.kelimequiz.util.NavigationHelper;
-import com.samil.kelimequiz.util.QuizSettingsManager;
 import com.samil.kelimequiz.util.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView tvQuizLimit;
-    private TextView tvQuizSummary;
     private MaterialButton btnStartQuiz;
     private int userId;
     private int totalWordCount;
-    private boolean quizSummaryLoaded;
+    private boolean wordCountLoaded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,57 +36,45 @@ public class MainActivity extends AppCompatActivity {
         NavigationHelper.bindTopBar(this, false);
         NavigationHelper.bindBottomBar(this);
 
-        tvQuizLimit = findViewById(R.id.tvQuizLimit);
-        tvQuizSummary = findViewById(R.id.tvQuizSummary);
         btnStartQuiz = findViewById(R.id.btnStartQuiz);
 
         userId = sessionManager.getUserId();
         btnStartQuiz.setEnabled(false);
         btnStartQuiz.setOnClickListener(v -> openQuizIfWordsExist());
-        loadQuizSummary();
+        loadWordCount();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (tvQuizLimit != null) {
-            loadQuizSummary();
+        if (btnStartQuiz != null) {
+            loadWordCount();
         }
     }
 
-    private void loadQuizSummary() {
-        quizSummaryLoaded = false;
+    private void loadWordCount() {
+        wordCountLoaded = false;
         btnStartQuiz.setEnabled(false);
-        int questionLimit = new QuizSettingsManager(this).getQuestionLimit();
-        tvQuizLimit.setText(getResources().getQuantityString(R.plurals.quiz_limit_message, questionLimit, questionLimit));
-        tvQuizSummary.setText(R.string.quiz_summary_loading);
         AppExecutors.io().execute(() -> {
             QuizSummary summary = AppContainer.from(this).quizRepository.getSummary(userId);
-            runOnUiThread(() -> showQuizSummary(summary));
+            runOnUiThread(() -> showWordCount(summary));
         });
     }
 
-    private void showQuizSummary(QuizSummary summary) {
-        quizSummaryLoaded = true;
+    private void showWordCount(QuizSummary summary) {
+        wordCountLoaded = true;
         totalWordCount = summary.getTotalWords();
-        tvQuizSummary.setText(getString(
-                R.string.quiz_summary_short,
-                getString(R.string.active_words_label),
-                summary.getActiveWords(),
-                getString(R.string.learned_words_label),
-                summary.getLearnedWords()
-        ));
         btnStartQuiz.setText(totalWordCount == 0 ? R.string.add_word_first_action : R.string.start_quiz_action);
         btnStartQuiz.setEnabled(true);
     }
 
     private void openQuizIfWordsExist() {
-        if (!quizSummaryLoaded) {
-            tvQuizSummary.setText(R.string.quiz_summary_wait);
+        if (!wordCountLoaded) {
+            Toast.makeText(this, R.string.quiz_summary_wait, Toast.LENGTH_SHORT).show();
             return;
         }
         if (totalWordCount == 0) {
-            tvQuizSummary.setText(R.string.quiz_requires_words);
+            Toast.makeText(this, R.string.quiz_requires_words, Toast.LENGTH_SHORT).show();
             return;
         }
         startActivity(new Intent(this, QuizActivity.class));

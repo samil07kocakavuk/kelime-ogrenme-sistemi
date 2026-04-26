@@ -45,7 +45,13 @@ public class WordDetailBottomSheet extends BottomSheetDialogFragment {
         }
 
         if (details.getPicturePath() != null && !details.getPicturePath().isEmpty()) {
-            Glide.with(this).load(details.getPicturePath()).into(ivWordImage);
+            Glide.with(this)
+                    .load(details.getPicturePath())
+                    .thumbnail(0.25f)
+                    .override(480, 360)
+                    .centerCrop()
+                    .dontAnimate()
+                    .into(ivWordImage);
             ivWordImage.setVisibility(View.VISIBLE);
         } else {
             ivWordImage.setVisibility(View.GONE);
