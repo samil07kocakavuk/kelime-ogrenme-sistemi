@@ -42,7 +42,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Profil"
+                        android:text="@string/profile_title"
                         android:textColor="@color/text_primary"
                         android:textSize="30sp"
                         android:textStyle="bold" />
@@ -52,7 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Kullanıcı bilgisi yükleniyor..."
+                        android:text="@string/profile_loading"
                         android:textColor="@color/text_secondary"
                         android:textSize="16sp" />
 
@@ -60,7 +60,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="22dp"
-                        android:text="Kelime havuzunu yönet, görünümü seç ve oturumunu tek ekrandan kontrol et."
+                        android:text="@string/profile_intro"
                         android:textColor="@color/text_secondary"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -85,7 +85,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Ayarlar"
+                        android:text="@string/settings_title"
                         android:textColor="@color/text_primary"
                         android:textSize="22sp"
                         android:textStyle="bold" />
@@ -94,17 +94,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:text="Tema seçimi"
+                        android:text="@string/theme_selection_title"
                         android:textColor="@color/text_secondary"
                         android:textSize="14sp" />
 
-                    <com.google.android.material.button.MaterialButtonToggleGroup
-                        android:id="@+id/themeToggleGroup"
+                    <TextView
+                        android:id="@+id/tvThemeMode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
-                        app:selectionRequired="true"
-                        app:singleSelection="true">
+                        android:text="@string/theme_mode_light"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnThemeLight"
@@ -112,7 +120,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Açık Tema" />
+                            android:text="@string/light_theme_action" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnThemeDark"
@@ -121,8 +129,53 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Dark Tema" />
-                    </com.google.android.material.button.MaterialButtonToggleGroup>
+                            android:text="@string/dark_theme_action" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:text="@string/quiz_question_limit_title"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnDecreaseQuizLimit"
+                            style="@style/AppButtonSecondary"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/decrease_action" />
+
+                        <TextView
+                            android:id="@+id/tvQuizQuestionLimit"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/default_quiz_limit"
+                            android:textColor="@color/text_primary"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnIncreaseQuizLimit"
+                            style="@style/AppButtonSecondary"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/increase_action" />
+                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -132,7 +185,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:text="Kelime Havuzu" />
+                android:text="@string/word_pool_title" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogout"
@@ -140,7 +193,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Çıkış Yap" />
+                android:text="@string/logout_action" />
         </LinearLayout>
     </ScrollView>
 

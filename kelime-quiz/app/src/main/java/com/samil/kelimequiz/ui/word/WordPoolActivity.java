@@ -59,13 +59,13 @@ public class WordPoolActivity extends AppCompatActivity implements WordCardAdapt
 
     private void loadWords() {
         int userId = sessionManager.getUserId();
-        tvEmptyState.setText("Kelime havuzu hazırlanıyor...");
+        tvEmptyState.setText(R.string.word_pool_loading);
         AppExecutors.io().execute(() -> {
             AppContainer.from(this).wordRepository.addInitialSeedWords(userId);
             List<WordEntity> words = AppContainer.from(this).wordRepository.listWords(userId);
             runOnUiThread(() -> {
                 wordAdapter.setWords(words);
-                tvEmptyState.setText(words.isEmpty() ? "Henüz kelime eklenmedi." : "Kelime kartlarına dokunarak detayları görebilirsin.");
+                tvEmptyState.setText(words.isEmpty() ? R.string.word_pool_empty : R.string.word_pool_help);
             });
         });
     }
@@ -82,10 +82,10 @@ public class WordPoolActivity extends AppCompatActivity implements WordCardAdapt
     @Override
     public void onDeleteRequested(WordEntity word) {
         new AlertDialog.Builder(this)
-                .setTitle("Kelimeyi sil")
-                .setMessage(word.engWord + " kelimesini silmek istiyor musun?")
-                .setNegativeButton("Vazgeç", null)
-                .setPositiveButton("Sil", (dialog, which) -> deleteWord(word.wordId))
+                .setTitle(R.string.delete_word_title)
+                .setMessage(getString(R.string.delete_word_message, word.engWord))
+                .setNegativeButton(R.string.cancel_action, null)
+                .setPositiveButton(R.string.delete_action, (dialog, which) -> deleteWord(word.wordId))
                 .show();
     }
 

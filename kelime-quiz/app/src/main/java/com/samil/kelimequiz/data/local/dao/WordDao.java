@@ -32,4 +32,7 @@ public interface WordDao {
 
     @Query("SELECT * FROM words WHERE userId = :userId AND LOWER(engWord) = LOWER(:engWord) LIMIT 1")
     WordEntity findByUserAndEnglishWord(int userId, String engWord);
+
+    @Query("SELECT trWord FROM words WHERE userId = :userId AND wordId != :excludedWordId ORDER BY RANDOM() LIMIT :limit")
+    List<String> listRandomTranslationsExcluding(int userId, int excludedWordId, int limit);
 }

@@ -17,15 +17,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Anasayfa" />
+        android:text="@string/home_nav" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnNavAdd"
-        style="@style/AppButtonPrimary"
+        style="@style/AppButtonGhost"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="+" />
+        android:text="@string/add_nav" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnNavProfile"
@@ -33,5 +33,5 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Profil" />
+        android:text="@string/profile_nav" />
 </LinearLayout>

@@ -76,11 +76,11 @@ public class AddWordActivity extends AppCompatActivity {
         tilTrWord.setError(null);
 
         if (engWord.isEmpty()) {
-            tilEngWord.setError("Lütfen İngilizce kelimeyi girin.");
+            tilEngWord.setError(getString(R.string.english_required_error));
             isValid = false;
         }
         if (trWord.isEmpty()) {
-            tilTrWord.setError("Lütfen Türkçe karşılığını girin.");
+            tilTrWord.setError(getString(R.string.turkish_required_error));
             isValid = false;
         }
 
@@ -92,26 +92,26 @@ public class AddWordActivity extends AppCompatActivity {
     private void saveWord(String engWord, String trWord) {
         int userId = new SessionManager(this).getUserId();
         if (userId <= 0) {
-            showStatus("Oturum bulunamadı.");
+            showStatus(getString(R.string.session_not_found));
             return;
         }
 
         String samples = getInput(etSamples);
 
-        showStatus("Kelime kaydediliyor...");
+        showStatus(getString(R.string.saving_word));
         btnSaveWord.setEnabled(false);
         AppExecutors.io().execute(() -> {
             try {
                 String picturePath = selectedImageUri == null ? null : ImageStorage.copyToAppStorage(this, selectedImageUri);
                 AppContainer.from(this).wordRepository.addWord(userId, engWord, trWord, picturePath, samples);
                 runOnUiThread(() -> {
-                    showStatus("Kelime başarıyla kaydedildi.");
+                    showStatus(getString(R.string.word_saved));
                     finish();
                 });
             } catch (RuntimeException e) {
                 runOnUiThread(() -> {
                     btnSaveWord.setEnabled(true);
-                    showStatus("Hata: " + e.getMessage());
+                    showStatus(getString(R.string.error_with_message, e.getMessage()));
                 });
             }
         });
@@ -120,12 +120,12 @@ public class AddWordActivity extends AppCompatActivity {
     private void onImagePicked(Uri uri) {
         selectedImageUri = uri;
         if (uri == null) {
-            tvSelectedImage.setText("Henüz görsel seçilmedi.");
+            tvSelectedImage.setText(R.string.no_image_selected);
             ivSelectedImage.setImageDrawable(null);
             ivSelectedImage.setVisibility(View.GONE);
             return;
         }
-        tvSelectedImage.setText("Görsel seçildi.");
+        tvSelectedImage.setText(R.string.image_selected);
         Glide.with(this).load(uri).into(ivSelectedImage);
         ivSelectedImage.setVisibility(View.VISIBLE);
     }

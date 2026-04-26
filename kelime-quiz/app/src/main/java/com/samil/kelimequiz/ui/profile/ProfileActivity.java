@@ -7,7 +7,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.data.local.entity.UserEntity;
 import com.samil.kelimequiz.ui.auth.LoginActivity;
@@ -15,12 +14,14 @@ import com.samil.kelimequiz.ui.word.WordPoolActivity;
 import com.samil.kelimequiz.util.AppContainer;
 import com.samil.kelimequiz.util.AppExecutors;
 import com.samil.kelimequiz.util.NavigationHelper;
+import com.samil.kelimequiz.util.QuizSettingsManager;
 import com.samil.kelimequiz.util.SessionManager;
 import com.samil.kelimequiz.util.ThemeManager;
 
 public class ProfileActivity extends AppCompatActivity {
     private TextView tvProfileInfo;
-    private boolean bindingThemeSelection;
+    private TextView tvThemeMode;
+    private TextView tvQuizQuestionLimit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +37,17 @@ public class ProfileActivity extends AppCompatActivity {
         tvProfileInfo = findViewById(R.id.tvProfileInfo);
         MaterialButton btnWordPool = findViewById(R.id.btnWordPool);
         MaterialButton btnLogout = findViewById(R.id.btnLogout);
-        MaterialButtonToggleGroup themeToggleGroup = findViewById(R.id.themeToggleGroup);
+        MaterialButton btnThemeLight = findViewById(R.id.btnThemeLight);
+        MaterialButton btnThemeDark = findViewById(R.id.btnThemeDark);
+        MaterialButton btnDecreaseQuizLimit = findViewById(R.id.btnDecreaseQuizLimit);
+        MaterialButton btnIncreaseQuizLimit = findViewById(R.id.btnIncreaseQuizLimit);
+        tvThemeMode = findViewById(R.id.tvThemeMode);
+        tvQuizQuestionLimit = findViewById(R.id.tvQuizQuestionLimit);
 
         NavigationHelper.bindTopBar(this, false);
         NavigationHelper.bindBottomBar(this);
-        bindThemeSettings(themeToggleGroup);
+        bindThemeSettings(btnThemeLight, btnThemeDark);
+        bindQuizLimitSettings(btnDecreaseQuizLimit, btnIncreaseQuizLimit);
         btnWordPool.setOnClickListener(v -> startActivity(new Intent(this, WordPoolActivity.class)));
         btnLogout.setOnClickListener(v -> {
             sessionManager.clear();
@@ -54,30 +61,42 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void bindThemeSettings(MaterialButtonToggleGroup themeToggleGroup) {
-        int selectedButtonId = ThemeManager.getSavedTheme(this) == ThemeManager.THEME_DARK
-                ? R.id.btnThemeDark
-                : R.id.btnThemeLight;
-        bindingThemeSelection = true;
-        themeToggleGroup.check(selectedButtonId);
-        bindingThemeSelection = false;
-        themeToggleGroup.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
-            if (bindingThemeSelection || !isChecked) {
-                return;
-            }
-            int themeMode = checkedId == R.id.btnThemeDark
-                    ? ThemeManager.THEME_DARK
-                    : ThemeManager.THEME_LIGHT;
-            ThemeManager.saveAndApplyTheme(this, themeMode);
-        });
+    private void bindThemeSettings(MaterialButton btnThemeLight, MaterialButton btnThemeDark) {
+        showThemeMode();
+        btnThemeLight.setOnClickListener(v -> changeTheme(ThemeManager.THEME_LIGHT));
+        btnThemeDark.setOnClickListener(v -> changeTheme(ThemeManager.THEME_DARK));
+    }
+
+    private void changeTheme(int themeMode) {
+        if (ThemeManager.getSavedTheme(this) == themeMode) {
+            showThemeMode();
+            return;
+        }
+        ThemeManager.saveAndApplyTheme(this, themeMode);
+    }
+
+    private void showThemeMode() {
+        boolean darkTheme = ThemeManager.getSavedTheme(this) == ThemeManager.THEME_DARK;
+        tvThemeMode.setText(darkTheme ? R.string.theme_mode_dark : R.string.theme_mode_light);
+    }
+
+    private void bindQuizLimitSettings(MaterialButton btnDecreaseQuizLimit, MaterialButton btnIncreaseQuizLimit) {
+        QuizSettingsManager settingsManager = new QuizSettingsManager(this);
+        showQuizQuestionLimit(settingsManager.getQuestionLimit());
+        btnDecreaseQuizLimit.setOnClickListener(v -> showQuizQuestionLimit(settingsManager.decreaseQuestionLimit()));
+        btnIncreaseQuizLimit.setOnClickListener(v -> showQuizQuestionLimit(settingsManager.increaseQuestionLimit()));
+    }
+
+    private void showQuizQuestionLimit(int questionLimit) {
+        tvQuizQuestionLimit.setText(String.valueOf(questionLimit));
     }
 
     private void showUser(UserEntity user) {
         if (user == null) {
-            tvProfileInfo.setText("Kullanıcı bilgisi bulunamadı.");
+            tvProfileInfo.setText(R.string.profile_not_found);
             return;
         }
-        tvProfileInfo.setText("Kullanıcı adı: " + user.username);
+        tvProfileInfo.setText(getString(R.string.profile_username, user.username));
     }
 
     private void openLoginAndClose() {
