@@ -76,7 +76,7 @@ public class QuizRepository {
 
         List<String> options = new ArrayList<>(uniqueOptions);
         Collections.shuffle(options);
-        return new QuizQuestion(word.wordId, word.engWord, word.trWord, options);
+        return new QuizQuestion(word.wordId, word.engWord, word.trWord, word.picturePath, options);
     }
 
     private void updateProgressAfterAnswer(QuizProgressEntity progress, boolean correct, long now) {

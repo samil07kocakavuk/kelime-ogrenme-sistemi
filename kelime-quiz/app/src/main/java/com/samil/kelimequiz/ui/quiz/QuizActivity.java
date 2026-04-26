@@ -3,10 +3,12 @@ package com.samil.kelimequiz.ui.quiz;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.domain.model.QuizAnswerResult;
@@ -29,6 +31,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView tvQuizProgress;
     private TextView tvQuestionWord;
     private TextView tvQuizFeedback;
+    private ImageView ivQuizWordImage;
     private MaterialButton btnNextQuestion;
     private MaterialButton btnFinishQuiz;
 
@@ -59,6 +62,7 @@ public class QuizActivity extends AppCompatActivity {
         tvQuizProgress = findViewById(R.id.tvQuizProgress);
         tvQuestionWord = findViewById(R.id.tvQuestionWord);
         tvQuizFeedback = findViewById(R.id.tvQuizFeedback);
+        ivQuizWordImage = findViewById(R.id.ivQuizWordImage);
         btnNextQuestion = findViewById(R.id.btnNextQuestion);
         btnFinishQuiz = findViewById(R.id.btnFinishQuiz);
 
@@ -99,6 +103,7 @@ public class QuizActivity extends AppCompatActivity {
         QuizQuestion question = questions.get(currentIndex);
         tvQuizProgress.setText(getString(R.string.quiz_progress_format, currentIndex + 1, questions.size()));
         tvQuestionWord.setText(question.getQuestionText());
+        showQuestionImage(question.getPicturePath());
         tvQuizFeedback.setText(R.string.choose_turkish_answer);
         tvQuizFeedback.setBackgroundResource(R.drawable.bg_feedback_neutral);
         tvQuizFeedback.setTextColor(getColor(R.color.text_secondary));
@@ -181,6 +186,19 @@ public class QuizActivity extends AppCompatActivity {
         tvQuizFeedback.setTextColor(getColor(R.color.error));
     }
 
+    private void showQuestionImage(String picturePath) {
+        if (picturePath == null || picturePath.trim().isEmpty()) {
+            ivQuizWordImage.setVisibility(View.GONE);
+            return;
+        }
+
+        ivQuizWordImage.setVisibility(View.VISIBLE);
+        Glide.with(this)
+                .load(picturePath)
+                .centerCrop()
+                .into(ivQuizWordImage);
+    }
+
     private void applyAnswerStyles(boolean correct, String correctAnswer) {
         for (MaterialButton button : optionButtons) {
             String option = button.getText().toString();
@@ -212,6 +230,7 @@ public class QuizActivity extends AppCompatActivity {
     private void showEmptyQuiz() {
         tvQuizProgress.setText(R.string.empty_quiz_progress);
         tvQuestionWord.setText(R.string.empty_quiz_title);
+        ivQuizWordImage.setVisibility(View.GONE);
         tvQuizFeedback.setText(R.string.empty_quiz_message);
         setOptionsVisible(false);
         btnNextQuestion.setVisibility(View.GONE);

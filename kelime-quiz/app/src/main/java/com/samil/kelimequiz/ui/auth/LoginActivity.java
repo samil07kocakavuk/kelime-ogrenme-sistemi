@@ -61,8 +61,18 @@ public class LoginActivity extends AppCompatActivity {
         showStatus("Kontrol ediliyor...");
         btnLogin.setEnabled(false);
         AppExecutors.io().execute(() -> {
-            AuthResult result = AppContainer.from(this).authRepository.login(username, password);
-            runOnUiThread(() -> handleAuthResult(result));
+            try {
+                AuthResult result = AppContainer.from(this).authRepository.login(username, password);
+                if (result.isSuccess()) {
+                    AppContainer.from(this).wordRepository.addInitialSeedWords(result.getUserId());
+                }
+                runOnUiThread(() -> handleAuthResult(result));
+            } catch (RuntimeException exception) {
+                runOnUiThread(() -> {
+                    btnLogin.setEnabled(true);
+                    showStatus(exception.getMessage());
+                });
+            }
         });
     }
 
