@@ -1,39 +1,68 @@
-# Kelime Öğrenme Sistemi
+# Kelime Quiz
 
-Bu repo, 6 tekrar prensibine dayalı kelime öğrenme projesinin düzenlenmiş gereksinimlerini ve geliştirme kurallarını içerir.
+Android tabanlı, kelime ezberleme ve tekrar odaklı bir uygulama. Proje Java, Room, Glide ve Material bileşenleriyle geliştirilmiştir.
 
-## Proje Amacı
+## Genel Bakış
 
-Amaç, kullanıcının İngilizce-Türkçe kelimeleri belirli tekrar aralıklarıyla görerek daha kalıcı şekilde öğrenmesini sağlamaktır. Sistem, kelimeleri tekrar zamanına göre sunar ve doğru/yanlış cevaplara göre öğrenme sürecini günceller.
+Uygulama kullanıcı bazlı çalışır. Her kullanıcının kelime havuzu, öğrenme ilerlemesi ve quiz geçmişi birbirinden bağımsız tutulur.
 
-## Temel Modüller
+## Özellikler
 
-- Kullanıcı kayıt, giriş ve şifre yönetimi
-- Kelime ekleme ve kelime havuzu yönetimi
-- Örnek cümle ve görsel desteği
-- 6 aşamalı tekrar mantığı ile quiz modülü
-- Ayarlar, raporlama ve analiz ekranları
-- Opsiyonel mini oyun ve AI destekli hikaye/görsel modülü
+- Kullanıcı kayıt, giriş ve şifre sıfırlama akışı
+- Kullanıcıya özel kelime havuzu
+- Kelime ekleme, silme ve detay görüntüleme
+- Görsel ve örnek cümle desteği
+- Quiz / tekrar modülü
+- Tekrar zamanı gelen kelimeleri önce soran SRS mantığı
+- Doğru cevapta seviyeyi artıran, yanlış cevapta sıfırlayan ilerleme sistemi
+- Öğrenilmiş kelimeleri quiz havuzundan çıkarma
+- Profil ekranından açık / koyu tema seçimi
+- Profil ekranından quiz soru sayısı ayarı
+- Ana ekranda quiz özeti ve hızlı başlatma
 
-## Dokümanlar
+## Quiz Mantığı
 
-- `README.md`: Genel proje özeti
-- `isterler.txt`: Düzenlenmiş proje isterleri
-- `CLEAN_CODE_RULES.md`: Derste beklenen temiz kod kuralları ve bu projede nasıl uygulanacağı
+Quiz sistemi kullanıcı bazlı ilerler:
 
-## Temiz Kod Önceliği
+1. Doğru cevap kelime seviyesini artırır.
+2. Yanlış cevap seviyeyi sıfırlar.
+3. Seviye 1'den 6'ya kadar tekrar aralıkları sırasıyla 1 gün, 1 hafta, 1 ay, 3 ay, 6 ay ve 1 yıldır.
+4. 6. doğru tekrar tamamlandığında kelime öğrenilmiş kabul edilir.
+5. Öğrenilmiş kelimeler normal quiz havuzuna tekrar girmez.
 
-Bu projede en kritik konu kod kalitesidir. Kod:
+## Teknoloji Yığını
 
-- basit olmalı
-- okunabilir olmalı
-- anlaşılabilir olmalı
-- bakım yapılabilir olmalı
-- gereksiz karmaşıklık içermemeli
+- Java 17
+- Android SDK 34
+- Room
+- Material Design
+- Glide
+- JUnit
 
-Temiz kod yaklaşımının detayları `CLEAN_CODE_RULES.md` içinde ayrı olarak tutulur.
+## Proje Yapısı
 
-## Kapsam Dışı
+- `app/src/main/java/com/samil/kelimequiz/data` veri katmanı
+- `app/src/main/java/com/samil/kelimequiz/domain` iş kuralları ve modeller
+- `app/src/main/java/com/samil/kelimequiz/ui` ekranlar
+- `app/src/main/res` layout, drawable ve renk kaynakları
 
-- `deneme1` klasörü bu repoya dahil edilmez
-- kullanıcı tarafından eklenen referans `.docx` ve `.pdf` dosyaları repoya alınmaz
+## Çalıştırma
+
+Proje kök dizininden:
+
+```bash
+gradlew.bat assembleDebug
+```
+
+Uygulamayı test etmek için:
+
+```bash
+gradlew.bat testDebugUnitTest lintDebug
+```
+
+## Notlar
+
+- Uygulama giriş yapılmadan korumalı ekranları açmaz.
+- Quiz soru limiti profil ekranından değiştirilebilir.
+- Tema değişimi profil ekranından yapılır ve uygulama genelinde uygulanır.
+- `lint` temiz geçecek şekilde tutulmuştur.
