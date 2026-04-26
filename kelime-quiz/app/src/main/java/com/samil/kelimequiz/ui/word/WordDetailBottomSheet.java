@@ -32,7 +32,7 @@ public class WordDetailBottomSheet extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView tvEngWord = view.findViewById(R.id.tvDialogTitle); // XML'e bu ID'yi ekleyeceğiz veya setTitle kullanacağız
+        TextView tvEngWord = view.findViewById(R.id.tvDialogTitle);
         ImageView ivWordImage = view.findViewById(R.id.ivWordImage);
         TextView tvMeaning = view.findViewById(R.id.tvMeaning);
         TextView tvSamples = view.findViewById(R.id.tvSamples);
@@ -40,7 +40,6 @@ public class WordDetailBottomSheet extends BottomSheetDialogFragment {
         tvMeaning.setText(details.getTrWord());
         tvSamples.setText(buildSamplesText(details));
         
-        // Başlık için bir TextView eklememiz iyi olur
         if (tvEngWord != null) {
             tvEngWord.setText(details.getEngWord());
         }
@@ -57,7 +56,7 @@ public class WordDetailBottomSheet extends BottomSheetDialogFragment {
 
     private String buildSamplesText(WordDetails details) {
         if (details.getSampleTexts().isEmpty()) {
-            return "Örnek cümle yok.";
+            return getString(R.string.no_sample_sentences);
         }
 
         StringBuilder builder = new StringBuilder();

@@ -1,39 +1,62 @@
-# Kelime Öğrenme Sistemi
+# Kelime Quiz - Android Application
 
-Bu repo, 6 tekrar prensibine dayalı kelime öğrenme projesinin düzenlenmiş gereksinimlerini ve geliştirme kurallarını içerir.
+[![Android](https://img.shields.io/badge/Platform-Android-green.svg)](https://developer.android.com/)
+[![Java](https://img.shields.io/badge/Language-Java%2017-orange.svg)](https://www.oracle.com/java/)
+[![Room](https://img.shields.io/badge/Database-Room-blue.svg)](https://developer.android.com/training/data-storage/room)
 
-## Proje Amacı
+Bu dizin, **Kelime Quiz** uygulamasının ana Android projesini içerir. Uygulama, 6 aşamalı tekrar algoritması (SRS) kullanarak kelime öğrenimini kolaylaştırmak amacıyla geliştirilmiştir.
 
-Amaç, kullanıcının İngilizce-Türkçe kelimeleri belirli tekrar aralıklarıyla görerek daha kalıcı şekilde öğrenmesini sağlamaktır. Sistem, kelimeleri tekrar zamanına göre sunar ve doğru/yanlış cevaplara göre öğrenme sürecini günceller.
+## 📱 Uygulama Hakkında
 
-## Temel Modüller
+Kelime Quiz, kullanıcı bazlı çalışan bir sistemdir. Her kullanıcının kendi kelime listesi, öğrenme durumu ve quiz ayarları yerel veritabanında (Room) güvenli bir şekilde saklanır.
 
-- Kullanıcı kayıt, giriş ve şifre yönetimi
-- Kelime ekleme ve kelime havuzu yönetimi
-- Örnek cümle ve görsel desteği
-- 6 aşamalı tekrar mantığı ile quiz modülü
-- Ayarlar, raporlama ve analiz ekranları
-- Opsiyonel mini oyun ve AI destekli hikaye/görsel modülü
+## 🛠️ Teknik Özellikler
 
-## Dokümanlar
+- **Mimarisi:** MVVM (Data, Domain, UI katmanları)
+- **Veritabanı:** Room Persistence Library
+- **Kullanıcı Güvenliği:** PBKDF2 Hashing algoritması ile yerel şifre doğrulama.
+- **UI Bileşenleri:** Material Design 3 (Material Components for Android).
+- **Görsel Yükleme:** Glide ile verimli resim önbelleğe alma ve görüntüleme.
+- **Arka Plan İşlemleri:** ExecutorService ve Handler ile asenkron veritabanı işlemleri.
 
-- `README.md`: Genel proje özeti
-- `isterler.txt`: Düzenlenmiş proje isterleri
-- `CLEAN_CODE_RULES.md`: Derste beklenen temiz kod kuralları ve bu projede nasıl uygulanacağı
+## 🧠 Quiz Algoritması
 
-## Temiz Kod Önceliği
+Sistem, **6 Tekrar Prensibine** göre çalışır. Bir kelimenin "Öğrenilmiş" statüsüne geçmesi için 6 farklı zaman diliminde doğru cevaplanması gerekir:
 
-Bu projede en kritik konu kod kalitesidir. Kod:
+- 1. Tekrar: 1 Gün sonra
+- 2. Tekrar: 1 Hafta sonra
+- 3. Tekrar: 1 Ay sonra
+- 4. Tekrar: 3 Ay sonra
+- 5. Tekrar: 6 Ay sonra
+- 6. Tekrar: 1 Yıl sonra
 
-- basit olmalı
-- okunabilir olmalı
-- anlaşılabilir olmalı
-- bakım yapılabilir olmalı
-- gereksiz karmaşıklık içermemeli
+*Not: Herhangi bir aşamada yanlış cevap verilirse, kelimenin seviyesi 0'a düşer.*
 
-Temiz kod yaklaşımının detayları `CLEAN_CODE_RULES.md` içinde ayrı olarak tutulur.
+## 📂 Paket Yapısı
 
-## Kapsam Dışı
+- `com.samil.kelimequiz.data`: Entity'ler, DAO'lar ve Database sınıfları.
+- `com.samil.kelimequiz.domain`: Business logic, yardımcı sınıflar (Helper) ve modeller.
+- `com.samil.kelimequiz.ui`: Activity, Fragment ve Adapter sınıfları.
 
-- `deneme1` klasörü bu repoya dahil edilmez
-- kullanıcı tarafından eklenen referans `.docx` ve `.pdf` dosyaları repoya alınmaz
+## 🚀 Çalıştırma ve Test
+
+### Derleme (Build)
+
+```bash
+./gradlew assembleDebug
+```
+
+Derleme sonrası APK dosyasına `app/build/outputs/apk/debug/app-debug.apk` yolundan ulaşabilirsiniz.
+
+### Testler
+
+```bash
+./gradlew test        # Unit Testleri çalıştırır
+./gradlew lint        # Kod kalitesi kontrolü
+```
+
+## 📝 Notlar
+
+- Uygulama ilk açılışta giriş ekranı ile başlar.
+- Yeni kelime eklerken cihaz galerisinden resim seçilebilir.
+- Quiz soru sayısı ve tema ayarları profil ekranından yönetilebilir.

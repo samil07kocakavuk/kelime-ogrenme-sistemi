@@ -31,14 +31,14 @@ public class WordRepository {
         int importedCount = 0;
         for (SeedWord seedWord : loadAvailableSeedWords()) {
             if (wordDao.findByUserAndEnglishWord(userId, seedWord.engWord) == null) {
-                addWord(userId, seedWord.engWord, seedWord.trWord, seedWord.picturePath, seedWord.samplesText);
+                addWord(userId, seedWord.engWord, seedWord.trWord, seedWord.picturePath, seedWord.samplesText, seedWord.category);
                 importedCount++;
             }
         }
         return importedCount;
     }
 
-    public void addWord(int userId, String engWord, String trWord, String picturePath, String samplesText) {
+    public void addWord(int userId, String engWord, String trWord, String picturePath, String samplesText, String category) {
         String cleanEngWord = requireText(engWord, "İngilizce kelime boş bırakılamaz.");
         String cleanTrWord = requireText(trWord, "Türkçe karşılık boş bırakılamaz.");
         if (wordDao.findByUserAndEnglishWord(userId, cleanEngWord) != null) {
@@ -50,6 +50,7 @@ public class WordRepository {
         word.engWord = cleanEngWord;
         word.trWord = cleanTrWord;
         word.picturePath = trimToNull(picturePath);
+        word.category = trimToNull(category);
         word.createdAt = System.currentTimeMillis();
         int wordId = (int) wordDao.insert(word);
         insertSamples(wordId, samplesText);
@@ -144,7 +145,8 @@ public class WordRepository {
                     item.getString("engWord"),
                     item.getString("trWord"),
                     item.getString("picturePath"),
-                    item.getString("samplesText")
+                    item.getString("samplesText"),
+                    item.optString("category", "Noun")
             ));
         }
         return words;
@@ -155,12 +157,14 @@ public class WordRepository {
         private final String trWord;
         private final String picturePath;
         private final String samplesText;
+        private final String category;
 
-        private SeedWord(String engWord, String trWord, String picturePath, String samplesText) {
+        private SeedWord(String engWord, String trWord, String picturePath, String samplesText, String category) {
             this.engWord = engWord;
             this.trWord = trWord;
             this.picturePath = picturePath;
             this.samplesText = samplesText;
+            this.category = category;
         }
     }
 }

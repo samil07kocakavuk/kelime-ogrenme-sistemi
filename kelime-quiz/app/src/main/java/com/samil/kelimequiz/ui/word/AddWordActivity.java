@@ -4,15 +4,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -26,12 +27,15 @@ import com.samil.kelimequiz.util.NavigationHelper;
 import com.samil.kelimequiz.util.SessionManager;
 
 public class AddWordActivity extends AppCompatActivity {
+    private static final String[] CATEGORIES = {"İsim", "Sıfat", "Fiil", "Zarf"};
+
     private TextInputLayout tilEngWord, tilTrWord;
     private TextInputEditText etEngWord;
     private TextInputEditText etTrWord;
     private TextInputEditText etSamples;
     private TextView tvSelectedImage;
     private ImageView ivSelectedImage;
+    private Spinner spCategory;
     private MaterialButton btnSaveWord;
     private Uri selectedImageUri;
 
@@ -57,14 +61,23 @@ public class AddWordActivity extends AppCompatActivity {
         etSamples = findViewById(R.id.etSamples);
         tvSelectedImage = findViewById(R.id.tvSelectedImage);
         ivSelectedImage = findViewById(R.id.ivSelectedImage);
+        spCategory = findViewById(R.id.spCategory);
         btnSaveWord = findViewById(R.id.btnSaveWord);
         MaterialButton btnChooseImage = findViewById(R.id.btnChooseImage);
 
         NavigationHelper.bindTopBar(this);
         NavigationHelper.bindBottomBar(this);
+        setupCategorySpinner();
         ivSelectedImage.setVisibility(View.GONE);
         btnChooseImage.setOnClickListener(v -> imagePickerLauncher.launch("image/*"));
         btnSaveWord.setOnClickListener(v -> validateAndSave());
+    }
+
+    private void setupCategorySpinner() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, CATEGORIES);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spCategory.setAdapter(adapter);
     }
 
     private void validateAndSave() {
@@ -76,11 +89,11 @@ public class AddWordActivity extends AppCompatActivity {
         tilTrWord.setError(null);
 
         if (engWord.isEmpty()) {
-            tilEngWord.setError("Lütfen İngilizce kelimeyi girin.");
+            tilEngWord.setError(getString(R.string.english_required_error));
             isValid = false;
         }
         if (trWord.isEmpty()) {
-            tilTrWord.setError("Lütfen Türkçe karşılığını girin.");
+            tilTrWord.setError(getString(R.string.turkish_required_error));
             isValid = false;
         }
 
@@ -92,26 +105,27 @@ public class AddWordActivity extends AppCompatActivity {
     private void saveWord(String engWord, String trWord) {
         int userId = new SessionManager(this).getUserId();
         if (userId <= 0) {
-            showStatus("Oturum bulunamadı.");
+            showStatus(getString(R.string.session_not_found));
             return;
         }
 
         String samples = getInput(etSamples);
+        String category = (String) spCategory.getSelectedItem();
 
-        showStatus("Kelime kaydediliyor...");
+        showStatus(getString(R.string.saving_word));
         btnSaveWord.setEnabled(false);
         AppExecutors.io().execute(() -> {
             try {
                 String picturePath = selectedImageUri == null ? null : ImageStorage.copyToAppStorage(this, selectedImageUri);
-                AppContainer.from(this).wordRepository.addWord(userId, engWord, trWord, picturePath, samples);
+                AppContainer.from(this).wordRepository.addWord(userId, engWord, trWord, picturePath, samples, category);
                 runOnUiThread(() -> {
-                    showStatus("Kelime başarıyla kaydedildi.");
+                    showStatus(getString(R.string.word_saved));
                     finish();
                 });
             } catch (RuntimeException e) {
                 runOnUiThread(() -> {
                     btnSaveWord.setEnabled(true);
-                    showStatus("Hata: " + e.getMessage());
+                    showStatus(getString(R.string.error_with_message, e.getMessage()));
                 });
             }
         });
@@ -120,12 +134,12 @@ public class AddWordActivity extends AppCompatActivity {
     private void onImagePicked(Uri uri) {
         selectedImageUri = uri;
         if (uri == null) {
-            tvSelectedImage.setText("Henüz görsel seçilmedi.");
+            tvSelectedImage.setText(R.string.no_image_selected);
             ivSelectedImage.setImageDrawable(null);
             ivSelectedImage.setVisibility(View.GONE);
             return;
         }
-        tvSelectedImage.setText("Görsel seçildi.");
+        tvSelectedImage.setText(R.string.image_selected);
         Glide.with(this).load(uri).into(ivSelectedImage);
         ivSelectedImage.setVisibility(View.VISIBLE);
     }

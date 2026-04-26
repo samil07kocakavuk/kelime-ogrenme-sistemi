@@ -28,7 +28,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Kelime Quiz"
+                    android:text="@string/app_name"
                     android:textColor="@color/text_dark"
                     android:textSize="28sp"
                     android:textStyle="bold" />
@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Güvenli kullanıcı girişi"
+                    android:text="@string/login_subtitle"
                     android:textColor="@color/text_dark_secondary" />
 
                 <TextView
@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:hint="Kullanıcı adı"
+                    android:hint="@string/username_hint"
                     app:boxBackgroundMode="filled">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:hint="Şifre"
+                    android:hint="@string/password_hint"
                     app:boxBackgroundMode="filled"
                     app:endIconDrawable="@drawable/ic_eye_off"
                     app:endIconMode="custom">
@@ -87,7 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
-                    android:text="Giriş Yap" />
+                    android:text="@string/login_action" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnGoRegister"
@@ -95,7 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Kayıt Ol" />
+                    android:text="@string/register_action" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnForgotPassword"
@@ -103,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Şifremi Unuttum" />
+                    android:text="@string/forgot_password_action" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
