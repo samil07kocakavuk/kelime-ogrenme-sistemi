@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!-- Dependency freshness is managed deliberately with the project toolchain.
+         Newer AndroidX builds currently add D8/Kotlin metadata noise on AGP 8.5.2. -->
+    <issue id="GradleDependency" severity="ignore" />
+</lint>

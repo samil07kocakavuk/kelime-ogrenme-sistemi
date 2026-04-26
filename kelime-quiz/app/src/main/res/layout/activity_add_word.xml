@@ -39,7 +39,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Kelime ekle"
+                    android:text="@string/add_word_title"
                     android:textColor="@color/text_dark"
                     android:textSize="26sp"
                     android:textStyle="bold" />
@@ -50,7 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:hint="İngilizce kelime"
+                    android:hint="@string/english_word_hint"
                     app:boxBackgroundMode="filled"
                     app:errorEnabled="true">
 
@@ -67,7 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:hint="Türkçe karşılığı"
+                    android:hint="@string/turkish_word_hint"
                     app:boxBackgroundMode="filled"
                     app:errorEnabled="true">
 
@@ -84,14 +84,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Resim Ekle" />
+                    android:text="@string/choose_image_action" />
 
                 <TextView
                     android:id="@+id/tvSelectedImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Henüz görsel seçilmedi."
+                    android:text="@string/no_image_selected"
                     android:textColor="@color/text_dark_secondary" />
 
                 <ImageView
@@ -101,6 +101,7 @@
                     android:layout_marginTop="10dp"
                     android:adjustViewBounds="true"
                     android:background="@drawable/bg_image_preview"
+                    android:contentDescription="@string/word_image_content_description"
                     android:scaleType="centerCrop" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -108,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:hint="Örnek cümleler (her satır bir örnek)"
+                    android:hint="@string/samples_hint"
                     app:boxBackgroundMode="filled">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -127,7 +128,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
-                    android:text="Kelimeyi Kaydet" />
+                    android:text="@string/save_word_action" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>

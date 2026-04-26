@@ -39,7 +39,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Yeni hesap oluştur"
+                    android:text="@string/register_title"
                     android:textColor="@color/text_dark"
                     android:textSize="26sp"
                     android:textStyle="bold" />
@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:hint="Kullanıcı adı"
+                    android:hint="@string/username_hint"
                     app:boxBackgroundMode="filled">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -73,7 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:hint="Şifre"
+                    android:hint="@string/password_hint"
                     app:boxBackgroundMode="filled"
                     app:endIconDrawable="@drawable/ic_eye_off"
                     app:endIconMode="custom">
@@ -92,7 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:hint="Şifre tekrar"
+                    android:hint="@string/password_repeat_hint"
                     app:boxBackgroundMode="filled"
                     app:endIconDrawable="@drawable/ic_eye_off"
                     app:endIconMode="custom">
@@ -111,7 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
-                    android:text="Kaydı Tamamla" />
+                    android:text="@string/register_complete_action" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>

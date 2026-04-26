@@ -7,6 +7,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
@@ -33,9 +34,11 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
     }
 
     public void setWords(List<WordEntity> newWords) {
+        List<WordEntity> oldWords = new ArrayList<>(words);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new WordDiffCallback(oldWords, newWords));
         words.clear();
         words.addAll(newWords);
-        notifyDataSetChanged();
+        diffResult.dispatchUpdatesTo(this);
     }
 
     @NonNull
@@ -78,12 +81,16 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
             btnToggleMeaning.setImageResource(isRevealed ? R.drawable.ic_eye : R.drawable.ic_eye_off);
             
             btnToggleMeaning.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position == RecyclerView.NO_POSITION) {
+                    return;
+                }
                 if (revealedWordIds.contains(word.wordId)) {
                     revealedWordIds.remove(word.wordId);
                 } else {
                     revealedWordIds.add(word.wordId);
                 }
-                notifyItemChanged(getAdapterPosition());
+                notifyItemChanged(position);
             });
 
             btnDetail.setOnClickListener(v -> listener.onDetailRequested(word));
@@ -92,6 +99,40 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
                 listener.onDeleteRequested(word);
                 return true;
             });
+        }
+    }
+
+    private static class WordDiffCallback extends DiffUtil.Callback {
+        private final List<WordEntity> oldWords;
+        private final List<WordEntity> newWords;
+
+        WordDiffCallback(List<WordEntity> oldWords, List<WordEntity> newWords) {
+            this.oldWords = oldWords;
+            this.newWords = newWords;
+        }
+
+        @Override
+        public int getOldListSize() {
+            return oldWords.size();
+        }
+
+        @Override
+        public int getNewListSize() {
+            return newWords.size();
+        }
+
+        @Override
+        public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+            return oldWords.get(oldItemPosition).wordId == newWords.get(newItemPosition).wordId;
+        }
+
+        @Override
+        public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+            WordEntity oldWord = oldWords.get(oldItemPosition);
+            WordEntity newWord = newWords.get(newItemPosition);
+            return oldWord.engWord.equals(newWord.engWord)
+                    && oldWord.trWord.equals(newWord.trWord)
+                    && oldWord.createdAt == newWord.createdAt;
         }
     }
 }

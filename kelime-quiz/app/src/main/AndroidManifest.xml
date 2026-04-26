@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KelimeQuiz">
+        <activity android:name=".ui.quiz.QuizActivity" />
         <activity android:name=".ui.profile.ProfileActivity" />
         <activity android:name=".ui.word.WordPoolActivity" />
         <activity android:name=".ui.word.AddWordActivity" />

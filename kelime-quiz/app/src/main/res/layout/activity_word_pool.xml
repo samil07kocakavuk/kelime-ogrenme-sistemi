@@ -8,40 +8,49 @@
 
     <include layout="@layout/include_top_bar" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
         android:paddingStart="24dp"
         android:paddingTop="8dp"
         android:paddingEnd="24dp"
         android:paddingBottom="16dp">
 
         <TextView
+            android:id="@+id/tvWordPoolTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kelime Havuzu"
+            android:text="@string/word_pool_title"
             android:textColor="@color/text_primary"
             android:textSize="28sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvEmptyState"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Kelime havuzu hazırlanıyor..."
-            android:textColor="@color/text_secondary" />
+            android:text="@string/word_pool_loading"
+            android:textColor="@color/text_secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWordPoolTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvWords"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="12dp"
-            android:layout_weight="1"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    </LinearLayout>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvEmptyState" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/include_bottom_nav" />
 </LinearLayout>

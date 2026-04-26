@@ -8,14 +8,20 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.samil.kelimequiz.data.local.dao.UserDao;
+import com.samil.kelimequiz.data.local.dao.QuizProgressDao;
 import com.samil.kelimequiz.data.local.dao.WordDao;
 import com.samil.kelimequiz.data.local.dao.WordSampleDao;
+import com.samil.kelimequiz.data.local.entity.QuizProgressEntity;
 import com.samil.kelimequiz.data.local.entity.UserEntity;
 import com.samil.kelimequiz.data.local.entity.WordEntity;
 import com.samil.kelimequiz.data.local.entity.WordSampleEntity;
 import com.samil.kelimequiz.util.SessionManager;
 
-@Database(entities = {UserEntity.class, WordEntity.class, WordSampleEntity.class}, version = 2, exportSchema = false)
+@Database(
+        entities = {UserEntity.class, WordEntity.class, WordSampleEntity.class, QuizProgressEntity.class},
+        version = 3,
+        exportSchema = false
+)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "kelime_quiz.db";
     private static final String RESET_PREF_NAME = "kelime_quiz_database_reset";
@@ -28,6 +34,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract WordDao wordDao();
 
     public abstract WordSampleDao wordSampleDao();
+
+    public abstract QuizProgressDao quizProgressDao();
 
     public static AppDatabase getInstance(Context context) {
         Context appContext = context.getApplicationContext();

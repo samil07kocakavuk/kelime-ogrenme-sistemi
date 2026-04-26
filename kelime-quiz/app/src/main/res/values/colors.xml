@@ -19,7 +19,6 @@
     
     <!-- Text Colors -->
     <color name="text_main">#2B2118</color>
-    <color name="text_sub">#7D6A55</color>
     <color name="text_on_primary">#FFFFFF</color>
     
     <!-- Missing Text Colors used in layouts -->
@@ -31,6 +30,12 @@
     <!-- Status & Alerts -->
     <color name="error">#EF4444</color>
     <color name="success">#10B981</color>
+    <color name="feedback_neutral_bg">#FFF0D6</color>
+    <color name="feedback_success_bg">#DCFCE7</color>
+    <color name="feedback_error_bg">#FEE2E2</color>
+    <color name="quiz_option_bg">#FFFDF8</color>
+    <color name="quiz_option_stroke">#E85D3F</color>
+    <color name="quiz_option_text">#A83B2B</color>
 
     <!-- Legacy / Compatibility -->
     <color name="purple_500">#E85D3F</color>
