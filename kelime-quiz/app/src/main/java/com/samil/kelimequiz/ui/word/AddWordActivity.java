@@ -4,15 +4,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -26,12 +27,15 @@ import com.samil.kelimequiz.util.NavigationHelper;
 import com.samil.kelimequiz.util.SessionManager;
 
 public class AddWordActivity extends AppCompatActivity {
+    private static final String[] CATEGORIES = {"İsim", "Sıfat", "Fiil", "Zarf"};
+
     private TextInputLayout tilEngWord, tilTrWord;
     private TextInputEditText etEngWord;
     private TextInputEditText etTrWord;
     private TextInputEditText etSamples;
     private TextView tvSelectedImage;
     private ImageView ivSelectedImage;
+    private Spinner spCategory;
     private MaterialButton btnSaveWord;
     private Uri selectedImageUri;
 
@@ -57,14 +61,23 @@ public class AddWordActivity extends AppCompatActivity {
         etSamples = findViewById(R.id.etSamples);
         tvSelectedImage = findViewById(R.id.tvSelectedImage);
         ivSelectedImage = findViewById(R.id.ivSelectedImage);
+        spCategory = findViewById(R.id.spCategory);
         btnSaveWord = findViewById(R.id.btnSaveWord);
         MaterialButton btnChooseImage = findViewById(R.id.btnChooseImage);
 
         NavigationHelper.bindTopBar(this);
         NavigationHelper.bindBottomBar(this);
+        setupCategorySpinner();
         ivSelectedImage.setVisibility(View.GONE);
         btnChooseImage.setOnClickListener(v -> imagePickerLauncher.launch("image/*"));
         btnSaveWord.setOnClickListener(v -> validateAndSave());
+    }
+
+    private void setupCategorySpinner() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, CATEGORIES);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spCategory.setAdapter(adapter);
     }
 
     private void validateAndSave() {
@@ -97,13 +110,14 @@ public class AddWordActivity extends AppCompatActivity {
         }
 
         String samples = getInput(etSamples);
+        String category = (String) spCategory.getSelectedItem();
 
         showStatus(getString(R.string.saving_word));
         btnSaveWord.setEnabled(false);
         AppExecutors.io().execute(() -> {
             try {
                 String picturePath = selectedImageUri == null ? null : ImageStorage.copyToAppStorage(this, selectedImageUri);
-                AppContainer.from(this).wordRepository.addWord(userId, engWord, trWord, picturePath, samples);
+                AppContainer.from(this).wordRepository.addWord(userId, engWord, trWord, picturePath, samples, category);
                 runOnUiThread(() -> {
                     showStatus(getString(R.string.word_saved));
                     finish();

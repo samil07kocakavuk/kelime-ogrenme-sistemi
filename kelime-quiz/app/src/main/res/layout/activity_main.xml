@@ -74,14 +74,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
                 android:text="@string/start_quiz_action" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnAddFirstWord"
-                style="@style/AppButtonSecondary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/add_word_action" />
         </LinearLayout>
     </ScrollView>
 
