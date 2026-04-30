@@ -79,7 +79,7 @@ public class WordPoolActivity extends AppCompatActivity implements WordCardAdapt
         wordAdapter = new WordCardAdapter(this);
         rvWords.setAdapter(wordAdapter);
 
-        NavigationHelper.bindTopBar(this, false);
+        NavigationHelper.bindTopBar(this, true, ProfileActivity.class);
         NavigationHelper.bindBottomBar(this);
         setupCategorySpinner();
         setupSortSpinner();
