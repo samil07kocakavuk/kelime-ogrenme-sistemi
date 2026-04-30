@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.data.local.entity.WordEntity;
@@ -66,7 +67,8 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
     class WordViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvEnglishWord;
         private final TextView tvTurkishWord;
-        private final ImageView ivLevelStatus;
+        private final TextView tvLevelLabel;
+        private final LinearProgressIndicator lpiWordLevel;
         private final ImageButton btnToggleMeaning;
         private final MaterialButton btnDetail;
 
@@ -74,7 +76,8 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
             super(itemView);
             tvEnglishWord = itemView.findViewById(R.id.tvEnglishWord);
             tvTurkishWord = itemView.findViewById(R.id.tvTurkishWord);
-            ivLevelStatus = itemView.findViewById(R.id.ivLevelStatus);
+            tvLevelLabel = itemView.findViewById(R.id.tvLevelLabel);
+            lpiWordLevel = itemView.findViewById(R.id.lpiWordLevel);
             btnToggleMeaning = itemView.findViewById(R.id.btnToggleMeaning);
             btnDetail = itemView.findViewById(R.id.btnDetail);
         }
@@ -111,24 +114,13 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
         }
 
         private void updateLevelStatus(int level) {
-            int iconRes;
-            String explanation;
-
-            if (level == 0) {
-                iconRes = R.drawable.ic_close_red;
-                explanation = "Kelime öğrenilmedi (Seviye 0)";
-            } else if (level >= 6) {
-                iconRes = R.drawable.ic_check_green;
-                explanation = "Kelime öğrenildi (Seviye " + level + ")";
-            } else {
-                iconRes = R.drawable.ic_hourglass_yellow;
-                explanation = "Kelime öğreniliyor (Seviye " + level + ")";
+            if (tvLevelLabel != null) {
+                tvLevelLabel.setText(itemView.getContext().getString(R.string.level_format_label, level, 6));
             }
-
-            ivLevelStatus.setImageResource(iconRes);
-            ivLevelStatus.setOnClickListener(v -> 
-                Snackbar.make(v, explanation, Snackbar.LENGTH_SHORT).show()
-            );
+            if (lpiWordLevel != null) {
+                int progress = (level * 100) / 6;
+                lpiWordLevel.setProgressCompat(progress, true);
+            }
         }
     }
 

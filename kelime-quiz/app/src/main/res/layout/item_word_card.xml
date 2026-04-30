@@ -32,13 +32,6 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/ivLevelStatus"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/ic_close_red" />
-
             <ImageButton
                 android:id="@+id/btnToggleMeaning"
                 android:layout_width="44dp"
@@ -48,6 +41,34 @@
                 android:padding="10dp"
                 android:src="@drawable/ic_eye"
                 app:tint="@color/primary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvLevelLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seviye: 0/6"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/lpiWordLevel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                app:indicatorColor="@color/accent"
+                app:trackColor="#E2E8F0"
+                app:trackCornerRadius="4dp"
+                app:trackThickness="6dp" />
         </LinearLayout>
 
         <TextView
