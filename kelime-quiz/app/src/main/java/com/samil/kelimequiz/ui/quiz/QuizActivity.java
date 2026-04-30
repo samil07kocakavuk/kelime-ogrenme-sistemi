@@ -135,13 +135,13 @@ public class QuizActivity extends AppCompatActivity {
 
         if (level == 0) {
             iconRes = R.drawable.ic_close_red;
-            explanation = "Kelime öğrenilmedi";
+            explanation = "Kelime öğrenilmedi (Seviye 0)";
         } else if (level >= 6) {
             iconRes = R.drawable.ic_check_green;
-            explanation = "Kelime öğrenildi";
+            explanation = "Kelime öğrenildi (Seviye " + level + ")";
         } else {
             iconRes = R.drawable.ic_hourglass_yellow;
-            explanation = "Kelime öğreniliyor";
+            explanation = "Kelime öğreniliyor (Seviye " + level + ")";
         }
 
         ivLevelStatus.setImageResource(iconRes);

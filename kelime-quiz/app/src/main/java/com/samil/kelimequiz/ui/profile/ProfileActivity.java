@@ -92,7 +92,8 @@ public class ProfileActivity extends AppCompatActivity {
             for (String category : categories) {
                 int total = db.wordDao().countByCategory(userId, category);
                 int correct = db.quizProgressDao().countCorrectByCategory(userId, category);
-                reports.add(new CategoryReport(category, total, correct));
+                Double avgLevel = db.quizProgressDao().getAverageLevelByCategory(userId, category);
+                reports.add(new CategoryReport(category, total, correct, avgLevel != null ? avgLevel : 0.0));
             }
             runOnUiThread(() -> showCategoryReports(reports));
         });
@@ -186,12 +187,13 @@ public class ProfileActivity extends AppCompatActivity {
                 .append(".bar-bg{height:14px;background:#eee;border-radius:4px;width:100%}")
                 .append("</style></head><body>")
                 .append("<h1>Kelime Quiz - Kategori Raporu</h1>")
-                .append("<table><tr><th>Kategori</th><th>Doğru</th><th>Toplam</th><th>Başarı</th><th>Grafik</th></tr>");
+                .append("<table><tr><th>Kategori</th><th>Doğru</th><th>Toplam</th><th>Ort. Seviye</th><th>Başarı</th><th>Grafik</th></tr>");
 
         for (CategoryReport r : currentReports) {
             sb.append("<tr><td>").append(r.getCategory()).append("</td>")
                     .append("<td>").append(r.getCorrectWords()).append("</td>")
                     .append("<td>").append(r.getTotalWords()).append("</td>")
+                    .append("<td>").append(String.format("%.1f", r.getAverageLevel())).append("</td>")
                     .append("<td>%").append(r.getSuccessPercent()).append("</td>")
                     .append("<td><div class='bar-bg'><div class='bar' style='width:")
                     .append(r.getSuccessPercent()).append("%'></div></div></td></tr>");
