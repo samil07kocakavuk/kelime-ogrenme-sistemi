@@ -19,13 +19,11 @@ import com.samil.kelimequiz.util.SessionManager;
 
 @Database(
         entities = {UserEntity.class, WordEntity.class, WordSampleEntity.class, QuizProgressEntity.class},
-        version = 5,
+        version = 7,
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "kelime_quiz.db";
-    private static final String RESET_PREF_NAME = "kelime_quiz_database_reset";
-    private static final String KEY_RESET_DONE = "reset_v5_done";
 
     private static volatile AppDatabase instance;
 
@@ -42,7 +40,6 @@ public abstract class AppDatabase extends RoomDatabase {
         if (instance == null) {
             synchronized (AppDatabase.class) {
                 if (instance == null) {
-                    resetDatabaseOnce(appContext);
                     instance = Room.databaseBuilder(
                                     appContext,
                                     AppDatabase.class,
@@ -54,16 +51,5 @@ public abstract class AppDatabase extends RoomDatabase {
             }
         }
         return instance;
-    }
-
-    private static void resetDatabaseOnce(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(RESET_PREF_NAME, Context.MODE_PRIVATE);
-        if (prefs.getBoolean(KEY_RESET_DONE, false)) {
-            return;
-        }
-
-        context.deleteDatabase(DATABASE_NAME);
-        SessionManager.clearSavedSession(context);
-        prefs.edit().putBoolean(KEY_RESET_DONE, true).apply();
     }
 }

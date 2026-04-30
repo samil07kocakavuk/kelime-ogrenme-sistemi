@@ -33,15 +33,28 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        NavigationHelper.bindTopBar(this, false);
-        NavigationHelper.bindBottomBar(this);
-
-        btnStartQuiz = findViewById(R.id.btnStartQuiz);
-
         userId = sessionManager.getUserId();
-        btnStartQuiz.setEnabled(false);
-        btnStartQuiz.setOnClickListener(v -> openQuizIfWordsExist());
-        loadWordCount();
+
+        // Stale session kontrolü (DB reset sonrası)
+        AppExecutors.io().execute(() -> {
+            AppContainer container = AppContainer.from(this);
+            if (container.authRepository.findUserById(userId) == null) {
+                runOnUiThread(() -> {
+                    sessionManager.clear();
+                    openLoginAndClose();
+                });
+                return;
+            }
+
+            runOnUiThread(() -> {
+                NavigationHelper.bindTopBar(this, false);
+                NavigationHelper.bindBottomBar(this);
+                btnStartQuiz = findViewById(R.id.btnStartQuiz);
+                btnStartQuiz.setEnabled(false);
+                btnStartQuiz.setOnClickListener(v -> openQuizIfWordsExist());
+                loadWordCount();
+            });
+        });
     }
 
     @Override
@@ -56,7 +69,14 @@ public class MainActivity extends AppCompatActivity {
         wordCountLoaded = false;
         btnStartQuiz.setEnabled(false);
         AppExecutors.io().execute(() -> {
-            QuizSummary summary = AppContainer.from(this).quizRepository.getSummary(userId);
+            // Veritabanı resetlendiği için kelimeler silinmiş olabilir, kontrol et ve gerekirse ekle
+            AppContainer container = AppContainer.from(this);
+            int currentCount = container.quizRepository.getSummary(userId).getTotalWords();
+            if (currentCount == 0) {
+                container.wordRepository.addInitialSeedWords(userId);
+            }
+            
+            QuizSummary summary = container.quizRepository.getSummary(userId);
             runOnUiThread(() -> showWordCount(summary));
         });
     }

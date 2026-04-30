@@ -7,6 +7,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.samil.kelimequiz.data.local.entity.WordEntity;
+import com.samil.kelimequiz.data.local.entity.WordWithLevel;
 
 import java.util.List;
 
@@ -21,8 +22,11 @@ public interface WordDao {
     @Delete
     void delete(WordEntity word);
 
-    @Query("SELECT * FROM words WHERE userId = :userId ORDER BY createdAt DESC")
-    List<WordEntity> listByUser(int userId);
+    @Query("SELECT words.wordId, words.userId, words.engWord, words.trWord, words.picturePath, words.category, words.createdAt, " +
+            "COALESCE(quiz_progress.level, 0) AS level FROM words " +
+            "LEFT JOIN quiz_progress ON words.wordId = quiz_progress.wordId AND quiz_progress.userId = :userId " +
+            "WHERE words.userId = :userId ORDER BY words.createdAt DESC")
+    List<WordWithLevel> listByUser(int userId);
 
     @Query("SELECT COUNT(*) FROM words WHERE userId = :userId")
     int countByUser(int userId);

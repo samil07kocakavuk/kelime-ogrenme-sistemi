@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.domain.model.QuizAnswerResult;
 import com.samil.kelimequiz.domain.model.QuizQuestion;
@@ -32,6 +33,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView tvQuestionWord;
     private TextView tvQuizFeedback;
     private ImageView ivQuizWordImage;
+    private ImageView ivLevelStatus;
     private MaterialButton btnNextQuestion;
     private MaterialButton btnFinishQuiz;
 
@@ -63,6 +65,7 @@ public class QuizActivity extends AppCompatActivity {
         tvQuestionWord = findViewById(R.id.tvQuestionWord);
         tvQuizFeedback = findViewById(R.id.tvQuizFeedback);
         ivQuizWordImage = findViewById(R.id.ivQuizWordImage);
+        ivLevelStatus = findViewById(R.id.ivLevelStatus);
         btnNextQuestion = findViewById(R.id.btnNextQuestion);
         btnFinishQuiz = findViewById(R.id.btnFinishQuiz);
 
@@ -104,6 +107,7 @@ public class QuizActivity extends AppCompatActivity {
         tvQuizProgress.setText(getString(R.string.quiz_progress_format, currentIndex + 1, questions.size()));
         tvQuestionWord.setText(question.getQuestionText());
         showQuestionImage(question.getPicturePath());
+        updateLevelStatus(question.getLevel());
         tvQuizFeedback.setText(R.string.choose_turkish_answer);
         tvQuizFeedback.setBackgroundResource(R.drawable.bg_feedback_neutral);
         tvQuizFeedback.setTextColor(getColor(R.color.text_secondary));
@@ -125,6 +129,27 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
+    private void updateLevelStatus(int level) {
+        int iconRes;
+        String explanation;
+
+        if (level == 0) {
+            iconRes = R.drawable.ic_close_red;
+            explanation = "Kelime öğrenilmedi";
+        } else if (level >= 6) {
+            iconRes = R.drawable.ic_check_green;
+            explanation = "Kelime öğrenildi";
+        } else {
+            iconRes = R.drawable.ic_hourglass_yellow;
+            explanation = "Kelime öğreniliyor";
+        }
+
+        ivLevelStatus.setImageResource(iconRes);
+        ivLevelStatus.setOnClickListener(v -> 
+            Snackbar.make(v, explanation, Snackbar.LENGTH_SHORT).show()
+        );
+    }
+
     private void submitAnswer(QuizQuestion question, String selectedAnswer) {
         if (answered) {
             return;
@@ -140,7 +165,10 @@ public class QuizActivity extends AppCompatActivity {
                         question.getWordId(),
                         selectedAnswer
                 );
-                runOnUiThread(() -> showAnswerResult(result));
+                runOnUiThread(() -> {
+                    updateLevelStatus(result.getLevel());
+                    showAnswerResult(result);
+                });
             } catch (RuntimeException exception) {
                 runOnUiThread(() -> showAnswerError());
             }

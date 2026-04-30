@@ -40,6 +40,64 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvWordPoolTitle" />
 
+        <LinearLayout
+            android:id="@+id/llFilters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/tvEmptyState">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card_modern"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Kategori:"
+                    android:textColor="@color/text_primary"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spCategoryFilter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_card_modern"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Sıralama:"
+                    android:textColor="@color/text_primary"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spSortOrder"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvWords"
             android:layout_width="match_parent"
@@ -49,7 +107,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvEmptyState" />
+            app:layout_constraintTop_toBottomOf="@id/llFilters" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/include_bottom_nav" />
