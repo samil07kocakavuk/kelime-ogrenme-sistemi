@@ -3,9 +3,16 @@ package com.samil.kelimequiz.ui.word;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.print.PrintAttributes;
+import android.print.PrintManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,20 +21,50 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.data.local.entity.WordEntity;
+import com.samil.kelimequiz.data.local.entity.WordWithLevel;
 import com.samil.kelimequiz.domain.model.WordDetails;
 import com.samil.kelimequiz.ui.auth.LoginActivity;
 import com.samil.kelimequiz.ui.main.WordCardAdapter;
+import com.samil.kelimequiz.ui.profile.ProfileActivity;
 import com.samil.kelimequiz.util.AppContainer;
 import com.samil.kelimequiz.util.AppExecutors;
 import com.samil.kelimequiz.util.NavigationHelper;
 import com.samil.kelimequiz.util.SessionManager;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WordPoolActivity extends AppCompatActivity implements WordCardAdapter.WordActionListener {
+    private static final String[] CATEGORIES = {
+            "Tümü",
+            "Hayvanlar",
+            "Meslekler",
+            "Sporlar",
+            "Yiyecekler",
+            "Ev ve Eşyalar",
+            "Okul",
+            "Ulaşım",
+            "Doğa",
+            "Sıfatlar",
+            "Fiiller",
+            "Sağlık ve Vücut",
+            "Günlük Yaşam"
+    };
+
+    private static final String[] SORT_OPTIONS = {
+            "En Yeni",
+            "Seviye (Yüksekten Alçağa)",
+            "Seviye (Alçaktan Yükseğe)"
+    };
+
     private WordCardAdapter wordAdapter;
     private TextView tvEmptyState;
+    private Spinner spCategoryFilter;
+    private Spinner spSortOrder;
     private SessionManager sessionManager;
+    private List<WordWithLevel> allWords = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +78,86 @@ public class WordPoolActivity extends AppCompatActivity implements WordCardAdapt
         }
 
         tvEmptyState = findViewById(R.id.tvEmptyState);
+        spCategoryFilter = findViewById(R.id.spCategoryFilter);
+        spSortOrder = findViewById(R.id.spSortOrder);
         RecyclerView rvWords = findViewById(R.id.rvWords);
         wordAdapter = new WordCardAdapter(this);
         rvWords.setAdapter(wordAdapter);
 
-        NavigationHelper.bindTopBar(this, false);
+        NavigationHelper.bindTopBar(this, true, ProfileActivity.class);
         NavigationHelper.bindBottomBar(this);
+        setupCategorySpinner();
+        setupSortSpinner();
+
+        findViewById(R.id.btnPrintReport).setOnClickListener(v -> printReport());
+    }
+
+    private void setupCategorySpinner() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, CATEGORIES);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spCategoryFilter.setAdapter(adapter);
+
+        spCategoryFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                applyFilters();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+    }
+
+    private void setupSortSpinner() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, SORT_OPTIONS);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spSortOrder.setAdapter(adapter);
+
+        spSortOrder.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                applyFilters();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+    }
+
+    private void applyFilters() {
+        if (allWords == null || allWords.isEmpty()) return;
+
+        String category = CATEGORIES[spCategoryFilter.getSelectedItemPosition()];
+        int sortPosition = spSortOrder.getSelectedItemPosition();
+
+        List<WordWithLevel> filtered;
+        if (category.equals("Tümü")) {
+            filtered = new ArrayList<>(allWords);
+        } else {
+            filtered = allWords.stream()
+                    .filter(w -> category.equals(w.word.category))
+                    .collect(Collectors.toList());
+        }
+
+        // Sort the filtered list
+        if (sortPosition == 1) { // High to Low
+            filtered.sort((w1, w2) -> Integer.compare(w2.level, w1.level));
+        } else if (sortPosition == 2) { // Low to High
+            filtered.sort((w1, w2) -> Integer.compare(w1.level, w2.level));
+        } else { // Newest First
+            filtered.sort((w1, w2) -> Long.compare(w2.word.createdAt, w1.word.createdAt));
+        }
+
+        wordAdapter.setWords(filtered);
+        tvEmptyState.setText(filtered.isEmpty() ? R.string.word_pool_empty : R.string.word_pool_help);
+        
+        // Sıralama veya filtre değişince listenin en başına kaydır
+        RecyclerView rvWords = findViewById(R.id.rvWords);
+        if (rvWords != null && !filtered.isEmpty()) {
+            rvWords.scrollToPosition(0);
+        }
     }
 
     @Override
@@ -62,10 +173,10 @@ public class WordPoolActivity extends AppCompatActivity implements WordCardAdapt
         tvEmptyState.setText(R.string.word_pool_loading);
         AppExecutors.io().execute(() -> {
             AppContainer.from(this).wordRepository.addInitialSeedWords(userId);
-            List<WordEntity> words = AppContainer.from(this).wordRepository.listWords(userId);
+            List<WordWithLevel> words = AppContainer.from(this).wordRepository.listWords(userId);
             runOnUiThread(() -> {
-                wordAdapter.setWords(words);
-                tvEmptyState.setText(words.isEmpty() ? R.string.word_pool_empty : R.string.word_pool_help);
+                allWords = words;
+                applyFilters();
             });
         });
     }
@@ -94,34 +205,6 @@ public class WordPoolActivity extends AppCompatActivity implements WordCardAdapt
         bottomSheet.show(getSupportFragmentManager(), "WordDetail");
     }
 
-    private String buildSamplesText(WordDetails details) {
-        if (details.getSampleTexts().isEmpty()) {
-            return "Örnek cümle yok.";
-        }
-
-        StringBuilder builder = new StringBuilder();
-        for (String sample : details.getSampleTexts()) {
-            builder.append("- ").append(sample).append("\n");
-        }
-        return builder.toString().trim();
-    }
-
-    private void bindWordImage(ImageView imageView, String picturePath) {
-        if (picturePath == null || picturePath.trim().isEmpty()) {
-            imageView.setVisibility(View.GONE);
-            return;
-        }
-
-        Glide.with(this)
-                .load(picturePath)
-                .thumbnail(0.25f)
-                .override(240, 180)
-                .centerCrop()
-                .dontAnimate()
-                .into(imageView);
-        imageView.setVisibility(View.VISIBLE);
-    }
-
     private void deleteWord(int wordId) {
         int userId = sessionManager.getUserId();
         AppExecutors.io().execute(() -> {
@@ -133,5 +216,72 @@ public class WordPoolActivity extends AppCompatActivity implements WordCardAdapt
     private void openLoginAndClose() {
         startActivity(new Intent(this, LoginActivity.class));
         finish();
+    }
+
+    private void printReport() {
+        if (allWords == null || allWords.isEmpty()) return;
+
+        List<WordWithLevel> learnedList = new ArrayList<>();
+        List<WordWithLevel> inProgressList = new ArrayList<>();
+        List<WordWithLevel> notStartedList = new ArrayList<>();
+
+        for (WordWithLevel w : allWords) {
+            if (w.level >= 6) learnedList.add(w);
+            else if (w.level == 0) notStartedList.add(w);
+            else inProgressList.add(w);
+        }
+        inProgressList.sort((a, b) -> Integer.compare(b.level, a.level));
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("<html><head><meta charset='UTF-8'><style>")
+                .append("body{font-family:sans-serif;padding:24px}")
+                .append("h1{color:#333;font-size:20px}")
+                .append("h2{color:#555;font-size:16px;margin-top:20px;border-bottom:1px solid #ddd;padding-bottom:4px}")
+                .append("table{width:100%;border-collapse:collapse;margin-top:8px}")
+                .append("th,td{border:1px solid #ddd;padding:6px 10px;text-align:left;font-size:13px}")
+                .append("th{background:#f5f5f5}")
+                .append("</style></head><body>")
+                .append("<h1>Kelime Quiz - Kişisel Analiz Raporu</h1>")
+                .append("<p>Toplam: ").append(allWords.size())
+                .append(" | Öğrenilmiş: ").append(learnedList.size())
+                .append(" | Devam Eden: ").append(inProgressList.size())
+                .append(" | Başlanmamış: ").append(notStartedList.size()).append("</p>");
+
+        if (!learnedList.isEmpty()) {
+            sb.append("<h2>✓ Öğrenilmiş Kelimeler (").append(learnedList.size()).append(")</h2>");
+            appendTable(sb, learnedList);
+        }
+        if (!inProgressList.isEmpty()) {
+            sb.append("<h2>↻ Öğrenilmekte Olan (").append(inProgressList.size()).append(")</h2>");
+            appendTable(sb, inProgressList);
+        }
+        if (!notStartedList.isEmpty()) {
+            sb.append("<h2>○ Başlanmamış (").append(notStartedList.size()).append(")</h2>");
+            appendTable(sb, notStartedList);
+        }
+        sb.append("</body></html>");
+
+        WebView webView = new WebView(this);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                PrintManager pm = (PrintManager) getSystemService(PRINT_SERVICE);
+                String jobName = getString(R.string.print_report_job_name);
+                pm.print(jobName, view.createPrintDocumentAdapter(jobName),
+                        new PrintAttributes.Builder().setMediaSize(PrintAttributes.MediaSize.ISO_A4).build());
+            }
+        });
+        webView.loadDataWithBaseURL(null, sb.toString(), "text/html", "UTF-8", null);
+    }
+
+    private void appendTable(StringBuilder sb, List<WordWithLevel> words) {
+        sb.append("<table><tr><th>İngilizce</th><th>Türkçe</th><th>Kategori</th><th>Seviye</th></tr>");
+        for (WordWithLevel w : words) {
+            sb.append("<tr><td>").append(w.word.engWord).append("</td>")
+                    .append("<td>").append(w.word.trWord).append("</td>")
+                    .append("<td>").append(w.word.category != null ? w.word.category : "-").append("</td>")
+                    .append("<td>").append(w.level).append("/6</td></tr>");
+        }
+        sb.append("</table>");
     }
 }

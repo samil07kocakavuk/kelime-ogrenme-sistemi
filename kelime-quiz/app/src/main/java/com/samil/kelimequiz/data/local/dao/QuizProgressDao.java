@@ -45,4 +45,9 @@ public interface QuizProgressDao {
             + "INNER JOIN words w ON qp.wordId = w.wordId "
             + "WHERE qp.userId = :userId AND qp.level > 0 AND w.category = :category")
     int countCorrectByCategory(int userId, String category);
+
+    @Query("SELECT AVG(qp.level) FROM quiz_progress qp "
+            + "INNER JOIN words w ON qp.wordId = w.wordId "
+            + "WHERE qp.userId = :userId AND w.category = :category")
+    Double getAverageLevelByCategory(int userId, String category);
 }

@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,8 +12,12 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.google.android.material.snackbar.Snackbar;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.data.local.entity.WordEntity;
+
+import com.samil.kelimequiz.data.local.entity.WordWithLevel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,7 +30,7 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
         void onDeleteRequested(WordEntity word);
     }
 
-    private final List<WordEntity> words = new ArrayList<>();
+    private final List<WordWithLevel> words = new ArrayList<>();
     private final Set<Integer> revealedWordIds = new HashSet<>();
     private final WordActionListener actionListener;
 
@@ -33,8 +38,8 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
         this.actionListener = actionListener;
     }
 
-    public void setWords(List<WordEntity> newWords) {
-        List<WordEntity> oldWords = new ArrayList<>(words);
+    public void setWords(List<WordWithLevel> newWords) {
+        List<WordWithLevel> oldWords = new ArrayList<>(words);
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new WordDiffCallback(oldWords, newWords));
         words.clear();
         words.addAll(newWords);
@@ -50,8 +55,8 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
 
     @Override
     public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
-        WordEntity word = words.get(position);
-        holder.bind(word, revealedWordIds.contains(word.wordId), actionListener);
+        WordWithLevel wordWithLevel = words.get(position);
+        holder.bind(wordWithLevel, revealedWordIds.contains(wordWithLevel.word.wordId), actionListener);
     }
 
     @Override
@@ -62,6 +67,8 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
     class WordViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvEnglishWord;
         private final TextView tvTurkishWord;
+        private final TextView tvLevelLabel;
+        private final LinearProgressIndicator lpiWordLevel;
         private final ImageButton btnToggleMeaning;
         private final MaterialButton btnDetail;
 
@@ -69,17 +76,22 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
             super(itemView);
             tvEnglishWord = itemView.findViewById(R.id.tvEnglishWord);
             tvTurkishWord = itemView.findViewById(R.id.tvTurkishWord);
+            tvLevelLabel = itemView.findViewById(R.id.tvLevelLabel);
+            lpiWordLevel = itemView.findViewById(R.id.lpiWordLevel);
             btnToggleMeaning = itemView.findViewById(R.id.btnToggleMeaning);
             btnDetail = itemView.findViewById(R.id.btnDetail);
         }
 
-        public void bind(WordEntity word, boolean isRevealed, WordActionListener listener) {
+        public void bind(WordWithLevel wordWithLevel, boolean isRevealed, WordActionListener listener) {
+            WordEntity word = wordWithLevel.word;
             tvEnglishWord.setText(word.engWord);
             tvTurkishWord.setText(word.trWord);
             tvTurkishWord.setVisibility(isRevealed ? View.VISIBLE : View.GONE);
             
             btnToggleMeaning.setImageResource(isRevealed ? R.drawable.ic_eye : R.drawable.ic_eye_off);
             
+            updateLevelStatus(wordWithLevel.level);
+
             btnToggleMeaning.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position == RecyclerView.NO_POSITION) {
@@ -100,13 +112,23 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
                 return true;
             });
         }
+
+        private void updateLevelStatus(int level) {
+            if (tvLevelLabel != null) {
+                tvLevelLabel.setText(itemView.getContext().getString(R.string.level_format_label, level, 6));
+            }
+            if (lpiWordLevel != null) {
+                int progress = (level * 100) / 6;
+                lpiWordLevel.setProgressCompat(progress, true);
+            }
+        }
     }
 
     private static class WordDiffCallback extends DiffUtil.Callback {
-        private final List<WordEntity> oldWords;
-        private final List<WordEntity> newWords;
+        private final List<WordWithLevel> oldWords;
+        private final List<WordWithLevel> newWords;
 
-        WordDiffCallback(List<WordEntity> oldWords, List<WordEntity> newWords) {
+        WordDiffCallback(List<WordWithLevel> oldWords, List<WordWithLevel> newWords) {
             this.oldWords = oldWords;
             this.newWords = newWords;
         }
@@ -123,16 +145,16 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
 
         @Override
         public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-            return oldWords.get(oldItemPosition).wordId == newWords.get(newItemPosition).wordId;
+            return oldWords.get(oldItemPosition).word.wordId == newWords.get(newItemPosition).word.wordId;
         }
 
         @Override
         public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-            WordEntity oldWord = oldWords.get(oldItemPosition);
-            WordEntity newWord = newWords.get(newItemPosition);
-            return oldWord.engWord.equals(newWord.engWord)
-                    && oldWord.trWord.equals(newWord.trWord)
-                    && oldWord.createdAt == newWord.createdAt;
+            WordWithLevel oldItem = oldWords.get(oldItemPosition);
+            WordWithLevel newItem = newWords.get(newItemPosition);
+            return oldItem.word.engWord.equals(newItem.word.engWord)
+                    && oldItem.word.trWord.equals(newItem.word.trWord)
+                    && oldItem.level == newItem.level;
         }
     }
 }
