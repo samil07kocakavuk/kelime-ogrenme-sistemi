@@ -8,13 +8,15 @@ public class QuizQuestion {
     private final String correctAnswer;
     private final String picturePath;
     private final List<String> options;
+    private final int level;
 
-    public QuizQuestion(int wordId, String questionText, String correctAnswer, String picturePath, List<String> options) {
+    public QuizQuestion(int wordId, String questionText, String correctAnswer, String picturePath, List<String> options, int level) {
         this.wordId = wordId;
         this.questionText = questionText;
         this.correctAnswer = correctAnswer;
         this.picturePath = picturePath;
         this.options = options;
+        this.level = level;
     }
 
     public int getWordId() {
@@ -35,5 +37,9 @@ public class QuizQuestion {
 
     public List<String> getOptions() {
         return options;
+    }
+
+    public int getLevel() {
+        return level;
     }
 }

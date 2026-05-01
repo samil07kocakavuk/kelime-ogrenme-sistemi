@@ -40,29 +40,20 @@
                     android:padding="24dp">
 
                     <TextView
+                        android:id="@+id/tvProfileName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/profile_title"
                         android:textColor="@color/text_primary"
-                        android:textSize="30sp"
+                        android:textSize="28sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvProfileInfo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/profile_loading"
+                        android:layout_marginTop="8dp"
                         android:textColor="@color/text_secondary"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="22dp"
-                        android:text="@string/profile_intro"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="15sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -72,56 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:text="@string/word_pool_title" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/card"
-                app:cardCornerRadius="28dp"
-                app:cardElevation="6dp"
-                app:strokeColor="@color/card_stroke"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/report_title"
-                        android:textColor="@color/text_primary"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:text="@string/report_subtitle"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="14sp" />
-
-                    <LinearLayout
-                        android:id="@+id/llCategoryReports"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="14dp"
-                        android:orientation="vertical" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnPrintReport"
-                        style="@style/AppButtonSecondary"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="14dp"
-                        android:text="@string/print_report_action" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                android:text="@string/personal_analysis_action" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"

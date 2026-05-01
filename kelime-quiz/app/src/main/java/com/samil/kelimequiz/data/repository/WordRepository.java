@@ -6,6 +6,7 @@ import com.samil.kelimequiz.data.local.dao.WordDao;
 import com.samil.kelimequiz.data.local.dao.WordSampleDao;
 import com.samil.kelimequiz.data.local.entity.WordEntity;
 import com.samil.kelimequiz.data.local.entity.WordSampleEntity;
+import com.samil.kelimequiz.data.local.entity.WordWithLevel;
 import com.samil.kelimequiz.domain.model.WordDetails;
 
 import org.json.JSONArray;
@@ -29,11 +30,16 @@ public class WordRepository {
 
     public int addInitialSeedWords(int userId) {
         int importedCount = 0;
-        for (SeedWord seedWord : loadAvailableSeedWords()) {
-            if (wordDao.findByUserAndEnglishWord(userId, seedWord.engWord) == null) {
-                addWord(userId, seedWord.engWord, seedWord.trWord, seedWord.picturePath, seedWord.samplesText, seedWord.category);
-                importedCount++;
+        try {
+            List<SeedWord> seedWords = loadAvailableSeedWords();
+            for (SeedWord seedWord : seedWords) {
+                if (wordDao.findByUserAndEnglishWord(userId, seedWord.engWord) == null) {
+                    addWord(userId, seedWord.engWord, seedWord.trWord, seedWord.picturePath, seedWord.samplesText, seedWord.category);
+                    importedCount++;
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return importedCount;
     }
@@ -41,6 +47,7 @@ public class WordRepository {
     public void addWord(int userId, String engWord, String trWord, String picturePath, String samplesText, String category) {
         String cleanEngWord = requireText(engWord, "İngilizce kelime boş bırakılamaz.");
         String cleanTrWord = requireText(trWord, "Türkçe karşılık boş bırakılamaz.");
+        
         if (wordDao.findByUserAndEnglishWord(userId, cleanEngWord) != null) {
             throw new IllegalArgumentException("Bu İngilizce kelime zaten kayıtlı.");
         }
@@ -52,11 +59,16 @@ public class WordRepository {
         word.picturePath = trimToNull(picturePath);
         word.category = trimToNull(category);
         word.createdAt = System.currentTimeMillis();
-        int wordId = (int) wordDao.insert(word);
-        insertSamples(wordId, samplesText);
+        
+        try {
+            int wordId = (int) wordDao.insert(word);
+            insertSamples(wordId, samplesText);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public List<WordEntity> listWords(int userId) {
+    public List<WordWithLevel> listWords(int userId) {
         return wordDao.listByUser(userId);
     }
 
@@ -142,10 +154,10 @@ public class WordRepository {
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);
             words.add(new SeedWord(
-                    item.getString("engWord"),
-                    item.getString("trWord"),
-                    item.getString("picturePath"),
-                    item.getString("samplesText"),
+                    item.optString("engWord", ""),
+                    item.optString("trWord", ""),
+                    item.optString("picturePath", null),
+                    item.optString("samplesText", ""),
                     item.optString("category", "Günlük Yaşam")
             ));
         }

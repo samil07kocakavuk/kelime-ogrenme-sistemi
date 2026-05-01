@@ -1,7 +1,8 @@
 package com.samil.kelimequiz.util.security;
 
+import android.util.Base64;
+
 import java.security.SecureRandom;
-import java.util.Base64;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -18,15 +19,15 @@ public class PasswordHasher {
         new SecureRandom().nextBytes(salt);
         byte[] hash = pbkdf2(rawPassword.toCharArray(), salt, DEFAULT_ITERATIONS);
         return new HashResult(
-                Base64.getEncoder().encodeToString(hash),
-                Base64.getEncoder().encodeToString(salt),
+                Base64.encodeToString(hash, Base64.NO_WRAP),
+                Base64.encodeToString(salt, Base64.NO_WRAP),
                 DEFAULT_ITERATIONS
         );
     }
 
     public boolean verify(String rawPassword, String storedHashBase64, String storedSaltBase64, int iterations) {
-        byte[] expectedHash = Base64.getDecoder().decode(storedHashBase64);
-        byte[] salt = Base64.getDecoder().decode(storedSaltBase64);
+        byte[] expectedHash = Base64.decode(storedHashBase64, Base64.NO_WRAP);
+        byte[] salt = Base64.decode(storedSaltBase64, Base64.NO_WRAP);
         byte[] candidateHash = pbkdf2(rawPassword.toCharArray(), salt, iterations);
         return constantTimeEquals(expectedHash, candidateHash);
     }

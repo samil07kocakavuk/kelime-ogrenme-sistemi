@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.domain.model.QuizAnswerResult;
 import com.samil.kelimequiz.domain.model.QuizQuestion;
@@ -25,19 +27,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuizActivity extends AppCompatActivity {
+    private static final int MAX_HINTS = 3;
+
     private final List<MaterialButton> optionButtons = new ArrayList<>();
     private final List<QuizQuestion> questions = new ArrayList<>();
 
     private TextView tvQuizProgress;
     private TextView tvQuestionWord;
     private TextView tvQuizFeedback;
+    private TextView tvLevelLabel;
     private ImageView ivQuizWordImage;
+    private LinearProgressIndicator lpiWordLevel;
     private MaterialButton btnNextQuestion;
     private MaterialButton btnFinishQuiz;
+    private MaterialButton btnHint;
 
     private int userId;
     private int currentIndex;
     private int correctCount;
+    private int hintsRemaining;
     private boolean answered;
     private String lastSelectedAnswer;
 
@@ -62,9 +70,12 @@ public class QuizActivity extends AppCompatActivity {
         tvQuizProgress = findViewById(R.id.tvQuizProgress);
         tvQuestionWord = findViewById(R.id.tvQuestionWord);
         tvQuizFeedback = findViewById(R.id.tvQuizFeedback);
+        tvLevelLabel = findViewById(R.id.tvLevelLabel);
         ivQuizWordImage = findViewById(R.id.ivQuizWordImage);
+        lpiWordLevel = findViewById(R.id.lpiWordLevel);
         btnNextQuestion = findViewById(R.id.btnNextQuestion);
         btnFinishQuiz = findViewById(R.id.btnFinishQuiz);
+        btnHint = findViewById(R.id.btnHint);
 
         optionButtons.add(findViewById(R.id.btnOptionOne));
         optionButtons.add(findViewById(R.id.btnOptionTwo));
@@ -73,6 +84,7 @@ public class QuizActivity extends AppCompatActivity {
 
         btnNextQuestion.setOnClickListener(v -> showNextQuestion());
         btnFinishQuiz.setOnClickListener(v -> finish());
+        btnHint.setOnClickListener(v -> useHint());
     }
 
     private void loadQuiz() {
@@ -89,6 +101,7 @@ public class QuizActivity extends AppCompatActivity {
         questions.addAll(loadedQuestions);
         currentIndex = 0;
         correctCount = 0;
+        hintsRemaining = MAX_HINTS;
 
         if (questions.isEmpty()) {
             showEmptyQuiz();
@@ -103,7 +116,20 @@ public class QuizActivity extends AppCompatActivity {
         QuizQuestion question = questions.get(currentIndex);
         tvQuizProgress.setText(getString(R.string.quiz_progress_format, currentIndex + 1, questions.size()));
         tvQuestionWord.setText(question.getQuestionText());
-        showQuestionImage(question.getPicturePath());
+
+        // Resim her zaman gizli başlar
+        ivQuizWordImage.setVisibility(View.GONE);
+
+        // İpucu butonu: resmi olan sorularda ve hak varsa göster
+        boolean hasImage = question.getPicturePath() != null && !question.getPicturePath().trim().isEmpty();
+        if (hasImage && hintsRemaining > 0) {
+            btnHint.setVisibility(View.VISIBLE);
+            btnHint.setText(getString(R.string.hint_action, hintsRemaining));
+        } else {
+            btnHint.setVisibility(View.GONE);
+        }
+
+        updateLevelStatus(question.getLevel());
         tvQuizFeedback.setText(R.string.choose_turkish_answer);
         tvQuizFeedback.setBackgroundResource(R.drawable.bg_feedback_neutral);
         tvQuizFeedback.setTextColor(getColor(R.color.text_secondary));
@@ -125,10 +151,35 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-    private void submitAnswer(QuizQuestion question, String selectedAnswer) {
-        if (answered) {
+    private void useHint() {
+        if (hintsRemaining <= 0) {
+            Toast.makeText(this, R.string.hint_no_remaining, Toast.LENGTH_SHORT).show();
             return;
         }
+
+        hintsRemaining--;
+        btnHint.setText(getString(R.string.hint_action, hintsRemaining));
+        if (hintsRemaining <= 0) {
+            btnHint.setEnabled(false);
+        }
+
+        // Resmi göster
+        QuizQuestion question = questions.get(currentIndex);
+        showQuestionImage(question.getPicturePath());
+    }
+
+    private void updateLevelStatus(int level) {
+        if (tvLevelLabel != null) {
+            tvLevelLabel.setText(getString(R.string.level_format_label, level, 6));
+        }
+        if (lpiWordLevel != null) {
+            int progress = (level * 100) / 6;
+            lpiWordLevel.setProgressCompat(progress, true);
+        }
+    }
+
+    private void submitAnswer(QuizQuestion question, String selectedAnswer) {
+        if (answered) return;
         answered = true;
         lastSelectedAnswer = selectedAnswer.trim();
         tvQuizFeedback.setText(R.string.saving_answer);
@@ -136,27 +187,25 @@ public class QuizActivity extends AppCompatActivity {
         AppExecutors.io().execute(() -> {
             try {
                 QuizAnswerResult result = AppContainer.from(this).quizRepository.answerQuestion(
-                        userId,
-                        question.getWordId(),
-                        selectedAnswer
-                );
-                runOnUiThread(() -> showAnswerResult(result));
+                        userId, question.getWordId(), selectedAnswer);
+                runOnUiThread(() -> {
+                    updateLevelStatus(result.getLevel());
+                    showAnswerResult(result);
+                });
             } catch (RuntimeException exception) {
-                runOnUiThread(() -> showAnswerError());
+                runOnUiThread(this::showAnswerError);
             }
         });
     }
 
     private void showAnswerResult(QuizAnswerResult result) {
-        if (result.isCorrect()) {
-            correctCount++;
-        }
+        if (result.isCorrect()) correctCount++;
         applyAnswerStyles(result.isCorrect(), questions.get(currentIndex).getCorrectAnswer());
         tvQuizFeedback.setText(buildResultMessage(result));
         tvQuizFeedback.setBackgroundResource(result.isCorrect()
-                ? R.drawable.bg_feedback_success
-                : R.drawable.bg_feedback_error);
+                ? R.drawable.bg_feedback_success : R.drawable.bg_feedback_error);
         tvQuizFeedback.setTextColor(getColor(result.isCorrect() ? R.color.success : R.color.error));
+
         if (currentIndex == questions.size() - 1) {
             btnFinishQuiz.setVisibility(View.VISIBLE);
             btnFinishQuiz.setText(getString(R.string.finish_quiz_score, correctCount, questions.size()));
@@ -166,17 +215,10 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private String buildResultMessage(QuizAnswerResult result) {
-        if (!result.isCorrect()) {
-            return getString(R.string.wrong_answer_feedback);
-        }
-        if (result.isLearned()) {
-            return getString(R.string.learned_answer_feedback);
-        }
-        return getString(
-                R.string.correct_answer_feedback,
-                result.getLevel(),
-                DateFormat.getDateInstance(DateFormat.MEDIUM).format(result.getNextReviewAt())
-        );
+        if (!result.isCorrect()) return getString(R.string.wrong_answer_feedback);
+        if (result.isLearned()) return getString(R.string.learned_answer_feedback);
+        return getString(R.string.correct_answer_feedback, result.getLevel(),
+                DateFormat.getDateInstance(DateFormat.MEDIUM).format(result.getNextReviewAt()));
     }
 
     private void showAnswerError() {
@@ -191,12 +233,11 @@ public class QuizActivity extends AppCompatActivity {
             ivQuizWordImage.setVisibility(View.GONE);
             return;
         }
-
         ivQuizWordImage.setVisibility(View.VISIBLE);
         Glide.with(this)
                 .load(picturePath)
                 .thumbnail(0.25f)
-                .override(216, 216)
+                .override(320, 240)
                 .centerCrop()
                 .dontAnimate()
                 .into(ivQuizWordImage);
@@ -234,6 +275,7 @@ public class QuizActivity extends AppCompatActivity {
         tvQuizProgress.setText(R.string.empty_quiz_progress);
         tvQuestionWord.setText(R.string.empty_quiz_title);
         ivQuizWordImage.setVisibility(View.GONE);
+        btnHint.setVisibility(View.GONE);
         tvQuizFeedback.setText(R.string.empty_quiz_message);
         setOptionsVisible(false);
         btnNextQuestion.setVisibility(View.GONE);

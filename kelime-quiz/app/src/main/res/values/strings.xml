@@ -37,6 +37,7 @@
     <string name="error_with_message">Hata: %1$s</string>
 
     <string name="word_pool_title">Kelime Havuzu</string>
+    <string name="personal_analysis_action">Kişisel Analiz</string>
     <string name="word_pool_loading">Kelime havuzu hazırlanıyor…</string>
     <string name="word_pool_empty">Henüz kelime eklenmedi.</string>
     <string name="word_pool_help">Kelime kartlarına dokunarak detayları görebilirsin.</string>
@@ -94,12 +95,42 @@
     <string name="empty_quiz_title">Sorulacak kelime yok</string>
     <string name="empty_quiz_message">Tekrar zamanı gelen veya yeni sorulacak kelime yok. Yeni kelime ekleyin ya da tekrar zamanını bekleyin.</string>
 
-    <string name="report_title">Raporlama</string>
-    <string name="report_subtitle">Kategori bazlı son sınav başarı durumun</string>
+    <string name="report_title">Kelime Analizi</string>
+    <string name="report_subtitle">Kelimelerinin öğrenme durumu</string>
     <string name="report_loading">Rapor yükleniyor…</string>
-    <string name="report_no_data">Henüz kategori verisi yok.</string>
-    <string name="report_category_format">%1$s: doğru %2$d/%3$d - başarı %4$d%%</string>
+    <string name="report_no_data">Henüz kelime verisi yok.</string>
+    <string name="report_summary_format">Toplam %1$d kelime: %2$d öğrenilmiş, %3$d devam eden, %4$d başlanmamış</string>
+    <string name="report_learned_title">✓ Öğrenilmiş (%1$d)</string>
+    <string name="report_in_progress_title">↻ Öğrenilmekte Olan (%1$d)</string>
+    <string name="report_not_started_title">○ Başlanmamış (%1$d)</string>
     <string name="category_hint">Kategori</string>
     <string name="print_report_action">Raporu Yazdır / PDF</string>
     <string name="print_report_job_name">Kelime Quiz Rapor</string>
+    <string name="level_format_label">Seviye: %1$d/%2$d</string>
+
+    <string name="wordle_title">Günlük Wordle</string>
+    <string name="hint_action">İpucu (%1$d)</string>
+    <string name="hint_no_remaining">İpucu hakkın kalmadı.</string>
+    <string name="wordle_button">Günlük Wordle</string>
+    <string name="wordle_hint">Kelimeyi tahmin et (%1$d harf)</string>
+    <string name="wordle_attempt_format">Tahmin %1$d / %2$d</string>
+    <string name="wordle_guess_action">Tahmin Et</string>
+    <string name="wordle_win_message">Tebrikler! Kelimeyi buldun: %1$s</string>
+    <string name="wordle_lose_message">Tahmin hakkın bitti. Doğru kelime: %1$s</string>
+    <string name="wordle_invalid_length">Tahmin %1$d harf olmalı.</string>
+    <string name="wordle_no_words">Wordle için yeterli kelime yok. Önce kelime ekleyin.</string>
+    <string name="wordle_already_played">Bugünkü Wordle\'ı zaten oynadın! Yarın tekrar gel.</string>
+    <string name="wordle_play_again">Tekrar Oyna</string>
+
+    <string name="word_chain_title">Word Chain</string>
+    <string name="word_chain_button">Hikaye Oluştur (AI)</string>
+    <string name="word_chain_info">Rastgele seçilen 5 kelimeden AI bir hikaye ve görsel oluşturacak.</string>
+    <string name="word_chain_words_label">Kelimeler: %1$s</string>
+    <string name="word_chain_generate">Hikaye Oluştur</string>
+    <string name="word_chain_generating">Oluşturuluyor…</string>
+    <string name="word_chain_story_loading">Hikaye yazılıyor…</string>
+    <string name="word_chain_image_loading">Görsel oluşturuluyor…</string>
+    <string name="word_chain_image_error">Görsel oluşturulamadı: %1$s</string>
+    <string name="word_chain_story_error">Hikaye oluşturulamadı: %1$s</string>
+    <string name="word_chain_no_words">Kelime havuzunda en az 5 kelime gerekli.</string>
 </resources>

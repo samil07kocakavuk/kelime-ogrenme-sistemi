@@ -4,11 +4,13 @@ public class CategoryReport {
     private final String category;
     private final int totalWords;
     private final int correctWords;
+    private final double averageLevel;
 
-    public CategoryReport(String category, int totalWords, int correctWords) {
+    public CategoryReport(String category, int totalWords, int correctWords, double averageLevel) {
         this.category = category;
         this.totalWords = totalWords;
         this.correctWords = correctWords;
+        this.averageLevel = averageLevel;
     }
 
     public String getCategory() {
@@ -21,6 +23,10 @@ public class CategoryReport {
 
     public int getCorrectWords() {
         return correctWords;
+    }
+
+    public double getAverageLevel() {
+        return averageLevel;
     }
 
     public int getSuccessPercent() {

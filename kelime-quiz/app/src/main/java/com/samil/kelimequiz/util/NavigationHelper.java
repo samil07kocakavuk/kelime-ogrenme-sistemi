@@ -17,11 +17,15 @@ public final class NavigationHelper {
     }
 
     public static void bindTopBar(AppCompatActivity activity, boolean showBackButton) {
+        bindTopBar(activity, showBackButton, MainActivity.class);
+    }
+
+    public static void bindTopBar(AppCompatActivity activity, boolean showBackButton, Class<?> targetClass) {
         ImageButton btnBack = activity.findViewById(R.id.btnBack);
         if (btnBack != null) {
             btnBack.setVisibility(showBackButton ? View.VISIBLE : View.GONE);
             if (showBackButton) {
-                btnBack.setOnClickListener(v -> redirectToMain(activity));
+                btnBack.setOnClickListener(v -> redirectTo(activity, targetClass));
             }
         }
     }
@@ -31,10 +35,14 @@ public final class NavigationHelper {
     }
 
     public static void redirectToMain(AppCompatActivity activity) {
-        if (activity instanceof MainActivity) {
+        redirectTo(activity, MainActivity.class);
+    }
+
+    public static void redirectTo(AppCompatActivity activity, Class<?> targetClass) {
+        if (activity.getClass().equals(targetClass)) {
             activity.finish();
         } else {
-            Intent intent = new Intent(activity, MainActivity.class);
+            Intent intent = new Intent(activity, targetClass);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             activity.startActivity(intent);
             activity.finish();

@@ -55,7 +55,7 @@ public class QuizRepository {
         }
 
         QuizProgressEntity progress = findOrCreateProgress(userId, wordId);
-        boolean correct = word.trWord.equals(selectedAnswer);
+        boolean correct = word.trWord.trim().equalsIgnoreCase(selectedAnswer.trim());
         updateProgressAfterAnswer(progress, correct, now);
         saveProgress(progress);
         return new QuizAnswerResult(correct, progress.level, progress.learned, progress.nextReviewAt);
@@ -76,7 +76,11 @@ public class QuizRepository {
 
         List<String> options = new ArrayList<>(uniqueOptions);
         Collections.shuffle(options);
-        return new QuizQuestion(word.wordId, word.engWord, word.trWord, word.picturePath, options);
+
+        QuizProgressEntity progress = quizProgressDao.findByUserAndWord(userId, word.wordId);
+        int level = (progress != null) ? progress.level : 0;
+
+        return new QuizQuestion(word.wordId, word.engWord, word.trWord, word.picturePath, options, level);
     }
 
     private void updateProgressAfterAnswer(QuizProgressEntity progress, boolean correct, long now) {
