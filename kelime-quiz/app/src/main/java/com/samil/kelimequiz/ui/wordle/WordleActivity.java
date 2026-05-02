@@ -29,9 +29,9 @@ import java.util.Locale;
 import java.util.Map;
 
 public class WordleActivity extends AppCompatActivity {
-    private static final int MAX_ATTEMPTS = 4;
+    private static final int MAX_ATTEMPTS = 5;
     private static final int MIN_WORD_LENGTH = 4;
-    private static final int MAX_WORD_LENGTH = 7;
+    private static final int MAX_WORD_LENGTH = 6;
     private static final String PREFS_NAME = "wordle_prefs";
 
     private LinearLayout llWordleGrid;
