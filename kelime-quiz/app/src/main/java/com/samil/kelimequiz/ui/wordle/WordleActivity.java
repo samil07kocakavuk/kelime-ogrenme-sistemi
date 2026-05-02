@@ -2,6 +2,7 @@ package com.samil.kelimequiz.ui.wordle;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -22,8 +23,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class WordleActivity extends AppCompatActivity {
     private static final int MAX_ATTEMPTS = 4;
@@ -44,6 +47,8 @@ public class WordleActivity extends AppCompatActivity {
     private int userId;
     private String selectedDate;
     private final List<LinearLayout> gridRows = new ArrayList<>();
+    private final Map<String, MaterialButton> keyButtons = new HashMap<>();
+    private final Map<String, Integer> letterStates = new HashMap<>(); // 0=absent, 1=misplaced, 2=correct
 
     private static final String[] KEYBOARD_ROW_1 = {"Q","W","E","R","T","Y","U","I","O","P"};
     private static final String[] KEYBOARD_ROW_2 = {"A","S","D","F","G","H","J","K","L"};
@@ -64,7 +69,6 @@ public class WordleActivity extends AppCompatActivity {
         bindViews();
         NavigationHelper.bindTopBar(this);
         NavigationHelper.bindBottomBar(this);
-        buildKeyboard();
         buildCalendar();
 
         selectedDate = todayString();
@@ -79,7 +83,7 @@ public class WordleActivity extends AppCompatActivity {
         tvResult = findViewById(R.id.tvWordleResult);
     }
 
-    // ─── TAKVİM (son 7 gün) ───
+    // ─── TAKVİM ───
 
     private void buildCalendar() {
         llCalendar.removeAllViews();
@@ -103,29 +107,19 @@ public class WordleActivity extends AppCompatActivity {
             btn.setText(dayFmt.format(day.getTime()));
 
             if (completed) {
-                btn.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getColor(R.color.success)));
+                btn.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.success)));
                 btn.setTextColor(getColor(R.color.white));
             }
-
             if (dateStr.equals(todayString())) {
                 btn.setStrokeWidth(dpToPx(2));
-                btn.setStrokeColor(android.content.res.ColorStateList.valueOf(getColor(R.color.primary)));
+                btn.setStrokeColor(ColorStateList.valueOf(getColor(R.color.primary)));
             }
 
             btn.setOnClickListener(v -> {
                 selectedDate = dateStr;
                 loadGameForDate(dateStr);
-                highlightCalendarSelection();
             });
-
             llCalendar.addView(btn);
-        }
-    }
-
-    private void highlightCalendarSelection() {
-        for (int i = 0; i < llCalendar.getChildCount(); i++) {
-            MaterialButton btn = (MaterialButton) llCalendar.getChildAt(i);
-            btn.setAlpha(1f);
         }
     }
 
@@ -149,12 +143,12 @@ public class WordleActivity extends AppCompatActivity {
         gameOver = false;
         currentAttempt = 0;
         currentCol = 0;
+        letterStates.clear();
         tvResult.setVisibility(View.GONE);
-        setKeyboardEnabled(true);
 
         buildEmptyGrid();
+        buildKeyboard();
 
-        // Kaydedilmiş tahminleri geri yükle
         List<String> savedGuesses = getSavedGuesses(date);
         for (String guess : savedGuesses) {
             replayGuess(guess);
@@ -172,17 +166,18 @@ public class WordleActivity extends AppCompatActivity {
 
     private void replayGuess(String guess) {
         int wordLen = targetWord.length();
+        LinearLayout row = gridRows.get(currentAttempt);
         for (int i = 0; i < wordLen && i < guess.length(); i++) {
-            LinearLayout row = gridRows.get(currentAttempt);
             TextView cell = (TextView) row.getChildAt(i);
             cell.setText(String.valueOf(guess.charAt(i)));
         }
         applyColors(currentAttempt, guess);
+        updateKeyboardColors(guess);
         currentAttempt++;
         currentCol = 0;
     }
 
-    // ─── KELİME SEÇİMİ (tarihe göre deterministik) ───
+    // ─── KELİME SEÇİMİ ───
 
     private String getWordForDate(String date) {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -199,7 +194,7 @@ public class WordleActivity extends AppCompatActivity {
         return word;
     }
 
-    // ─── STATE KAYDETME ───
+    // ─── STATE ───
 
     private void saveGuess(String date, String guess) {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -215,9 +210,7 @@ public class WordleActivity extends AppCompatActivity {
         String raw = prefs.getString(key, "");
         List<String> guesses = new ArrayList<>();
         if (!raw.isEmpty()) {
-            for (String g : raw.split("\\|")) {
-                guesses.add(g);
-            }
+            for (String g : raw.split("\\|")) guesses.add(g);
         }
         return guesses;
     }
@@ -249,8 +242,7 @@ public class WordleActivity extends AppCompatActivity {
             rowLayout.setLayoutParams(rowParams);
 
             for (int col = 0; col < wordLen; col++) {
-                TextView cell = createCell();
-                rowLayout.addView(cell);
+                rowLayout.addView(createCell());
             }
             llWordleGrid.addView(rowLayout);
             gridRows.add(rowLayout);
@@ -258,14 +250,13 @@ public class WordleActivity extends AppCompatActivity {
     }
 
     private TextView createCell() {
-        int size = dpToPx(46);
-        int margin = dpToPx(3);
+        int size = dpToPx(48);
         TextView cell = new TextView(this);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
-        params.setMargins(margin, margin, margin, margin);
+        params.setMargins(dpToPx(3), dpToPx(3), dpToPx(3), dpToPx(3));
         cell.setLayoutParams(params);
         cell.setGravity(Gravity.CENTER);
-        cell.setTextSize(20);
+        cell.setTextSize(22);
         cell.setTypeface(null, Typeface.BOLD);
         cell.setTextColor(getColor(R.color.text_primary));
         cell.setBackgroundResource(R.drawable.bg_wordle_empty);
@@ -276,22 +267,55 @@ public class WordleActivity extends AppCompatActivity {
 
     private void buildKeyboard() {
         llKeyboard.removeAllViews();
+        keyButtons.clear();
+
         llKeyboard.addView(buildKeyboardRow(KEYBOARD_ROW_1));
         llKeyboard.addView(buildKeyboardRow(KEYBOARD_ROW_2));
 
-        // 3. satır: ENTER + harfler + SİL
+        // 3. satır: GÖNDER + harfler + SİL
         LinearLayout row3 = new LinearLayout(this);
         row3.setGravity(Gravity.CENTER);
         row3.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
-        row3.addView(createKeyButton("⏎", dpToPx(48), v -> onEnterPressed()));
+        // GÖNDER butonu - belirgin
+        MaterialButton btnEnter = new MaterialButton(this);
+        LinearLayout.LayoutParams enterParams = new LinearLayout.LayoutParams(dpToPx(64), dpToPx(48));
+        enterParams.setMargins(dpToPx(2), dpToPx(3), dpToPx(2), dpToPx(3));
+        btnEnter.setLayoutParams(enterParams);
+        btnEnter.setPadding(0, 0, 0, 0);
+        btnEnter.setInsetTop(0);
+        btnEnter.setInsetBottom(0);
+        btnEnter.setTextSize(11);
+        btnEnter.setText("GÖN");
+        btnEnter.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.success)));
+        btnEnter.setTextColor(getColor(R.color.white));
+        btnEnter.setOnClickListener(v -> onEnterPressed());
+        row3.addView(btnEnter);
+
         for (String letter : KEYBOARD_ROW_3) {
-            row3.addView(createKeyButton(letter, dpToPx(32), v -> onLetterPressed(letter)));
+            row3.addView(createLetterKey(letter));
         }
-        row3.addView(createKeyButton("⌫", dpToPx(48), v -> onBackspacePressed()));
+
+        // SİL butonu
+        MaterialButton btnDel = new MaterialButton(this, null, com.google.android.material.R.attr.materialButtonOutlinedStyle);
+        LinearLayout.LayoutParams delParams = new LinearLayout.LayoutParams(dpToPx(56), dpToPx(48));
+        delParams.setMargins(dpToPx(2), dpToPx(3), dpToPx(2), dpToPx(3));
+        btnDel.setLayoutParams(delParams);
+        btnDel.setPadding(0, 0, 0, 0);
+        btnDel.setInsetTop(0);
+        btnDel.setInsetBottom(0);
+        btnDel.setTextSize(16);
+        btnDel.setText("⌫");
+        btnDel.setOnClickListener(v -> onBackspacePressed());
+        row3.addView(btnDel);
 
         llKeyboard.addView(row3);
+
+        // Kayıtlı renkleri uygula
+        for (Map.Entry<String, Integer> entry : letterStates.entrySet()) {
+            applyKeyColor(entry.getKey(), entry.getValue());
+        }
     }
 
     private LinearLayout buildKeyboardRow(String[] letters) {
@@ -300,37 +324,65 @@ public class WordleActivity extends AppCompatActivity {
         row.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         for (String letter : letters) {
-            row.addView(createKeyButton(letter, dpToPx(32), v -> onLetterPressed(letter)));
+            row.addView(createLetterKey(letter));
         }
         return row;
     }
 
-    private MaterialButton createKeyButton(String text, int width, View.OnClickListener listener) {
+    private MaterialButton createLetterKey(String letter) {
         MaterialButton btn = new MaterialButton(this, null, com.google.android.material.R.attr.materialButtonOutlinedStyle);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, dpToPx(42));
-        params.setMargins(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, dpToPx(48), 1f);
+        params.setMargins(dpToPx(2), dpToPx(3), dpToPx(2), dpToPx(3));
         btn.setLayoutParams(params);
         btn.setPadding(0, 0, 0, 0);
         btn.setInsetTop(0);
         btn.setInsetBottom(0);
-        btn.setTextSize(14);
-        btn.setText(text);
-        btn.setOnClickListener(listener);
+        btn.setTextSize(16);
+        btn.setTypeface(null, Typeface.BOLD);
+        btn.setText(letter);
+        btn.setOnClickListener(v -> onLetterPressed(letter));
+        keyButtons.put(letter, btn);
         return btn;
     }
 
-    private void setKeyboardEnabled(boolean enabled) {
-        setChildrenEnabled(llKeyboard, enabled);
+    private void updateKeyboardColors(String guess) {
+        int[] result = evaluateGuess(guess);
+        for (int i = 0; i < guess.length(); i++) {
+            String letter = String.valueOf(guess.charAt(i));
+            int newState = result[i];
+            Integer currentState = letterStates.get(letter);
+
+            // Yeşil > Sarı > Gri (sadece yükselt, düşürme)
+            if (currentState == null || newState > currentState) {
+                letterStates.put(letter, newState);
+                applyKeyColor(letter, newState);
+            }
+        }
     }
 
-    private void setChildrenEnabled(View view, boolean enabled) {
-        if (view instanceof LinearLayout) {
-            LinearLayout layout = (LinearLayout) view;
-            for (int i = 0; i < layout.getChildCount(); i++) {
-                setChildrenEnabled(layout.getChildAt(i), enabled);
+    private void applyKeyColor(String letter, int state) {
+        MaterialButton btn = keyButtons.get(letter);
+        if (btn == null) return;
+
+        int bgColor;
+        switch (state) {
+            case 2: bgColor = 0xFF6AAA64; break; // yeşil
+            case 1: bgColor = 0xFFC9B458; break; // sarı
+            default: bgColor = 0xFF787C7E; break; // gri
+        }
+        btn.setBackgroundTintList(ColorStateList.valueOf(bgColor));
+        btn.setTextColor(getColor(R.color.white));
+        btn.setStrokeWidth(0);
+    }
+
+    private void setKeyboardEnabled(boolean enabled) {
+        for (int i = 0; i < llKeyboard.getChildCount(); i++) {
+            View row = llKeyboard.getChildAt(i);
+            if (row instanceof LinearLayout) {
+                for (int j = 0; j < ((LinearLayout) row).getChildCount(); j++) {
+                    ((LinearLayout) row).getChildAt(j).setEnabled(enabled);
+                }
             }
-        } else {
-            view.setEnabled(enabled);
         }
     }
 
@@ -338,8 +390,7 @@ public class WordleActivity extends AppCompatActivity {
 
     private void onLetterPressed(String letter) {
         if (gameOver || currentAttempt >= MAX_ATTEMPTS) return;
-        int wordLen = targetWord.length();
-        if (currentCol >= wordLen) return;
+        if (currentCol >= targetWord.length()) return;
 
         LinearLayout row = gridRows.get(currentAttempt);
         TextView cell = (TextView) row.getChildAt(currentCol);
@@ -357,11 +408,11 @@ public class WordleActivity extends AppCompatActivity {
 
     private void onEnterPressed() {
         if (gameOver) return;
-        int wordLen = targetWord.length();
-        if (currentCol < wordLen) return;
+        if (currentCol < targetWord.length()) return;
 
         String guess = buildCurrentGuess();
         applyColors(currentAttempt, guess);
+        updateKeyboardColors(guess);
         saveGuess(selectedDate, guess);
 
         if (guess.equals(targetWord)) {
@@ -395,15 +446,9 @@ public class WordleActivity extends AppCompatActivity {
             TextView cell = (TextView) row.getChildAt(i);
             cell.setTextColor(getColor(R.color.white));
             switch (result[i]) {
-                case 2:
-                    cell.setBackgroundResource(R.drawable.bg_wordle_correct);
-                    break;
-                case 1:
-                    cell.setBackgroundResource(R.drawable.bg_wordle_misplaced);
-                    break;
-                default:
-                    cell.setBackgroundResource(R.drawable.bg_wordle_absent);
-                    break;
+                case 2: cell.setBackgroundResource(R.drawable.bg_wordle_correct); break;
+                case 1: cell.setBackgroundResource(R.drawable.bg_wordle_misplaced); break;
+                default: cell.setBackgroundResource(R.drawable.bg_wordle_absent); break;
             }
         }
     }
@@ -421,7 +466,6 @@ public class WordleActivity extends AppCompatActivity {
                 guessUsed[i] = true;
             }
         }
-
         for (int i = 0; i < len; i++) {
             if (guessUsed[i]) continue;
             for (int j = 0; j < len; j++) {
@@ -442,7 +486,7 @@ public class WordleActivity extends AppCompatActivity {
         setKeyboardEnabled(false);
         markDateCompleted(selectedDate);
         showResult(won);
-        buildCalendar(); // takvimi güncelle (yeşil işaret)
+        buildCalendar();
     }
 
     private void showResult(boolean won) {
