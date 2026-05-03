@@ -2,21 +2,7 @@
 
 ![Java 17](https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Android SDK 34](https://img.shields.io/badge/Android%20SDK-34-3DDC84?style=for-the-badge&logo=android&logoColor=white)
-![SQLite](https://img.shields.io/badge/SQLite-Room-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
-![Material Design](https://img.shields.io/badge/Material-UI-6750A4?style=for-the-badge&logo=materialdesign&logoColor=white)
-![Glide](https://img.shields.io/badge/Glide-4.16.0-18BED4?style=for-the-badge&logo=googlephotos&logoColor=white)
-![JUnit](https://img.shields.io/badge/JUnit-4.13.2-25A162?style=for-the-badge&logo=junit5&logoColor=white)
-
-| Bilgi | Değer |
-| --- | --- |
-| Proje | Kelime Quiz |
-| Sürüm | 1.0 |
-| Platform | Android |
-| Dil | Java |
-| Minimum SDK | 24 |
-| Target / Compile SDK | 34 |
-| Veritabanı | Room / SQLite |
-| Ana branch | `main` |
+![Room Database](https://img.shields.io/badge/Room-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 
 Kelime Quiz, İngilizce kelime öğrenmeyi kullanıcı bazlı kelime havuzu, sınav, aralıklı tekrar, raporlama, Wordle ve LLM destekli hikaye üretimi ile birleştiren Android dönem projesidir. Projede amaç sadece kelime listelemek değil; kullanıcının kelimelerle tekrar tekrar karşılaşmasını, yanlış bildiği kelimelerin sürecinin sıfırlanmasını ve öğrenme durumunun kişiye özel takip edilmesini sağlamaktır.
 
