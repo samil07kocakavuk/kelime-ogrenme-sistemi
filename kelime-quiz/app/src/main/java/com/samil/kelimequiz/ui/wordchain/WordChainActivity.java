@@ -13,7 +13,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.data.local.AppDatabase;
 import com.samil.kelimequiz.data.local.entity.WordEntity;
-import com.samil.kelimequiz.data.remote.GeminiApiClient;
+import com.samil.kelimequiz.data.remote.LlmApiClient;
 import com.samil.kelimequiz.util.AppExecutors;
 import com.samil.kelimequiz.util.NavigationHelper;
 import com.samil.kelimequiz.util.SessionManager;
@@ -95,14 +95,14 @@ public class WordChainActivity extends AppCompatActivity {
 
         AppExecutors.io().execute(() -> {
             try {
-                String story = GeminiApiClient.generateStory(selectedWords);
+                String story = LlmApiClient.generateStory(selectedWords);
                 runOnUiThread(() -> {
                     tvStoryText.setText(story);
                     tvImageStatus.setVisibility(View.VISIBLE);
                     tvImageStatus.setText(R.string.word_chain_image_loading);
                 });
 
-                Bitmap image = GeminiApiClient.generateImage(story);
+                Bitmap image = LlmApiClient.generateImage(story);
                 runOnUiThread(() -> {
                     ivStoryImage.setImageBitmap(image);
                     ivStoryImage.setVisibility(View.VISIBLE);

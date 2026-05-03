@@ -12,9 +12,12 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-public class GeminiApiClient {
+public class LlmApiClient {
     private static final String TEXT_URL = "https://text.pollinations.ai/";
     private static final String IMAGE_URL = "https://image.pollinations.ai/prompt/";
+
+    private LlmApiClient() {
+    }
 
     public static String generateStory(List<String> words) throws Exception {
         String wordList = String.join(", ", words);
@@ -25,37 +28,37 @@ public class GeminiApiClient {
 
         String encoded = URLEncoder.encode(prompt, "UTF-8");
         URL url = new URL(TEXT_URL + encoded);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setConnectTimeout(30000);
-        conn.setReadTimeout(60000);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        connection.setConnectTimeout(30000);
+        connection.setReadTimeout(60000);
 
         BufferedReader reader = new BufferedReader(
-                new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-        StringBuilder sb = new StringBuilder();
+                new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
+        StringBuilder storyBuilder = new StringBuilder();
         String line;
         while ((line = reader.readLine()) != null) {
-            sb.append(line).append("\n");
+            storyBuilder.append(line).append("\n");
         }
         reader.close();
-        conn.disconnect();
-        return sb.toString().trim();
+        connection.disconnect();
+        return storyBuilder.toString().trim();
     }
 
     public static Bitmap generateImage(String storyDescription) throws Exception {
         String prompt = "colorful children book illustration for story: " + storyDescription;
         String encoded = URLEncoder.encode(prompt, "UTF-8");
         URL url = new URL(IMAGE_URL + encoded + "?width=512&height=512&nologo=true");
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setConnectTimeout(30000);
-        conn.setReadTimeout(90000);
-        conn.setInstanceFollowRedirects(true);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        connection.setConnectTimeout(30000);
+        connection.setReadTimeout(90000);
+        connection.setInstanceFollowRedirects(true);
 
-        InputStream is = conn.getInputStream();
-        Bitmap bitmap = BitmapFactory.decodeStream(is);
-        is.close();
-        conn.disconnect();
+        InputStream inputStream = connection.getInputStream();
+        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+        inputStream.close();
+        connection.disconnect();
 
         if (bitmap == null) {
             throw new RuntimeException("Görsel oluşturulamadı.");

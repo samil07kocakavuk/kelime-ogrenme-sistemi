@@ -122,9 +122,9 @@
     <string name="wordle_already_played">Bugünkü Wordle\'ı zaten oynadın! Yarın tekrar gel.</string>
     <string name="wordle_play_again">Tekrar Oyna</string>
 
-    <string name="word_chain_title">Word Chain</string>
-    <string name="word_chain_button">Hikaye Oluştur (AI)</string>
-    <string name="word_chain_info">Rastgele seçilen 5 kelimeden AI bir hikaye ve görsel oluşturacak.</string>
+    <string name="word_chain_title">LLM Modülü</string>
+    <string name="word_chain_button">LLM Hikaye Oluştur</string>
+    <string name="word_chain_info">Rastgele seçilen 5 kelimeden LLM destekli bir hikaye ve görsel oluşturulur.</string>
     <string name="word_chain_words_label">Kelimeler: %1$s</string>
     <string name="word_chain_generate">Hikaye Oluştur</string>
     <string name="word_chain_generating">Oluşturuluyor…</string>
