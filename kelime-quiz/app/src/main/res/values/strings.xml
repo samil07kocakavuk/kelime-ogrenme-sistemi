@@ -36,7 +36,6 @@
     <string name="word_saved">Kelime başarıyla kaydedildi.</string>
     <string name="error_with_message">Hata: %1$s</string>
 
-    <string name="word_pool_title">Kelime Havuzu</string>
     <string name="personal_analysis_action">Kişisel Analiz</string>
     <string name="word_pool_loading">Kelime havuzu hazırlanıyor…</string>
     <string name="word_pool_empty">Henüz kelime eklenmedi.</string>
@@ -57,9 +56,6 @@
     <string name="quiz_summary_wait">Quiz özeti hazırlanıyor. Lütfen birkaç saniye sonra tekrar deneyin.</string>
     <string name="quiz_requires_words">Quiz başlatmak için önce kelime havuzuna en az bir kelime ekleyin.</string>
 
-    <string name="profile_title">Profil</string>
-    <string name="profile_loading">Kullanıcı bilgisi yükleniyor…</string>
-    <string name="profile_intro">Kelime havuzunu yönet, görünümü seç ve oturumunu tek ekrandan kontrol et.</string>
     <string name="settings_title">Ayarlar</string>
     <string name="theme_selection_title">Tema seçimi</string>
     <string name="theme_mode_light">Seçili tema: Açık</string>
@@ -72,7 +68,6 @@
     <string name="default_quiz_limit">10</string>
     <string name="logout_action">Çıkış Yap</string>
     <string name="profile_not_found">Kullanıcı bilgisi bulunamadı.</string>
-    <string name="profile_username">Kullanıcı adı: %1$s</string>
 
     <string name="quiz_initial_progress">1 / 10</string>
     <string name="quiz_word_placeholder">word</string>
@@ -95,32 +90,22 @@
     <string name="empty_quiz_title">Sorulacak kelime yok</string>
     <string name="empty_quiz_message">Tekrar zamanı gelen veya yeni sorulacak kelime yok. Yeni kelime ekleyin ya da tekrar zamanını bekleyin.</string>
 
-    <string name="report_title">Kelime Analizi</string>
-    <string name="report_subtitle">Kelimelerinin öğrenme durumu</string>
-    <string name="report_loading">Rapor yükleniyor…</string>
-    <string name="report_no_data">Henüz kelime verisi yok.</string>
-    <string name="report_summary_format">Toplam %1$d kelime: %2$d öğrenilmiş, %3$d devam eden, %4$d başlanmamış</string>
-    <string name="report_learned_title">✓ Öğrenilmiş (%1$d)</string>
-    <string name="report_in_progress_title">↻ Öğrenilmekte Olan (%1$d)</string>
-    <string name="report_not_started_title">○ Başlanmamış (%1$d)</string>
     <string name="category_hint">Kategori</string>
+    <string name="category_label">Kategori:</string>
+    <string name="sort_label">Sıralama:</string>
     <string name="print_report_action">Raporu Yazdır / PDF</string>
     <string name="print_report_job_name">Kelime Quiz Rapor</string>
     <string name="level_format_label">Seviye: %1$d/%2$d</string>
+    <string name="level_default_label">Seviye: 0/6</string>
 
     <string name="wordle_title">Günlük Wordle</string>
     <string name="hint_action">İpucu (%1$d)</string>
     <string name="hint_no_remaining">İpucu hakkın kalmadı.</string>
     <string name="wordle_button">Günlük Wordle</string>
-    <string name="wordle_hint">Kelimeyi tahmin et (%1$d harf)</string>
-    <string name="wordle_attempt_format">Tahmin %1$d / %2$d</string>
-    <string name="wordle_guess_action">Tahmin Et</string>
+    <string name="wordle_hint">Kelimeyi tahmin et. Harf sayısı: %1$d</string>
     <string name="wordle_win_message">Tebrikler! Kelimeyi buldun: %1$s</string>
     <string name="wordle_lose_message">Tahmin hakkın bitti. Doğru kelime: %1$s</string>
-    <string name="wordle_invalid_length">Tahmin %1$d harf olmalı.</string>
     <string name="wordle_no_words">Wordle için yeterli kelime yok. Önce kelime ekleyin.</string>
-    <string name="wordle_already_played">Bugünkü Wordle\'ı zaten oynadın! Yarın tekrar gel.</string>
-    <string name="wordle_play_again">Tekrar Oyna</string>
 
     <string name="word_chain_title">LLM Modülü</string>
     <string name="word_chain_button">LLM Hikaye Oluştur</string>
@@ -133,4 +118,5 @@
     <string name="word_chain_image_error">Görsel oluşturulamadı: %1$s</string>
     <string name="word_chain_story_error">Hikaye oluşturulamadı: %1$s</string>
     <string name="word_chain_no_words">Kelime havuzunda en az 5 kelime gerekli.</string>
+    <string name="word_chain_image_content_description">LLM tarafından oluşturulan hikaye görseli</string>
 </resources>

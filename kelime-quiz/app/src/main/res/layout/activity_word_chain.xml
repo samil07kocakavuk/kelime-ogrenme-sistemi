@@ -89,6 +89,7 @@
                         android:layout_height="240dp"
                         android:layout_marginTop="14dp"
                         android:background="@drawable/bg_image_preview"
+                        android:contentDescription="@string/word_chain_image_content_description"
                         android:scaleType="centerCrop"
                         android:visibility="gone" />
 

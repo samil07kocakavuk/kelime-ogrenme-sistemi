@@ -105,7 +105,7 @@
                             android:id="@+id/tvLevelLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Seviye: 0/6"
+                            android:text="@string/level_default_label"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp"
                             android:textStyle="bold" />
