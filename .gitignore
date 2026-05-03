@@ -1,1 +1,8 @@
 deneme1/
+.idea/
+*/.idea/
+*/.gradle/
+*/build/
+**/build/
+*/local.properties
+"Yazılım Yapımı - Birleşik Notlar.pdf"
