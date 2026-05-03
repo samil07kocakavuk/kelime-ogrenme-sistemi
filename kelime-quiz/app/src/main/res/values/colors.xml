@@ -38,7 +38,6 @@
     <color name="quiz_option_text">#A83B2B</color>
 
     <!-- Legacy / Compatibility -->
-    <color name="purple_500">#E85D3F</color>
     <color name="purple_700">#A83B2B</color>
     <color name="teal_200">#0E9F8A</color>
 </resources>
