@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <gradient
-        android:angle="135"
-        android:centerColor="@color/card"
-        android:endColor="@color/background_end"
-        android:startColor="@color/background_start"
-        android:type="linear" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="135"
+                android:centerColor="@color/background_mid"
+                android:endColor="@color/background_end"
+                android:startColor="@color/background_start"
+                android:type="linear" />
+            <corners android:radius="32dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/overlay_lavender" />
+            <corners android:radius="32dp" />
+        </shape>
+    </item>
+</layer-list>
