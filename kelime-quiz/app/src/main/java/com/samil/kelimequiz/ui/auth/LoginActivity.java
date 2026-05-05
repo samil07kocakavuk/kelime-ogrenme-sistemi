@@ -64,7 +64,11 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 AuthResult result = AppContainer.from(this).authRepository.login(username, password);
                 if (result.isSuccess()) {
-                    AppContainer.from(this).wordRepository.addInitialSeedWords(result.getUserId());
+                    try {
+                        AppContainer.from(this).wordSeedBootstrapper.ensureSeedWords(result.getUserId());
+                    } catch (RuntimeException seedException) {
+                        seedException.printStackTrace();
+                    }
                 }
                 runOnUiThread(() -> handleAuthResult(result));
             } catch (RuntimeException exception) {

@@ -11,29 +11,7 @@ public enum WordLevel {
     C2;
 
     public static WordLevel fromCategory(String category) {
-        if (category == null) {
-            return A1;
-        }
-
-        switch (category) {
-            case "Hayvanlar":
-            case "Yiyecekler":
-            case "Ev ve Eşyalar":
-            case "Okul":
-                return A1;
-            case "Meslekler":
-            case "Ulaşım":
-            case "Günlük Yaşam":
-                return A2;
-            case "Doğa":
-            case "Sıfatlar":
-            case "Fiiller":
-            case "Sağlık ve Vücut":
-            case "Sporlar":
-                return B1;
-            default:
-                return A1;
-        }
+        return WordCategories.defaultLevelFor(category);
     }
 
     public static String normalize(String value) {
@@ -47,9 +25,5 @@ public enum WordLevel {
             return normalized;
         }
         return A1.name();
-    }
-
-    public String getDisplayName() {
-        return name();
     }
 }

@@ -134,7 +134,10 @@ public class AddWordActivity extends AppCompatActivity {
         AppExecutors.io().execute(() -> {
             try {
                 String picturePath = selectedImageUri == null ? null : ImageStorage.copyToAppStorage(this, selectedImageUri);
-                AppContainer.from(this).wordRepository.addWord(userId, engWord, trWord, picturePath, samples, category, cefrLevel);
+                boolean inserted = AppContainer.from(this).wordRepository.addWord(userId, engWord, trWord, picturePath, samples, category, cefrLevel);
+                if (!inserted) {
+                    throw new IllegalArgumentException("Bu İngilizce kelime zaten kayıtlı.");
+                }
                 runOnUiThread(() -> {
                     showStatus(getString(R.string.word_saved));
                     finish();

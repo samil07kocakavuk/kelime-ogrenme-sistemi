@@ -78,13 +78,7 @@ public class MainActivity extends AppCompatActivity {
         wordCountLoaded = false;
         btnStartQuiz.setEnabled(false);
         AppExecutors.io().execute(() -> {
-            // Veritabanı resetlendiği için kelimeler silinmiş olabilir, kontrol et ve gerekirse ekle
             AppContainer container = AppContainer.from(this);
-            int currentCount = container.quizRepository.getSummary(userId).getTotalWords();
-            if (currentCount == 0) {
-                container.wordRepository.addInitialSeedWords(userId);
-            }
-            
             QuizSummary summary = container.quizRepository.getSummary(userId);
             runOnUiThread(() -> showWordCount(summary));
         });

@@ -1,7 +1,5 @@
 package com.samil.kelimequiz.data.repository;
 
-import android.content.Context;
-
 import com.samil.kelimequiz.data.local.dao.WordDao;
 import com.samil.kelimequiz.data.local.dao.WordSampleDao;
 import com.samil.kelimequiz.data.local.entity.WordEntity;
@@ -10,51 +8,28 @@ import com.samil.kelimequiz.data.local.entity.WordWithLevel;
 import com.samil.kelimequiz.domain.model.WordDetails;
 import com.samil.kelimequiz.domain.model.WordLevel;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class WordRepository {
-    private final Context context;
     private final WordDao wordDao;
     private final WordSampleDao wordSampleDao;
 
-    public WordRepository(Context context, WordDao wordDao, WordSampleDao wordSampleDao) {
-        this.context = context.getApplicationContext();
+    public WordRepository(WordDao wordDao, WordSampleDao wordSampleDao) {
         this.wordDao = wordDao;
         this.wordSampleDao = wordSampleDao;
     }
 
-    public int addInitialSeedWords(int userId) {
-        int importedCount = 0;
-        try {
-            List<SeedWord> seedWords = loadAvailableSeedWords();
-            for (SeedWord seedWord : seedWords) {
-                if (wordDao.findByUserAndEnglishWord(userId, seedWord.engWord) == null) {
-                    addWord(userId, seedWord.engWord, seedWord.trWord, seedWord.picturePath, seedWord.samplesText, seedWord.category, seedWord.cefrLevel);
-                    importedCount++;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return importedCount;
+    public boolean addWord(int userId, String engWord, String trWord, String picturePath, String samplesText, String category) {
+        return addWord(userId, engWord, trWord, picturePath, samplesText, category, WordLevel.fromCategory(category).name());
     }
 
-    public void addWord(int userId, String engWord, String trWord, String picturePath, String samplesText, String category) {
-        addWord(userId, engWord, trWord, picturePath, samplesText, category, WordLevel.fromCategory(category).name());
-    }
-
-    public void addWord(int userId, String engWord, String trWord, String picturePath, String samplesText, String category, String cefrLevel) {
+    public boolean addWord(int userId, String engWord, String trWord, String picturePath, String samplesText, String category, String cefrLevel) {
         String cleanEngWord = requireText(engWord, "İngilizce kelime boş bırakılamaz.");
         String cleanTrWord = requireText(trWord, "Türkçe karşılık boş bırakılamaz.");
-        
+
         if (wordDao.findByUserAndEnglishWord(userId, cleanEngWord) != null) {
-            throw new IllegalArgumentException("Bu İngilizce kelime zaten kayıtlı.");
+            return false;
         }
 
         WordEntity word = new WordEntity();
@@ -65,13 +40,10 @@ public class WordRepository {
         word.category = trimToNull(category);
         word.cefrLevel = WordLevel.normalize(cefrLevel);
         word.createdAt = System.currentTimeMillis();
-        
-        try {
-            int wordId = (int) wordDao.insert(word);
-            insertSamples(wordId, samplesText);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        int wordId = (int) wordDao.insert(word);
+        insertSamples(wordId, samplesText);
+        return true;
     }
 
     public List<WordWithLevel> listWords(int userId) {
@@ -144,48 +116,4 @@ public class WordRepository {
         return trimmed.isEmpty() ? null : trimmed;
     }
 
-    private List<SeedWord> loadAvailableSeedWords() {
-        try (InputStream inputStream = context.getAssets().open("seed_words_100.json");
-             Scanner scanner = new Scanner(inputStream).useDelimiter("\\A")) {
-            String json = scanner.hasNext() ? scanner.next() : "[]";
-            return parseSeedWords(json);
-        } catch (Exception e) {
-            throw new IllegalStateException("Hazır kelime havuzu yüklenemedi.", e);
-        }
-    }
-
-    private List<SeedWord> parseSeedWords(String json) throws Exception {
-        JSONArray items = new JSONArray(json);
-        List<SeedWord> words = new ArrayList<>();
-        for (int i = 0; i < items.length(); i++) {
-            JSONObject item = items.getJSONObject(i);
-            words.add(new SeedWord(
-                    item.optString("engWord", ""),
-                    item.optString("trWord", ""),
-                    item.optString("picturePath", null),
-                    item.optString("samplesText", ""),
-                    item.optString("category", "Günlük Yaşam"),
-                    item.optString("cefrLevel", WordLevel.fromCategory(item.optString("category", "Günlük Yaşam")).name())
-            ));
-        }
-        return words;
-    }
-
-    private static final class SeedWord {
-        private final String engWord;
-        private final String trWord;
-        private final String picturePath;
-        private final String samplesText;
-        private final String category;
-        private final String cefrLevel;
-
-        private SeedWord(String engWord, String trWord, String picturePath, String samplesText, String category, String cefrLevel) {
-            this.engWord = engWord;
-            this.trWord = trWord;
-            this.picturePath = picturePath;
-            this.samplesText = samplesText;
-            this.category = category;
-            this.cefrLevel = cefrLevel;
-        }
-    }
 }

@@ -3,12 +3,8 @@ package com.samil.kelimequiz.ui.word;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.print.PrintAttributes;
-import android.print.PrintManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -24,7 +20,7 @@ import com.samil.kelimequiz.data.local.entity.WordEntity;
 import com.samil.kelimequiz.data.local.entity.WordWithLevel;
 import com.samil.kelimequiz.domain.model.WordDetails;
 import com.samil.kelimequiz.domain.model.WordCategories;
-import com.samil.kelimequiz.domain.model.WordLevel;
+import com.samil.kelimequiz.domain.service.WordReportHtmlBuilder;
 import com.samil.kelimequiz.ui.auth.LoginActivity;
 import com.samil.kelimequiz.ui.main.WordCardAdapter;
 import com.samil.kelimequiz.ui.profile.ProfileActivity;
@@ -34,7 +30,6 @@ import com.samil.kelimequiz.util.NavigationHelper;
 import com.samil.kelimequiz.util.SessionManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,6 +46,7 @@ public class WordPoolActivity extends AppCompatActivity implements WordCardAdapt
     private Spinner spSortOrder;
     private SessionManager sessionManager;
     private List<WordWithLevel> allWords = new ArrayList<>();
+    private final WordReportHtmlBuilder reportHtmlBuilder = new WordReportHtmlBuilder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,95 +201,7 @@ public class WordPoolActivity extends AppCompatActivity implements WordCardAdapt
 
     private void printReport() {
         if (allWords == null || allWords.isEmpty()) return;
-
-        List<WordWithLevel> learnedList = new ArrayList<>();
-        List<WordWithLevel> inProgressList = new ArrayList<>();
-        List<WordWithLevel> notStartedList = new ArrayList<>();
-
-        for (WordWithLevel w : allWords) {
-            if (w.level >= 6) learnedList.add(w);
-            else if (w.level == 0) notStartedList.add(w);
-            else inProgressList.add(w);
-        }
-        inProgressList.sort((a, b) -> Integer.compare(b.level, a.level));
-
-        int a1Count = countByCefr(WordLevel.A1.name());
-        int a2Count = countByCefr(WordLevel.A2.name());
-        int b1Count = countByCefr(WordLevel.B1.name());
-        int b2Count = countByCefr(WordLevel.B2.name());
-        int c1Count = countByCefr(WordLevel.C1.name());
-        int c2Count = countByCefr(WordLevel.C2.name());
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("<html><head><meta charset='UTF-8'><style>")
-                .append("body{font-family:sans-serif;padding:24px}")
-                .append("h1{color:#333;font-size:20px}")
-                .append("h2{color:#555;font-size:16px;margin-top:20px;border-bottom:1px solid #ddd;padding-bottom:4px}")
-                .append(".badge{display:inline-block;padding:4px 10px;border-radius:999px;margin-right:6px;margin-bottom:6px;background:#f1f5f9;color:#0f172a;font-size:12px;font-weight:bold}")
-                .append("table{width:100%;border-collapse:collapse;margin-top:8px}")
-                .append("th,td{border:1px solid #ddd;padding:6px 10px;text-align:left;font-size:13px}")
-                .append("th{background:#f5f5f5}")
-                .append("</style></head><body>")
-                .append("<h1>Kelime Quiz - Kişisel Analiz Raporu</h1>")
-                .append("<p>Toplam: ").append(allWords.size())
-                .append(" | Öğrenilmiş: ").append(learnedList.size())
-                .append(" | Devam Eden: ").append(inProgressList.size())
-                .append(" | Başlanmamış: ").append(notStartedList.size()).append("</p>")
-                .append("<p>")
-                .append("<span class='badge'>A1: ").append(a1Count).append("</span>")
-                .append("<span class='badge'>A2: ").append(a2Count).append("</span>")
-                .append("<span class='badge'>B1: ").append(b1Count).append("</span>")
-                .append("<span class='badge'>B2: ").append(b2Count).append("</span>")
-                .append("<span class='badge'>C1: ").append(c1Count).append("</span>")
-                .append("<span class='badge'>C2: ").append(c2Count).append("</span>")
-                .append("</p>");
-
-        if (!learnedList.isEmpty()) {
-            sb.append("<h2>✓ Öğrenilmiş Kelimeler (").append(learnedList.size()).append(")</h2>");
-            appendTable(sb, learnedList);
-        }
-        if (!inProgressList.isEmpty()) {
-            sb.append("<h2>↻ Öğrenilmekte Olan (").append(inProgressList.size()).append(")</h2>");
-            appendTable(sb, inProgressList);
-        }
-        if (!notStartedList.isEmpty()) {
-            sb.append("<h2>○ Başlanmamış (").append(notStartedList.size()).append(")</h2>");
-            appendTable(sb, notStartedList);
-        }
-        sb.append("</body></html>");
-
-        WebView webView = new WebView(this);
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                PrintManager pm = (PrintManager) getSystemService(PRINT_SERVICE);
-                String jobName = getString(R.string.print_report_job_name);
-                pm.print(jobName, view.createPrintDocumentAdapter(jobName),
-                        new PrintAttributes.Builder().setMediaSize(PrintAttributes.MediaSize.ISO_A4).build());
-            }
-        });
-        webView.loadDataWithBaseURL(null, sb.toString(), "text/html", "UTF-8", null);
-    }
-
-    private void appendTable(StringBuilder sb, List<WordWithLevel> words) {
-        sb.append("<table><tr><th>İngilizce</th><th>Türkçe</th><th>Kategori</th><th>CEFR</th><th>Quiz Seviyesi</th></tr>");
-        for (WordWithLevel w : words) {
-            sb.append("<tr><td>").append(w.word.engWord).append("</td>")
-                    .append("<td>").append(w.word.trWord).append("</td>")
-                    .append("<td>").append(w.word.category != null ? w.word.category : "-").append("</td>")
-                    .append("<td>").append(w.word.cefrLevel != null ? w.word.cefrLevel : "-").append("</td>")
-                    .append("<td>").append(w.level).append("/6</td></tr>");
-        }
-        sb.append("</table>");
-    }
-
-    private int countByCefr(String cefrLevel) {
-        int count = 0;
-        for (WordWithLevel word : allWords) {
-            if (cefrLevel.equalsIgnoreCase(word.word.cefrLevel == null ? "A1" : word.word.cefrLevel)) {
-                count++;
-            }
-        }
-        return count;
+        String html = reportHtmlBuilder.build(allWords);
+        new WordReportPrinter(this).print(html);
     }
 }

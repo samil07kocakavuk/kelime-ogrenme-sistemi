@@ -2,6 +2,7 @@ package com.samil.kelimequiz.util;
 
 import android.content.Context;
 
+import com.samil.kelimequiz.data.bootstrap.WordSeedBootstrapper;
 import com.samil.kelimequiz.data.local.AppDatabase;
 import com.samil.kelimequiz.data.repository.AuthRepository;
 import com.samil.kelimequiz.data.repository.QuizRepository;
@@ -14,12 +15,14 @@ public class AppContainer {
     public final AuthRepository authRepository;
     public final WordRepository wordRepository;
     public final QuizRepository quizRepository;
+    public final WordSeedBootstrapper wordSeedBootstrapper;
 
     private AppContainer(Context context) {
         AppDatabase database = AppDatabase.getInstance(context);
         authRepository = new AuthRepository(database.userDao(), new PasswordHasher());
-        wordRepository = new WordRepository(context, database.wordDao(), database.wordSampleDao());
+        wordRepository = new WordRepository(database.wordDao(), database.wordSampleDao());
         quizRepository = new QuizRepository(database.wordDao(), database.quizProgressDao());
+        wordSeedBootstrapper = new WordSeedBootstrapper(context, wordRepository);
     }
 
     public static AppContainer from(Context context) {
