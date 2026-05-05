@@ -1,6 +1,7 @@
 package com.samil.kelimequiz.data.bootstrap;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.samil.kelimequiz.data.repository.WordRepository;
 import com.samil.kelimequiz.domain.model.WordLevel;
@@ -14,6 +15,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class WordSeedBootstrapper {
+    private static final String PREF_NAME = "word_seed_bootstrap";
+    private static final String KEY_SEED_VERSION_PREFIX = "seed_version_";
+    private static final int CURRENT_SEED_VERSION = 1;
+
     private final Context context;
     private final WordRepository wordRepository;
 
@@ -23,6 +28,10 @@ public class WordSeedBootstrapper {
     }
 
     public int ensureSeedWords(int userId) {
+        if (isSeedAlreadyImported(userId)) {
+            return 0;
+        }
+
         int importedCount = 0;
         for (SeedWord seedWord : loadSeedWords()) {
             boolean inserted = wordRepository.addWord(
@@ -38,7 +47,24 @@ public class WordSeedBootstrapper {
                 importedCount++;
             }
         }
+        markSeedImported(userId);
         return importedCount;
+    }
+
+    private boolean isSeedAlreadyImported(int userId) {
+        SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        return prefs.getInt(seedVersionKey(userId), 0) >= CURRENT_SEED_VERSION;
+    }
+
+    private void markSeedImported(int userId) {
+        context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+                .edit()
+                .putInt(seedVersionKey(userId), CURRENT_SEED_VERSION)
+                .apply();
+    }
+
+    private String seedVersionKey(int userId) {
+        return KEY_SEED_VERSION_PREFIX + userId;
     }
 
     private List<SeedWord> loadSeedWords() {

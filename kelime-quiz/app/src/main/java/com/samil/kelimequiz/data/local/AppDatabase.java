@@ -27,7 +27,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static volatile AppDatabase instance;
 
-    private static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+    public static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL(
@@ -55,7 +55,7 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
-    private static final Migration MIGRATION_2_4 = new Migration(2, 4) {
+    public static final Migration MIGRATION_2_4 = new Migration(2, 4) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE `words` ADD COLUMN `category` TEXT");
@@ -78,35 +78,35 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
-    private static final Migration MIGRATION_3_4 = new Migration(3, 4) {
+    public static final Migration MIGRATION_3_4 = new Migration(3, 4) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             MIGRATION_2_4.migrate(database);
         }
     };
 
-    private static final Migration MIGRATION_4_5 = new Migration(4, 5) {
+    public static final Migration MIGRATION_4_5 = new Migration(4, 5) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             // No schema change in this version bump.
         }
     };
 
-    private static final Migration MIGRATION_5_6 = new Migration(5, 6) {
+    public static final Migration MIGRATION_5_6 = new Migration(5, 6) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             // No schema change in this version bump.
         }
     };
 
-    private static final Migration MIGRATION_6_7 = new Migration(6, 7) {
+    public static final Migration MIGRATION_6_7 = new Migration(6, 7) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             // No schema change in this version bump.
         }
     };
 
-    private static final Migration MIGRATION_7_8 = new Migration(7, 8) {
+    public static final Migration MIGRATION_7_8 = new Migration(7, 8) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE `words` ADD COLUMN `cefrLevel` TEXT");
