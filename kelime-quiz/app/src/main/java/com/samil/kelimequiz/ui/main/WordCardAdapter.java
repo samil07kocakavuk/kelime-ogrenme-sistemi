@@ -16,7 +16,6 @@ import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.data.local.entity.WordEntity;
-
 import com.samil.kelimequiz.data.local.entity.WordWithLevel;
 
 import java.util.ArrayList;
@@ -90,7 +89,7 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
             
             btnToggleMeaning.setImageResource(isRevealed ? R.drawable.ic_eye : R.drawable.ic_eye_off);
             
-            updateLevelStatus(wordWithLevel.level);
+            updateLevelStatus(wordWithLevel);
 
             btnToggleMeaning.setOnClickListener(v -> {
                 int position = getAdapterPosition();
@@ -113,11 +112,16 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
             });
         }
 
-        private void updateLevelStatus(int level) {
+        private void updateLevelStatus(WordWithLevel wordWithLevel) {
             if (tvLevelLabel != null) {
-                tvLevelLabel.setText(itemView.getContext().getString(R.string.level_format_label, level, 6));
+                String category = wordWithLevel.word.category == null
+                        ? itemView.getContext().getString(R.string.category_hint)
+                        : wordWithLevel.word.category;
+                String cefrLevel = wordWithLevel.word.cefrLevel == null ? "A1" : wordWithLevel.word.cefrLevel;
+                tvLevelLabel.setText(itemView.getContext().getString(R.string.word_meta_format, cefrLevel, category));
             }
             if (lpiWordLevel != null) {
+                int level = wordWithLevel.level;
                 int progress = (level * 100) / 6;
                 lpiWordLevel.setProgressCompat(progress, true);
             }
@@ -154,7 +158,9 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardAdapter.WordVi
             WordWithLevel newItem = newWords.get(newItemPosition);
             return oldItem.word.engWord.equals(newItem.word.engWord)
                     && oldItem.word.trWord.equals(newItem.word.trWord)
-                    && oldItem.level == newItem.level;
+                    && oldItem.level == newItem.level
+                    && ((oldItem.word.cefrLevel == null && newItem.word.cefrLevel == null)
+                    || (oldItem.word.cefrLevel != null && oldItem.word.cefrLevel.equals(newItem.word.cefrLevel)));
         }
     }
 }

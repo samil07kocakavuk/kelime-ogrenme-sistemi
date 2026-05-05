@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="surface_elevated">#16211F</color>
+    <color name="surface_elevated">#1B434D</color>
     <color name="white">#FFFFFF</color>
 
-    <color name="primary">#FF9A73</color>
-    <color name="primary_dark">#FF7043</color>
-    <color name="accent">#49D6BE</color>
+    <color name="primary">#FFFFFF</color>
+    <color name="primary_dark">#E8F0F2</color>
+    <color name="accent">#FFFFFF</color>
 
-    <color name="background_start">#0D1516</color>
-    <color name="background_mid">#172321</color>
-    <color name="background_end">#263022</color>
-    <color name="surface">#111B1B</color>
-    <color name="card">#172322</color>
-    <color name="card_stroke">#2F4640</color>
+    <color name="background_start">#1B434D</color>
+    <color name="background_mid">#1B434D</color>
+    <color name="background_end">#1B434D</color>
+    <color name="surface">#1B434D</color>
+    <color name="card">#245B67</color>
+    <color name="card_stroke">#D9EEF1</color>
 
-    <color name="text_main">#F7F1E8</color>
-    <color name="text_on_primary">#21130D</color>
+    <color name="text_main">#FFFFFF</color>
+    <color name="text_on_primary">#1B434D</color>
 
-    <color name="text_dark">#F7F1E8</color>
-    <color name="text_dark_secondary">#B9C8BE</color>
-    <color name="text_primary">#F7F1E8</color>
-    <color name="text_secondary">#B9C8BE</color>
+    <color name="text_dark">#FFFFFF</color>
+    <color name="text_dark_secondary">#EAF4F6</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#EAF4F6</color>
 
-    <color name="error">#FF8A80</color>
-    <color name="success">#49D6BE</color>
-    <color name="feedback_neutral_bg">#263022</color>
-    <color name="feedback_success_bg">#163A32</color>
-    <color name="feedback_error_bg">#44211F</color>
-    <color name="quiz_option_bg">#172322</color>
-    <color name="quiz_option_stroke">#FF9A73</color>
-    <color name="quiz_option_text">#FFB99E</color>
+    <color name="error">#FFB8B0</color>
+    <color name="success">#FFFFFF</color>
+    <color name="feedback_neutral_bg">#245B67</color>
+    <color name="feedback_success_bg">#2D6975</color>
+    <color name="feedback_error_bg">#6A4C49</color>
+    <color name="quiz_option_bg">#245B67</color>
+    <color name="quiz_option_stroke">#FFFFFF</color>
+    <color name="quiz_option_text">#FFFFFF</color>
 
-    <color name="purple_700">#FF7043</color>
-    <color name="teal_200">#49D6BE</color>
+    <color name="purple_700">#FFFFFF</color>
+    <color name="teal_200">#FFFFFF</color>
 </resources>

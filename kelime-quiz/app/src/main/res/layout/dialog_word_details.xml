@@ -22,6 +22,18 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/tvMeta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_level_badge"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="6dp"
+        android:textColor="@color/primary_dark"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
     <ImageView
         android:id="@+id/ivWordImage"
         android:layout_width="match_parent"

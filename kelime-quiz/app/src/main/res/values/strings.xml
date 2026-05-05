@@ -64,6 +64,7 @@
     <string name="light_theme_action">Açık Tema</string>
     <string name="dark_theme_action">Dark Tema</string>
     <string name="quiz_question_limit_title">Quiz soru sayısı</string>
+    <string name="word_level_title">Kelime seviyesi</string>
     <string name="decrease_action">-</string>
     <string name="increase_action">+</string>
     <string name="default_quiz_limit">10</string>
@@ -98,6 +99,22 @@
     <string name="print_report_job_name">Kelime Quiz Rapor</string>
     <string name="level_format_label">Seviye: %1$d/%2$d</string>
     <string name="level_default_label">Seviye: 0/6</string>
+    <string name="word_meta_format">%1$s · %2$s</string>
+    <string name="home_hero_badge">Günün çalışma alanı</string>
+    <string name="home_hero_title">Kelimeleri düzenli, hızlı ve tek ekranda çalış.</string>
+    <string name="home_hero_subtitle">Tekrar et, keşfet ve günlük hedefini bir kart üzerinden yönet.</string>
+    <string name="home_hero_chip_quiz">Tekrar odaklı quiz</string>
+    <string name="home_hero_chip_wordle">Günlük Wordle</string>
+    <string name="home_hero_chip_story">LLM hikaye modu</string>
+    <string name="home_card_one_badge">Quiz</string>
+    <string name="home_card_one_title">Bugünün tekrarını tamamla.</string>
+    <string name="home_card_one_subtitle">Tekrar zamanı gelen kelimeler önce gelir, eksik kalanlar yeni havuzdan eklenir.</string>
+    <string name="home_card_two_badge">Wordle</string>
+    <string name="home_card_two_title">Günün kelimesini yakala.</string>
+    <string name="home_card_two_subtitle">Günlük kelimeyi tahmin et, ipuçlarını verimli kullan.</string>
+    <string name="home_card_three_badge">LLM Modülü</string>
+    <string name="home_card_three_title">Beş kelimeden kısa bir hikaye üret.</string>
+    <string name="home_card_three_subtitle">Seçilen kelimelerle yapay zeka destekli metin ve görsel oluşturulur.</string>
 
     <string name="wordle_title">Günlük Wordle</string>
     <string name="hint_action">İpucu (%1$d)</string>

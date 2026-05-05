@@ -33,12 +33,18 @@ public class WordDetailBottomSheet extends BottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         TextView tvEngWord = view.findViewById(R.id.tvDialogTitle);
+        TextView tvMeta = view.findViewById(R.id.tvMeta);
         ImageView ivWordImage = view.findViewById(R.id.ivWordImage);
         TextView tvMeaning = view.findViewById(R.id.tvMeaning);
         TextView tvSamples = view.findViewById(R.id.tvSamples);
 
         tvMeaning.setText(details.getTrWord());
         tvSamples.setText(buildSamplesText(details));
+        if (tvMeta != null) {
+            String cefr = details.getCefrLevel() == null ? "A1" : details.getCefrLevel();
+            String category = details.getCategory() == null ? getString(R.string.category_hint) : details.getCategory();
+            tvMeta.setText(getString(R.string.word_meta_format, cefr, category));
+        }
         
         if (tvEngWord != null) {
             tvEngWord.setText(details.getEngWord());

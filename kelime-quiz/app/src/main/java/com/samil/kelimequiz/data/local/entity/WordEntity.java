@@ -27,5 +27,6 @@ public class WordEntity {
     public String trWord;
     public String picturePath;
     public String category;
+    public String cefrLevel;
     public long createdAt;
 }

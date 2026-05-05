@@ -23,7 +23,7 @@ public interface WordDao {
     void delete(WordEntity word);
 
     @Query("SELECT words.wordId, words.userId, words.engWord, words.trWord, words.picturePath, words.category, words.createdAt, " +
-            "COALESCE(quiz_progress.level, 0) AS level FROM words " +
+            "words.cefrLevel, COALESCE(quiz_progress.level, 0) AS level FROM words " +
             "LEFT JOIN quiz_progress ON words.wordId = quiz_progress.wordId AND quiz_progress.userId = :userId " +
             "WHERE words.userId = :userId ORDER BY words.createdAt DESC")
     List<WordWithLevel> listByUser(int userId);

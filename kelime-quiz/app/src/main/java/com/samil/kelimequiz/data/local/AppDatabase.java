@@ -19,7 +19,7 @@ import com.samil.kelimequiz.util.SessionManager;
 
 @Database(
         entities = {UserEntity.class, WordEntity.class, WordSampleEntity.class, QuizProgressEntity.class},
-        version = 7,
+        version = 8,
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {

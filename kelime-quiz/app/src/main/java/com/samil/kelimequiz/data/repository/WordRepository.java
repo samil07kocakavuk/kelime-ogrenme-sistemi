@@ -8,6 +8,7 @@ import com.samil.kelimequiz.data.local.entity.WordEntity;
 import com.samil.kelimequiz.data.local.entity.WordSampleEntity;
 import com.samil.kelimequiz.data.local.entity.WordWithLevel;
 import com.samil.kelimequiz.domain.model.WordDetails;
+import com.samil.kelimequiz.domain.model.WordLevel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,7 +35,7 @@ public class WordRepository {
             List<SeedWord> seedWords = loadAvailableSeedWords();
             for (SeedWord seedWord : seedWords) {
                 if (wordDao.findByUserAndEnglishWord(userId, seedWord.engWord) == null) {
-                    addWord(userId, seedWord.engWord, seedWord.trWord, seedWord.picturePath, seedWord.samplesText, seedWord.category);
+                    addWord(userId, seedWord.engWord, seedWord.trWord, seedWord.picturePath, seedWord.samplesText, seedWord.category, seedWord.cefrLevel);
                     importedCount++;
                 }
             }
@@ -45,6 +46,10 @@ public class WordRepository {
     }
 
     public void addWord(int userId, String engWord, String trWord, String picturePath, String samplesText, String category) {
+        addWord(userId, engWord, trWord, picturePath, samplesText, category, WordLevel.fromCategory(category).name());
+    }
+
+    public void addWord(int userId, String engWord, String trWord, String picturePath, String samplesText, String category, String cefrLevel) {
         String cleanEngWord = requireText(engWord, "İngilizce kelime boş bırakılamaz.");
         String cleanTrWord = requireText(trWord, "Türkçe karşılık boş bırakılamaz.");
         
@@ -58,6 +63,7 @@ public class WordRepository {
         word.trWord = cleanTrWord;
         word.picturePath = trimToNull(picturePath);
         word.category = trimToNull(category);
+        word.cefrLevel = WordLevel.normalize(cefrLevel);
         word.createdAt = System.currentTimeMillis();
         
         try {
@@ -84,7 +90,7 @@ public class WordRepository {
             sampleTexts.add(sample.sampleText);
         }
 
-        return new WordDetails(word.wordId, word.engWord, word.trWord, word.picturePath, sampleTexts);
+        return new WordDetails(word.wordId, word.engWord, word.trWord, word.picturePath, word.category, word.cefrLevel, sampleTexts);
     }
 
     public void deleteWord(int userId, int wordId) {
@@ -158,7 +164,8 @@ public class WordRepository {
                     item.optString("trWord", ""),
                     item.optString("picturePath", null),
                     item.optString("samplesText", ""),
-                    item.optString("category", "Günlük Yaşam")
+                    item.optString("category", "Günlük Yaşam"),
+                    item.optString("cefrLevel", WordLevel.fromCategory(item.optString("category", "Günlük Yaşam")).name())
             ));
         }
         return words;
@@ -170,13 +177,15 @@ public class WordRepository {
         private final String picturePath;
         private final String samplesText;
         private final String category;
+        private final String cefrLevel;
 
-        private SeedWord(String engWord, String trWord, String picturePath, String samplesText, String category) {
+        private SeedWord(String engWord, String trWord, String picturePath, String samplesText, String category, String cefrLevel) {
             this.engWord = engWord;
             this.trWord = trWord;
             this.picturePath = picturePath;
             this.samplesText = samplesText;
             this.category = category;
+            this.cefrLevel = cefrLevel;
         }
     }
 }
