@@ -158,7 +158,6 @@ public class WordPoolActivity extends AppCompatActivity implements WordCardAdapt
         int userId = sessionManager.getUserId();
         tvEmptyState.setText(R.string.word_pool_loading);
         AppExecutors.io().execute(() -> {
-            AppContainer.from(this).wordRepository.addInitialSeedWords(userId);
             List<WordWithLevel> words = AppContainer.from(this).wordRepository.listWords(userId);
             runOnUiThread(() -> {
                 allWords = words;
