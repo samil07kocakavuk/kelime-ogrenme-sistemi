@@ -7,7 +7,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.samil.kelimequiz.R;
+import com.samil.kelimequiz.data.local.entity.UserEntity;
 import com.samil.kelimequiz.domain.model.QuizSummary;
 import com.samil.kelimequiz.ui.auth.LoginActivity;
 import com.samil.kelimequiz.ui.quiz.QuizActivity;
@@ -18,8 +20,15 @@ import com.samil.kelimequiz.util.AppExecutors;
 import com.samil.kelimequiz.util.NavigationHelper;
 import com.samil.kelimequiz.util.SessionManager;
 
+import android.widget.TextView;
+
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
     private MaterialButton btnStartQuiz;
+    private TextView tvUsernameMain;
+    private TextView tvAverageLevelValue;
+    private LinearProgressIndicator lpiAverageLevel;
     private int userId;
     private int totalWordCount;
     private boolean wordCountLoaded;
@@ -40,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
         // Stale session kontrolü (DB reset sonrası)
         AppExecutors.io().execute(() -> {
             AppContainer container = AppContainer.from(this);
-            if (container.authRepository.findUserById(userId) == null) {
+            UserEntity user = container.authRepository.findUserById(userId);
+            if (user == null) {
                 runOnUiThread(() -> {
                     sessionManager.clear();
                     openLoginAndClose();
@@ -49,9 +59,14 @@ public class MainActivity extends AppCompatActivity {
             }
 
             runOnUiThread(() -> {
-                NavigationHelper.bindTopBar(this, false);
                 NavigationHelper.bindBottomBar(this);
                 btnStartQuiz = findViewById(R.id.btnStartQuiz);
+                tvUsernameMain = findViewById(R.id.tvUsernameMain);
+                tvAverageLevelValue = findViewById(R.id.tvAverageLevelValue);
+                lpiAverageLevel = findViewById(R.id.lpiAverageLevel);
+                
+                tvUsernameMain.setText(user.username);
+                
                 btnStartQuiz.setEnabled(false);
                 btnStartQuiz.setOnClickListener(v -> openQuizIfWordsExist());
 
@@ -61,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 MaterialButton btnWordChain = findViewById(R.id.btnWordChain);
                 btnWordChain.setOnClickListener(v -> startActivity(new Intent(this, WordChainActivity.class)));
 
-                loadWordCount();
+                loadUserData();
             });
         });
     }
@@ -70,18 +85,32 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (btnStartQuiz != null) {
-            loadWordCount();
+            loadUserData();
         }
     }
 
-    private void loadWordCount() {
+    private void loadUserData() {
         wordCountLoaded = false;
         btnStartQuiz.setEnabled(false);
         AppExecutors.io().execute(() -> {
             AppContainer container = AppContainer.from(this);
             QuizSummary summary = container.quizRepository.getSummary(userId);
-            runOnUiThread(() -> showWordCount(summary));
+            double avgLevel = container.quizRepository.getGlobalAverageLevel(userId);
+            runOnUiThread(() -> {
+                showWordCount(summary);
+                updateAverageLevel(avgLevel);
+            });
         });
+    }
+
+    private void updateAverageLevel(double avgLevel) {
+        if (tvAverageLevelValue != null) {
+            tvAverageLevelValue.setText(String.format(Locale.US, "%.1f", avgLevel));
+        }
+        if (lpiAverageLevel != null) {
+            int progress = (int) ((avgLevel * 100) / 6.0);
+            lpiAverageLevel.setProgressCompat(progress, true);
+        }
     }
 
     private void showWordCount(QuizSummary summary) {

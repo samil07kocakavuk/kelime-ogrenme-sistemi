@@ -69,6 +69,11 @@ public class QuizRepository {
         );
     }
 
+    public double getGlobalAverageLevel(int userId) {
+        Double avg = quizProgressDao.getGlobalAverageLevel(userId);
+        return avg != null ? avg : 0.0;
+    }
+
     private QuizQuestion toQuestion(int userId, WordEntity word) {
         Set<String> uniqueOptions = new LinkedHashSet<>();
         uniqueOptions.add(word.trWord);
