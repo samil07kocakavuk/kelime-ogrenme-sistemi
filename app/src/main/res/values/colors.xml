@@ -44,6 +44,14 @@
     <color name="quiz_option_stroke">#898693</color>
     <color name="quiz_option_text">#1B434D</color>
 
+    <!-- Wordle Colors -->
+    <color name="wordle_correct">#6AAA64</color>
+    <color name="wordle_misplaced">#C9B458</color>
+    <color name="wordle_absent">#787C7E</color>
+    <color name="wordle_empty_stroke">#D3D6DA</color>
+    <color name="wordle_key_bg">#D3D6DA</color>
+    <color name="wordle_key_text">#1B2430</color>
+
     <!-- Legacy / Compatibility -->
     <color name="purple_700">#244B56</color>
     <color name="teal_200">#387E4F</color>

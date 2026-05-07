@@ -7,11 +7,13 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.data.local.AppDatabase;
@@ -94,7 +96,9 @@ public class WordleActivity extends AppCompatActivity {
             Calendar day = (Calendar) cal.clone();
             day.add(Calendar.DAY_OF_YEAR, -i);
             String dateStr = toDateString(day);
-            boolean completed = isDateCompleted(dateStr);
+            
+            // Tamamlanma durumu: 0=yok, 1=kazandı, 2=kaybetti
+            int status = getDateStatus(dateStr);
 
             MaterialButton btn = new MaterialButton(this, null, com.google.android.material.R.attr.materialButtonOutlinedStyle);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dpToPx(52), dpToPx(52));
@@ -106,10 +110,16 @@ public class WordleActivity extends AppCompatActivity {
             btn.setTextSize(11);
             btn.setText(dayFmt.format(day.getTime()));
 
-            if (completed) {
+            if (status == 1) { // Kazandı
                 btn.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.success)));
                 btn.setTextColor(getColor(R.color.white));
+                btn.setStrokeWidth(0);
+            } else if (status == 2) { // Kaybetti
+                btn.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.error)));
+                btn.setTextColor(getColor(R.color.white));
+                btn.setStrokeWidth(0);
             }
+            
             if (dateStr.equals(todayString())) {
                 btn.setStrokeWidth(dpToPx(2));
                 btn.setStrokeColor(ColorStateList.valueOf(getColor(R.color.primary)));
@@ -215,14 +225,25 @@ public class WordleActivity extends AppCompatActivity {
         return guesses;
     }
 
-    private void markDateCompleted(String date) {
+    private void markDateCompleted(String date, boolean won) {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String key = "status_" + date + "_" + userId;
+        prefs.edit().putString(key, won ? "win" : "lose").apply();
         prefs.edit().putBoolean("completed_" + date + "_" + userId, true).apply();
     }
 
     private boolean isDateCompleted(String date) {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean("completed_" + date + "_" + userId, false);
+    }
+
+    private int getDateStatus(String date) {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String key = "status_" + date + "_" + userId;
+        String status = prefs.getString(key, "");
+        if (status.equals("win")) return 1;
+        if (status.equals("lose")) return 2;
+        return 0;
     }
 
     // ─── GRID ───
@@ -280,16 +301,18 @@ public class WordleActivity extends AppCompatActivity {
 
         // GÖNDER butonu - belirgin
         MaterialButton btnEnter = new MaterialButton(this);
-        LinearLayout.LayoutParams enterParams = new LinearLayout.LayoutParams(dpToPx(64), dpToPx(48));
+        LinearLayout.LayoutParams enterParams = new LinearLayout.LayoutParams(dpToPx(72), dpToPx(54));
         enterParams.setMargins(dpToPx(2), dpToPx(3), dpToPx(2), dpToPx(3));
         btnEnter.setLayoutParams(enterParams);
         btnEnter.setPadding(0, 0, 0, 0);
         btnEnter.setInsetTop(0);
         btnEnter.setInsetBottom(0);
         btnEnter.setTextSize(11);
-        btnEnter.setText("GÖN");
-        btnEnter.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.success)));
+        btnEnter.setTypeface(null, Typeface.BOLD);
+        btnEnter.setText("GÖNDER");
+        btnEnter.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.wordle_correct)));
         btnEnter.setTextColor(getColor(R.color.white));
+        btnEnter.setCornerRadius(dpToPx(6));
         btnEnter.setOnClickListener(v -> onEnterPressed());
         row3.addView(btnEnter);
 
@@ -298,15 +321,18 @@ public class WordleActivity extends AppCompatActivity {
         }
 
         // SİL butonu
-        MaterialButton btnDel = new MaterialButton(this, null, com.google.android.material.R.attr.materialButtonOutlinedStyle);
-        LinearLayout.LayoutParams delParams = new LinearLayout.LayoutParams(dpToPx(56), dpToPx(48));
+        MaterialButton btnDel = new MaterialButton(this);
+        LinearLayout.LayoutParams delParams = new LinearLayout.LayoutParams(dpToPx(54), dpToPx(54));
         delParams.setMargins(dpToPx(2), dpToPx(3), dpToPx(2), dpToPx(3));
         btnDel.setLayoutParams(delParams);
         btnDel.setPadding(0, 0, 0, 0);
         btnDel.setInsetTop(0);
         btnDel.setInsetBottom(0);
-        btnDel.setTextSize(16);
+        btnDel.setTextSize(18);
         btnDel.setText("⌫");
+        btnDel.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.wordle_key_bg)));
+        btnDel.setTextColor(getColor(R.color.wordle_key_text));
+        btnDel.setCornerRadius(dpToPx(6));
         btnDel.setOnClickListener(v -> onBackspacePressed());
         row3.addView(btnDel);
 
@@ -330,8 +356,8 @@ public class WordleActivity extends AppCompatActivity {
     }
 
     private MaterialButton createLetterKey(String letter) {
-        MaterialButton btn = new MaterialButton(this, null, com.google.android.material.R.attr.materialButtonOutlinedStyle);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, dpToPx(48), 1f);
+        MaterialButton btn = new MaterialButton(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, dpToPx(54), 1f);
         params.setMargins(dpToPx(2), dpToPx(3), dpToPx(2), dpToPx(3));
         btn.setLayoutParams(params);
         btn.setPadding(0, 0, 0, 0);
@@ -340,6 +366,9 @@ public class WordleActivity extends AppCompatActivity {
         btn.setTextSize(16);
         btn.setTypeface(null, Typeface.BOLD);
         btn.setText(letter);
+        btn.setCornerRadius(dpToPx(6));
+        btn.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.wordle_key_bg)));
+        btn.setTextColor(getColor(R.color.wordle_key_text));
         btn.setOnClickListener(v -> onLetterPressed(letter));
         keyButtons.put(letter, btn);
         return btn;
@@ -366,13 +395,12 @@ public class WordleActivity extends AppCompatActivity {
 
         int bgColor;
         switch (state) {
-            case 2: bgColor = 0xFF6AAA64; break; // yeşil
-            case 1: bgColor = 0xFFC9B458; break; // sarı
-            default: bgColor = 0xFF787C7E; break; // gri
+            case 2: bgColor = getColor(R.color.wordle_correct); break;
+            case 1: bgColor = getColor(R.color.wordle_misplaced); break;
+            default: bgColor = getColor(R.color.wordle_absent); break;
         }
         btn.setBackgroundTintList(ColorStateList.valueOf(bgColor));
         btn.setTextColor(getColor(R.color.white));
-        btn.setStrokeWidth(0);
     }
 
     private void setKeyboardEnabled(boolean enabled) {
@@ -484,7 +512,7 @@ public class WordleActivity extends AppCompatActivity {
     private void endGame(boolean won) {
         gameOver = true;
         setKeyboardEnabled(false);
-        markDateCompleted(selectedDate);
+        markDateCompleted(selectedDate, won);
         showResult(won);
         buildCalendar();
     }
@@ -498,6 +526,39 @@ public class WordleActivity extends AppCompatActivity {
             tvResult.setText(getString(R.string.wordle_lose_message, targetWord));
             tvResult.setTextColor(getColor(R.color.error));
         }
+
+        // Modern BottomSheet Dialog
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_wordle_result, null);
+        BottomSheetDialog dialog = new BottomSheetDialog(this);
+        dialog.setContentView(dialogView);
+
+        ImageView ivIcon = dialogView.findViewById(R.id.ivResultIcon);
+        TextView tvTitle = dialogView.findViewById(R.id.tvResultTitle);
+        TextView tvDesc = dialogView.findViewById(R.id.tvResultDescription);
+        TextView tvTarget = dialogView.findViewById(R.id.tvTargetWord);
+        MaterialButton btnDone = dialogView.findViewById(R.id.btnDone);
+
+        tvTarget.setText(targetWord);
+
+        if (won) {
+            ivIcon.setImageResource(R.drawable.ic_launcher_foreground);
+            ivIcon.setImageTintList(ColorStateList.valueOf(getColor(R.color.wordle_correct)));
+            tvTitle.setText(R.string.wordle_result_title_win);
+            tvTitle.setTextColor(getColor(R.color.wordle_correct));
+            
+            int attempts = getSavedGuesses(selectedDate).size();
+            tvDesc.setText(getString(R.string.wordle_win_message_short, attempts));
+        } else {
+            ivIcon.setImageResource(R.drawable.ic_info);
+            ivIcon.setImageTintList(ColorStateList.valueOf(getColor(R.color.error)));
+            tvTitle.setText(R.string.wordle_result_title_lose);
+            tvTitle.setTextColor(getColor(R.color.error));
+            tvDesc.setText(getString(R.string.wordle_lose_message, targetWord));
+        }
+
+        btnDone.setText(R.string.wordle_done_action);
+        btnDone.setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
     }
 
     private void showNoWordsState() {

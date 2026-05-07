@@ -123,7 +123,12 @@
     <string name="wordle_button">Günlük Wordle</string>
     <string name="wordle_hint">Kelimeyi tahmin et. Harf sayısı: %1$d</string>
     <string name="wordle_win_message">Tebrikler! Kelimeyi buldun: %1$s</string>
+    <string name="wordle_win_message_short">Bugünkü kelimeyi %1$d denemede buldun.</string>
     <string name="wordle_lose_message">Tahmin hakkın bitti. Doğru kelime: %1$s</string>
+    <string name="wordle_result_title_win">Tebrikler!</string>
+    <string name="wordle_result_title_lose">Maalesef…</string>
+    <string name="wordle_done_action">TAMAM</string>
+    <string name="wordle_target_word_label">Kelime:</string>
     <string name="wordle_no_words">Wordle için yeterli kelime yok. Önce kelime ekleyin.</string>
 
     <string name="word_chain_title">LLM Modülü</string>
