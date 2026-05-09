@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.domain.model.QuizAnswerResult;
@@ -24,14 +25,31 @@ import com.samil.kelimequiz.util.SessionManager;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class QuizActivity extends AppCompatActivity {
     private static final int MAX_HINTS = 3;
 
+    private static class QuestionResult {
+        final String word;
+        final int level;
+        final boolean correct;
+        final String correctAnswer;
+
+        QuestionResult(String word, int level, boolean correct, String correctAnswer) {
+            this.word = word;
+            this.level = level;
+            this.correct = correct;
+            this.correctAnswer = correctAnswer;
+        }
+    }
+
     private final List<MaterialButton> optionButtons = new ArrayList<>();
     private final List<QuizQuestion> questions = new ArrayList<>();
+    private final List<QuestionResult> quizResults = new ArrayList<>();
 
     private TextView tvQuizProgress;
     private TextView tvQuestionWord;
@@ -86,7 +104,13 @@ public class QuizActivity extends AppCompatActivity {
         optionButtons.add(findViewById(R.id.btnOptionFour));
 
         btnNextQuestion.setOnClickListener(v -> showNextQuestion());
-        btnFinishQuiz.setOnClickListener(v -> finish());
+        btnFinishQuiz.setOnClickListener(v -> {
+            if (quizResults.isEmpty()) {
+                finish();
+            } else {
+                showQuizReport();
+            }
+        });
         btnHint.setOnClickListener(v -> useHint());
     }
 
@@ -208,8 +232,16 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void showAnswerResult(QuizAnswerResult result) {
+        QuizQuestion currentQuestion = questions.get(currentIndex);
+        quizResults.add(new QuestionResult(
+                currentQuestion.getQuestionText(),
+                currentQuestion.getLevel(),
+                result.isCorrect(),
+                currentQuestion.getCorrectAnswer()
+        ));
+
         if (result.isCorrect()) correctCount++;
-        applyAnswerStyles(result.isCorrect(), questions.get(currentIndex).getCorrectAnswer());
+        applyAnswerStyles(result.isCorrect(), currentQuestion.getCorrectAnswer());
         tvQuizFeedback.setText(buildResultMessage(result));
         tvQuizFeedback.setBackgroundResource(result.isCorrect()
                 ? R.drawable.bg_feedback_success : R.drawable.bg_feedback_error);
@@ -221,6 +253,75 @@ public class QuizActivity extends AppCompatActivity {
         } else {
             btnNextQuestion.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void showQuizReport() {
+        View view = getLayoutInflater().inflate(R.layout.dialog_quiz_report, null);
+        TextView tvReportTitle = view.findViewById(R.id.tvReportTitle);
+        TextView tvReportSubtitle = view.findViewById(R.id.tvReportSubtitle);
+        TextView tvCorrectCount = view.findViewById(R.id.tvCorrectCount);
+        TextView tvWrongCount = view.findViewById(R.id.tvWrongCount);
+        TextView tvSuccessRate = view.findViewById(R.id.tvSuccessRate);
+        TextView tvMistakeReport = view.findViewById(R.id.tvMistakeReport);
+        MaterialButton btnDone = view.findViewById(R.id.btnDone);
+
+        int totalQuestions = questions.size();
+        int wrongCount = totalQuestions - correctCount;
+        int successPercent = (int) (((float) correctCount / totalQuestions) * 100);
+
+        tvCorrectCount.setText(String.valueOf(correctCount));
+        tvWrongCount.setText(String.valueOf(wrongCount));
+        tvSuccessRate.setText("%" + successPercent);
+
+        // Başarı oranına göre mesaj ve başlık
+        if (successPercent == 100) {
+            tvReportTitle.setText("Tebrikler! 🎉");
+            tvReportSubtitle.setText("Kusursuz bir sonuç! Tüm kelimeleri bildiniz.");
+            tvReportTitle.setTextColor(getColor(R.color.success));
+        } else if (successPercent >= 70) {
+            tvReportTitle.setText("Harika İş! 🌟");
+            tvReportSubtitle.setText("Çok iyi bir performans sergilediniz.");
+        } else if (successPercent >= 40) {
+            tvReportTitle.setText("İyi Deneme 👍");
+            tvReportSubtitle.setText("Biraz daha pratikle mükemmelleşebilirsin.");
+        } else {
+            tvReportTitle.setText("Vazgeçme! 💪");
+            tvReportSubtitle.setText("Çalışmaya devam et, başaracaksın.");
+        }
+
+        // Yanlış raporu - Sadece yanlış kelimeler ve doğruları
+        StringBuilder mistakeReport = new StringBuilder();
+        int actualMistakes = 0;
+        for (QuestionResult res : quizResults) {
+            if (!res.correct) {
+                actualMistakes++;
+                mistakeReport.append("✖ '").append(res.word)
+                        .append("' kelimesinin doğru karşılığı '")
+                        .append(res.correctAnswer).append("'\n\n");
+            }
+        }
+        
+        if (actualMistakes == 0) {
+            tvMistakeReport.setVisibility(View.GONE);
+        } else {
+            tvMistakeReport.setText(mistakeReport.toString().trim());
+        }
+
+        androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(this)
+                .setView(view)
+                .setCancelable(false)
+                .create();
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
+
+        btnDone.setOnClickListener(v -> {
+            dialog.dismiss();
+            finish();
+        });
+
+        dialog.show();
     }
 
     private String buildResultMessage(QuizAnswerResult result) {
