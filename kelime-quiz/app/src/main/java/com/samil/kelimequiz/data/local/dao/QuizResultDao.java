@@ -18,4 +18,7 @@ public interface QuizResultDao {
 
     @Query("SELECT * FROM quiz_results WHERE userId = :userId ORDER BY completedAt DESC")
     List<QuizResultEntity> listByUser(int userId);
+
+    @Query("SELECT * FROM quiz_results WHERE userId = :userId AND completedAt >= :since ORDER BY completedAt ASC")
+    List<QuizResultEntity> getRecentResults(int userId, long since);
 }

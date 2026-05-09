@@ -2,6 +2,10 @@ package com.samil.kelimequiz.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,18 +14,18 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.data.local.entity.UserEntity;
+import com.samil.kelimequiz.domain.model.DayProgress;
 import com.samil.kelimequiz.domain.model.QuizSummary;
 import com.samil.kelimequiz.ui.auth.LoginActivity;
 import com.samil.kelimequiz.ui.quiz.QuizActivity;
-import com.samil.kelimequiz.ui.wordle.WordleActivity;
 import com.samil.kelimequiz.ui.wordchain.WordChainActivity;
+import com.samil.kelimequiz.ui.wordle.WordleActivity;
 import com.samil.kelimequiz.util.AppContainer;
 import com.samil.kelimequiz.util.AppExecutors;
 import com.samil.kelimequiz.util.NavigationHelper;
 import com.samil.kelimequiz.util.SessionManager;
 
-import android.widget.TextView;
-
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvDailyWord;
     private TextView tvDailyWordMeaning;
     private LinearProgressIndicator lpiAverageLevel;
+    private LinearLayout layoutBarChart;
     private int userId;
     private int totalWordCount;
     private boolean wordCountLoaded;
@@ -76,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 tvDailyWord = findViewById(R.id.tvDailyWord);
                 tvDailyWordMeaning = findViewById(R.id.tvDailyWordMeaning);
                 lpiAverageLevel = findViewById(R.id.lpiAverageLevel);
+                layoutBarChart = findViewById(R.id.layoutBarChart);
                 
                 tvUsernameMain.setText(user.username);
                 updateGreeting();
@@ -130,12 +136,14 @@ public class MainActivity extends AppCompatActivity {
             double avgLevel = container.quizRepository.getGlobalAverageLevel(userId);
             int levelOneCount = container.quizRepository.countLevelOneWords(userId);
             double averageSuccessRate = container.quizRepository.getAverageSuccessRate(userId);
+            List<DayProgress> weeklyProgress = container.quizRepository.getWeeklyProgress(userId);
             
             final UserEntity finalUser = user;
             
             runOnUiThread(() -> {
                 showWordCount(summary);
                 updateAverageLevel(avgLevel);
+                updateWeeklyProgress(weeklyProgress);
                 if (tvStreakValue != null && finalUser != null) {
                     tvStreakValue.setText(finalUser.currentStreak + " Gün Seri");
                 }
@@ -152,6 +160,35 @@ public class MainActivity extends AppCompatActivity {
         if (lpiAverageLevel != null) {
             int progress = (int) ((avgLevel * 100) / 6.0);
             lpiAverageLevel.setProgressCompat(progress, true);
+        }
+    }
+
+    private void updateWeeklyProgress(List<DayProgress> progressList) {
+        if (layoutBarChart == null) return;
+        layoutBarChart.removeAllViews();
+
+        for (DayProgress dp : progressList) {
+            View itemView = getLayoutInflater().inflate(R.layout.item_bar_chart, layoutBarChart, false);
+            View viewBar = itemView.findViewById(R.id.viewBar);
+            TextView tvDayName = itemView.findViewById(R.id.tvDayName);
+
+            tvDayName.setText(dp.day);
+
+            // Başarı oranına göre bar yüksekliğini ayarla (Max 100dp)
+            float density = getResources().getDisplayMetrics().density;
+            int maxHeightPx = (int) (100 * density);
+            int barHeight = (int) (dp.avgSuccess * maxHeightPx / 100.0);
+            
+            // Minimum görünürlük için 4dp
+            if (dp.avgSuccess > 0 && barHeight < (int)(4 * density)) {
+                barHeight = (int)(4 * density);
+            }
+
+            ViewGroup.LayoutParams params = viewBar.getLayoutParams();
+            params.height = barHeight;
+            viewBar.setLayoutParams(params);
+
+            layoutBarChart.addView(itemView);
         }
     }
 

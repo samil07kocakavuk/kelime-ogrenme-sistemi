@@ -6,19 +6,24 @@ import com.samil.kelimequiz.data.local.dao.WordDao;
 import com.samil.kelimequiz.data.local.entity.QuizProgressEntity;
 import com.samil.kelimequiz.data.local.entity.QuizResultEntity;
 import com.samil.kelimequiz.data.local.entity.WordEntity;
+import com.samil.kelimequiz.domain.model.DayProgress;
 import com.samil.kelimequiz.domain.model.QuizAnswerResult;
 import com.samil.kelimequiz.domain.model.QuizQuestion;
 import com.samil.kelimequiz.domain.model.QuizSummary;
 import com.samil.kelimequiz.domain.service.SrsScheduler;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class QuizRepository {
-    private static final int OPTION_COUNT = 4;
+
 
     private final WordDao wordDao;
     private final QuizProgressDao quizProgressDao;
@@ -95,6 +100,60 @@ public class QuizRepository {
 
     public int countLevelOneWords(int userId) {
         return quizProgressDao.countLevelOneWords(userId);
+    }
+
+    public List<DayProgress> getWeeklyProgress(int userId) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_YEAR, -6);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        long since = cal.getTimeInMillis();
+
+        List<QuizResultEntity> results = quizResultDao.getRecentResults(userId, since);
+        Map<String, List<Double>> grouped = new HashMap<>();
+
+        for (QuizResultEntity res : results) {
+            Calendar resCal = Calendar.getInstance();
+            resCal.setTimeInMillis(res.completedAt);
+            String dayKey = String.format("%02d/%02d", resCal.get(Calendar.DAY_OF_MONTH), resCal.get(Calendar.MONTH) + 1);
+            if (!grouped.containsKey(dayKey)) grouped.put(dayKey, new ArrayList<>());
+            grouped.get(dayKey).add(res.successRate);
+        }
+
+        List<DayProgress> weekly = new ArrayList<>();
+        Calendar current = Calendar.getInstance();
+        current.setTimeInMillis(since);
+
+        for (int i = 0; i < 7; i++) {
+            String dayKey = String.format("%02d/%02d", current.get(Calendar.DAY_OF_MONTH), current.get(Calendar.MONTH) + 1);
+            double avg = 0;
+            if (grouped.containsKey(dayKey)) {
+                List<Double> rates = grouped.get(dayKey);
+                double sum = 0;
+                for (double r : rates) sum += r;
+                avg = sum / rates.size();
+            }
+            // Kısa gün adı ekle (Örn: Pzt, Sal...)
+            String dayName = getDayName(current.get(Calendar.DAY_OF_WEEK));
+            weekly.add(new DayProgress(dayName, avg));
+            current.add(Calendar.DAY_OF_YEAR, 1);
+        }
+        return weekly;
+    }
+
+    private String getDayName(int dayOfWeek) {
+        switch (dayOfWeek) {
+            case Calendar.MONDAY: return "Pzt";
+            case Calendar.TUESDAY: return "Sal";
+            case Calendar.WEDNESDAY: return "Çar";
+            case Calendar.THURSDAY: return "Per";
+            case Calendar.FRIDAY: return "Cum";
+            case Calendar.SATURDAY: return "Cmt";
+            case Calendar.SUNDAY: return "Paz";
+            default: return "";
+        }
     }
 
     private QuizQuestion toQuestion(int userId, WordEntity word) {
