@@ -28,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
     private MaterialButton btnStartQuiz;
     private TextView tvUsernameMain;
     private TextView tvAverageLevelValue;
+    private TextView tvGreeting;
+    private TextView tvStreakValue;
+    private TextView tvSuccessRateValue;
+    private TextView tvWordCountValue;
+    private TextView tvDailyWord;
+    private TextView tvDailyWordMeaning;
     private LinearProgressIndicator lpiAverageLevel;
     private int userId;
     private int totalWordCount;
@@ -63,9 +69,16 @@ public class MainActivity extends AppCompatActivity {
                 btnStartQuiz = findViewById(R.id.btnStartQuiz);
                 tvUsernameMain = findViewById(R.id.tvUsernameMain);
                 tvAverageLevelValue = findViewById(R.id.tvAverageLevelValue);
+                tvGreeting = findViewById(R.id.tvGreeting);
+                tvStreakValue = findViewById(R.id.tvStreakValue);
+                tvSuccessRateValue = findViewById(R.id.tvSuccessRateValue);
+                tvWordCountValue = findViewById(R.id.tvWordCountValue);
+                tvDailyWord = findViewById(R.id.tvDailyWord);
+                tvDailyWordMeaning = findViewById(R.id.tvDailyWordMeaning);
                 lpiAverageLevel = findViewById(R.id.lpiAverageLevel);
                 
                 tvUsernameMain.setText(user.username);
+                updateGreeting();
                 
                 btnStartQuiz.setEnabled(false);
                 btnStartQuiz.setOnClickListener(v -> openQuizIfWordsExist());
@@ -81,11 +94,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void updateGreeting() {
+        int hour = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY);
+        String greeting;
+        if (hour >= 5 && hour < 12) greeting = "Günaydın,";
+        else if (hour >= 12 && hour < 18) greeting = "Tünaydın,";
+        else if (hour >= 18 && hour < 22) greeting = "İyi Akşamlar,";
+        else greeting = "İyi Geceler,";
+        
+        if (tvGreeting != null) tvGreeting.setText(greeting);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         if (btnStartQuiz != null) {
             loadUserData();
+            updateGreeting();
         }
     }
 
@@ -94,11 +119,28 @@ public class MainActivity extends AppCompatActivity {
         btnStartQuiz.setEnabled(false);
         AppExecutors.io().execute(() -> {
             AppContainer container = AppContainer.from(this);
+            UserEntity user = container.authRepository.findUserById(userId);
+            if (user != null) {
+                container.authRepository.checkAndUpdateStreak(user);
+                // Güncellenmiş veriyi tekrar çek
+                user = container.authRepository.findUserById(userId);
+            }
+            
             QuizSummary summary = container.quizRepository.getSummary(userId);
             double avgLevel = container.quizRepository.getGlobalAverageLevel(userId);
+            int levelOneCount = container.quizRepository.countLevelOneWords(userId);
+            double averageSuccessRate = container.quizRepository.getAverageSuccessRate(userId);
+            
+            final UserEntity finalUser = user;
+            
             runOnUiThread(() -> {
                 showWordCount(summary);
                 updateAverageLevel(avgLevel);
+                if (tvStreakValue != null && finalUser != null) {
+                    tvStreakValue.setText(finalUser.currentStreak + " Gün Seri");
+                }
+                if (tvSuccessRateValue != null) tvSuccessRateValue.setText(String.format(Locale.US, "%%%.0f Başarı", averageSuccessRate));
+                if (tvWordCountValue != null) tvWordCountValue.setText(levelOneCount + " Kelime");
             });
         });
     }

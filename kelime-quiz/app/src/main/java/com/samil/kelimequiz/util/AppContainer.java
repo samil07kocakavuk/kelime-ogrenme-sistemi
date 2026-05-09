@@ -21,7 +21,7 @@ public class AppContainer {
         AppDatabase database = AppDatabase.getInstance(context);
         authRepository = new AuthRepository(database.userDao(), new PasswordHasher());
         wordRepository = new WordRepository(database.wordDao(), database.wordSampleDao());
-        quizRepository = new QuizRepository(database.wordDao(), database.quizProgressDao());
+        quizRepository = new QuizRepository(database.wordDao(), database.quizProgressDao(), database.quizResultDao());
         wordSeedBootstrapper = new WordSeedBootstrapper(context, wordRepository);
     }
 

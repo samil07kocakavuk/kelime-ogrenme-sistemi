@@ -19,4 +19,7 @@ public interface UserDao {
 
     @Query("SELECT * FROM users WHERE userId = :userId LIMIT 1")
     UserEntity findById(int userId);
+
+    @Query("UPDATE users SET currentStreak = :streak, lastLoginDate = :lastLogin WHERE userId = :userId")
+    void updateStreak(int userId, int streak, long lastLogin);
 }

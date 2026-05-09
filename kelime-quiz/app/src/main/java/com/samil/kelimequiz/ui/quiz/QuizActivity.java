@@ -269,6 +269,11 @@ public class QuizActivity extends AppCompatActivity {
         int wrongCount = totalQuestions - correctCount;
         int successPercent = (int) (((float) correctCount / totalQuestions) * 100);
 
+        // Save result to DB
+        AppExecutors.io().execute(() -> {
+            AppContainer.from(this).quizRepository.saveQuizResult(userId, totalQuestions, correctCount);
+        });
+
         tvCorrectCount.setText(String.valueOf(correctCount));
         tvWrongCount.setText(String.valueOf(wrongCount));
         tvSuccessRate.setText(getString(R.string.quiz_success_rate_format, successPercent));

@@ -14,4 +14,6 @@ public class UserEntity {
     public String passwordSalt;
     public int passwordIterations;
     public long createdAt;
+    public int currentStreak;
+    public long lastLoginDate;
 }

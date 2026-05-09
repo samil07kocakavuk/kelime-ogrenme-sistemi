@@ -6,6 +6,7 @@ import com.samil.kelimequiz.domain.model.AuthResult;
 import com.samil.kelimequiz.util.security.HashResult;
 import com.samil.kelimequiz.util.security.PasswordHasher;
 
+import java.util.Calendar;
 import java.util.Locale;
 
 public class AuthRepository {
@@ -64,7 +65,51 @@ public class AuthRepository {
             return AuthResult.fail("Şifre hatalı.");
         }
 
+        checkAndUpdateStreak(user);
+
         return AuthResult.success(user.userId, "Giriş başarılı.");
+    }
+
+    public void checkAndUpdateStreak(UserEntity user) {
+        long now = System.currentTimeMillis();
+        if (user.lastLoginDate == 0) {
+            user.currentStreak = 1;
+            user.lastLoginDate = now;
+            userDao.updateStreak(user.userId, user.currentStreak, user.lastLoginDate);
+            return;
+        }
+
+        Calendar lastCal = Calendar.getInstance();
+        lastCal.setTimeInMillis(user.lastLoginDate);
+        int lastYear = lastCal.get(Calendar.YEAR);
+        int lastDay = lastCal.get(Calendar.DAY_OF_YEAR);
+
+        Calendar nowCal = Calendar.getInstance();
+        nowCal.setTimeInMillis(now);
+        int nowYear = nowCal.get(Calendar.YEAR);
+        int nowDay = nowCal.get(Calendar.DAY_OF_YEAR);
+
+        // Bugün zaten giriş yapılmış mı?
+        if (lastYear == nowYear && lastDay == nowDay) {
+            return;
+        }
+
+        // Dün mü giriş yapılmış?
+        Calendar yesterdayCal = Calendar.getInstance();
+        yesterdayCal.setTimeInMillis(now);
+        yesterdayCal.add(Calendar.DAY_OF_YEAR, -1);
+        int yestYear = yesterdayCal.get(Calendar.YEAR);
+        int yestDay = yesterdayCal.get(Calendar.DAY_OF_YEAR);
+
+        if (lastYear == yestYear && lastDay == yestDay) {
+            user.currentStreak++;
+        } else {
+            // 2 gün veya daha fazla ara verilmiş, sıfırla (veya 1'den başlat)
+            user.currentStreak = 1;
+        }
+
+        user.lastLoginDate = now;
+        userDao.updateStreak(user.userId, user.currentStreak, user.lastLoginDate);
     }
 
     public AuthResult resetPassword(String username, String newPassword) {

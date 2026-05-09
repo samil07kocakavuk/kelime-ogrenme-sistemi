@@ -9,17 +9,19 @@ import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.samil.kelimequiz.data.local.dao.QuizProgressDao;
+import com.samil.kelimequiz.data.local.dao.QuizResultDao;
 import com.samil.kelimequiz.data.local.dao.UserDao;
 import com.samil.kelimequiz.data.local.dao.WordDao;
 import com.samil.kelimequiz.data.local.dao.WordSampleDao;
 import com.samil.kelimequiz.data.local.entity.QuizProgressEntity;
+import com.samil.kelimequiz.data.local.entity.QuizResultEntity;
 import com.samil.kelimequiz.data.local.entity.UserEntity;
 import com.samil.kelimequiz.data.local.entity.WordEntity;
 import com.samil.kelimequiz.data.local.entity.WordSampleEntity;
 
 @Database(
-        entities = {UserEntity.class, WordEntity.class, WordSampleEntity.class, QuizProgressEntity.class},
-        version = 8,
+        entities = {UserEntity.class, WordEntity.class, WordSampleEntity.class, QuizProgressEntity.class, QuizResultEntity.class},
+        version = 10,
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
@@ -113,6 +115,32 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
+    public static final Migration MIGRATION_8_9 = new Migration(8, 9) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `quiz_results` (" +
+                            "`resultId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                            "`userId` INTEGER NOT NULL, " +
+                            "`totalQuestions` INTEGER NOT NULL, " +
+                            "`correctAnswers` INTEGER NOT NULL, " +
+                            "`successRate` REAL NOT NULL, " +
+                            "`completedAt` INTEGER NOT NULL, " +
+                            "FOREIGN KEY(`userId`) REFERENCES `users`(`userId`) ON UPDATE NO ACTION ON DELETE CASCADE" +
+                            ")"
+            );
+            database.execSQL("CREATE INDEX IF NOT EXISTS `index_quiz_results_userId` ON `quiz_results` (`userId`)");
+        }
+    };
+
+    public static final Migration MIGRATION_9_10 = new Migration(9, 10) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE `users` ADD COLUMN `currentStreak` INTEGER NOT NULL DEFAULT 0");
+            database.execSQL("ALTER TABLE `users` ADD COLUMN `lastLoginDate` INTEGER NOT NULL DEFAULT 0");
+        }
+    };
+
     public abstract UserDao userDao();
 
     public abstract WordDao wordDao();
@@ -120,6 +148,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract WordSampleDao wordSampleDao();
 
     public abstract QuizProgressDao quizProgressDao();
+
+    public abstract QuizResultDao quizResultDao();
 
     public static AppDatabase getInstance(Context context) {
         Context appContext = context.getApplicationContext();
@@ -138,7 +168,9 @@ public abstract class AppDatabase extends RoomDatabase {
                                     MIGRATION_4_5,
                                     MIGRATION_5_6,
                                     MIGRATION_6_7,
-                                    MIGRATION_7_8
+                                    MIGRATION_7_8,
+                                    MIGRATION_8_9,
+                                    MIGRATION_9_10
                             )
                             .build();
                 }

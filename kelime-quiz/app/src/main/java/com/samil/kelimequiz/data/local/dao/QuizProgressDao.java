@@ -53,4 +53,7 @@ public interface QuizProgressDao {
 
     @Query("SELECT AVG(level) FROM quiz_progress WHERE userId = :userId")
     Double getGlobalAverageLevel(int userId);
+
+    @Query("SELECT COUNT(*) FROM quiz_progress WHERE userId = :userId AND level = 1")
+    int countLevelOneWords(int userId);
 }

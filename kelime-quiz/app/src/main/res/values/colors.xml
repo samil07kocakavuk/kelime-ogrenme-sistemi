@@ -2,6 +2,7 @@
 <resources>
     <!-- Base Colors -->
     <color name="surface_elevated">#FCFBF8</color>
+    <color name="surface_variant">#E2E8F0</color>
     <color name="white">#FFFFFF</color>
 
     <!-- Primary & Action Colors -->

@@ -1,8 +1,10 @@
 package com.samil.kelimequiz.data.repository;
 
 import com.samil.kelimequiz.data.local.dao.QuizProgressDao;
+import com.samil.kelimequiz.data.local.dao.QuizResultDao;
 import com.samil.kelimequiz.data.local.dao.WordDao;
 import com.samil.kelimequiz.data.local.entity.QuizProgressEntity;
+import com.samil.kelimequiz.data.local.entity.QuizResultEntity;
 import com.samil.kelimequiz.data.local.entity.WordEntity;
 import com.samil.kelimequiz.domain.model.QuizAnswerResult;
 import com.samil.kelimequiz.domain.model.QuizQuestion;
@@ -20,11 +22,13 @@ public class QuizRepository {
 
     private final WordDao wordDao;
     private final QuizProgressDao quizProgressDao;
+    private final QuizResultDao quizResultDao;
     private final SrsScheduler srsScheduler;
 
-    public QuizRepository(WordDao wordDao, QuizProgressDao quizProgressDao) {
+    public QuizRepository(WordDao wordDao, QuizProgressDao quizProgressDao, QuizResultDao quizResultDao) {
         this.wordDao = wordDao;
         this.quizProgressDao = quizProgressDao;
+        this.quizResultDao = quizResultDao;
         this.srsScheduler = new SrsScheduler();
     }
 
@@ -72,6 +76,25 @@ public class QuizRepository {
     public double getGlobalAverageLevel(int userId) {
         Double avg = quizProgressDao.getGlobalAverageLevel(userId);
         return avg != null ? avg : 0.0;
+    }
+
+    public void saveQuizResult(int userId, int total, int correct) {
+        QuizResultEntity result = new QuizResultEntity();
+        result.userId = userId;
+        result.totalQuestions = total;
+        result.correctAnswers = correct;
+        result.successRate = total > 0 ? (correct * 100.0) / total : 0;
+        result.completedAt = System.currentTimeMillis();
+        quizResultDao.insert(result);
+    }
+
+    public double getAverageSuccessRate(int userId) {
+        Double avg = quizResultDao.getAverageSuccessRate(userId);
+        return avg != null ? avg : 0.0;
+    }
+
+    public int countLevelOneWords(int userId) {
+        return quizProgressDao.countLevelOneWords(userId);
     }
 
     private QuizQuestion toQuestion(int userId, WordEntity word) {

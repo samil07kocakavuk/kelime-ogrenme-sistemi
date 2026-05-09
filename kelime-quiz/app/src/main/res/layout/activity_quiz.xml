@@ -28,40 +28,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/quiz_initial_progress"
-                android:textColor="@color/text_secondary"
-                android:textSize="14sp"
+                android:textAlignment="center"
+                android:textColor="@color/primary"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@color/card"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="32dp"
-                app:cardElevation="10dp"
-                app:strokeColor="@color/card_stroke"
-                app:strokeWidth="1dp">
+                app:cardElevation="12dp"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_profile_hero"
                     android:orientation="vertical"
-                    android:padding="24dp">
+                    android:padding="28dp">
 
                     <TextView
                         android:id="@+id/tvWordLevelLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/english_word_hint"
+                        android:textAlignment="center"
                         android:textColor="@color/text_secondary"
                         android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center_vertical"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <TextView
@@ -70,34 +71,38 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/quiz_word_placeholder"
-                            android:textColor="@color/text_primary"
-                            android:textSize="34sp"
+                            android:textAlignment="center"
+                            android:textColor="@color/primary"
+                            android:textSize="40sp"
                             android:textStyle="bold"
                             android:maxLines="1"
-                            app:autoSizeMaxTextSize="34sp"
-                            app:autoSizeMinTextSize="18sp"
+                            app:autoSizeMaxTextSize="40sp"
+                            app:autoSizeMinTextSize="24sp"
                             app:autoSizeStepGranularity="2sp"
                             app:autoSizeTextType="uniform" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnHint"
-                            style="@style/Widget.Material3.Button.TonalButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/hint_action"
-                            android:textSize="12sp"
-                            app:icon="@drawable/ic_lightbulb"
-                            app:iconGravity="start"
-                            app:iconPadding="4dp"
-                            app:iconSize="18dp"
-                            android:visibility="gone" />
                     </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnHint"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/hint_action"
+                        android:textSize="12sp"
+                        app:icon="@drawable/ic_lightbulb"
+                        app:iconGravity="start"
+                        app:iconPadding="4dp"
+                        app:iconSize="18dp"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/ivQuizWordImage"
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_height="180dp"
+                        android:layout_marginTop="16dp"
                         android:adjustViewBounds="true"
                         android:background="@drawable/bg_image_preview"
                         android:contentDescription="@string/word_image_content_description"
@@ -107,7 +112,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="20dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
@@ -124,7 +129,7 @@
                             android:id="@+id/lpiWordLevel"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
+                            android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             app:indicatorColor="@color/accent"
                             app:trackColor="#E2E8F0"
@@ -136,11 +141,12 @@
                         android:id="@+id/tvQuizFeedback"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
+                        android:layout_marginTop="24dp"
                         android:background="@drawable/bg_feedback_neutral"
-                        android:minHeight="44dp"
-                        android:padding="14dp"
+                        android:minHeight="48dp"
+                        android:padding="16dp"
                         android:text="@string/choose_turkish_answer"
+                        android:textAlignment="center"
                         android:textColor="@color/text_secondary"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -151,41 +157,53 @@
                 android:id="@+id/btnOptionOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/bg_quiz_option"
-                android:minHeight="56dp"
+                android:minHeight="64dp"
                 android:text="@string/quiz_option_one"
-                android:textColor="@color/quiz_option_text" />
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                app:backgroundTint="@null" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnOptionTwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/bg_quiz_option"
-                android:minHeight="56dp"
+                android:minHeight="64dp"
                 android:text="@string/quiz_option_two"
-                android:textColor="@color/quiz_option_text" />
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                app:backgroundTint="@null" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnOptionThree"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/bg_quiz_option"
-                android:minHeight="56dp"
+                android:minHeight="64dp"
                 android:text="@string/quiz_option_three"
-                android:textColor="@color/quiz_option_text" />
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                app:backgroundTint="@null" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnOptionFour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/bg_quiz_option"
-                android:minHeight="56dp"
+                android:minHeight="64dp"
                 android:text="@string/quiz_option_four"
-                android:textColor="@color/quiz_option_text" />
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                app:backgroundTint="@null" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnNextQuestion"
