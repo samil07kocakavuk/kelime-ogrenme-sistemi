@@ -7,6 +7,7 @@
 
     <!-- Primary & Action Colors -->
     <color name="primary">#1B434D</color>
+    <color name="primary_light">#458B9C</color>
     <color name="primary_dark">#244B56</color>
     <color name="accent">#387E4F</color>
     <color name="muted_lavender">#898693</color>
