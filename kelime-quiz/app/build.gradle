@@ -24,6 +24,12 @@ android {
         }
     }
 
+    packaging {
+        resources {
+            excludes += 'META-INF/versions/9/OSGI-INF/MANIFEST.MF'
+        }
+    }
+
     compileOptions {
         coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_17
