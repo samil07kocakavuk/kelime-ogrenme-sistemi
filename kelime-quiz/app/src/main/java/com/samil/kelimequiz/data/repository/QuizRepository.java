@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class QuizRepository {
-
+    private static final int OPTION_COUNT = 4;
 
     private final WordDao wordDao;
     private final QuizProgressDao quizProgressDao;

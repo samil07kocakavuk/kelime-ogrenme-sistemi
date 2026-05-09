@@ -49,6 +49,9 @@ public interface WordDao {
     @Query("SELECT engWord FROM words WHERE userId = :userId AND LENGTH(engWord) BETWEEN :minLen AND :maxLen ORDER BY RANDOM() LIMIT 1")
     String getRandomWordForWordle(int userId, int minLen, int maxLen);
 
+    @Query("SELECT * FROM words WHERE userId = :userId ORDER BY RANDOM() LIMIT 1")
+    WordEntity getRandomWord(int userId);
+
     @Query("SELECT * FROM words WHERE userId = :userId ORDER BY RANDOM()")
     List<WordEntity> listByUserSimple(int userId);
 }

@@ -3,21 +3,18 @@ package com.samil.kelimequiz.ui.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.samil.kelimequiz.R;
 import com.samil.kelimequiz.data.local.entity.UserEntity;
-import com.samil.kelimequiz.domain.model.DayProgress;
 import com.samil.kelimequiz.domain.model.QuizSummary;
 import com.samil.kelimequiz.ui.auth.LoginActivity;
 import com.samil.kelimequiz.ui.quiz.QuizActivity;
+import com.samil.kelimequiz.ui.report.WeeklyReportActivity;
 import com.samil.kelimequiz.ui.wordchain.WordChainActivity;
 import com.samil.kelimequiz.ui.wordle.WordleActivity;
 import com.samil.kelimequiz.util.AppContainer;
@@ -38,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvWordCountValue;
     private TextView tvDailyWord;
     private TextView tvDailyWordMeaning;
-    private LinearProgressIndicator lpiAverageLevel;
-    private LinearLayout layoutBarChart;
+    private TextView tvDailyWordSample;
     private int userId;
     private int totalWordCount;
     private boolean wordCountLoaded;
@@ -80,8 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 tvWordCountValue = findViewById(R.id.tvWordCountValue);
                 tvDailyWord = findViewById(R.id.tvDailyWord);
                 tvDailyWordMeaning = findViewById(R.id.tvDailyWordMeaning);
-                lpiAverageLevel = findViewById(R.id.lpiAverageLevel);
-                layoutBarChart = findViewById(R.id.layoutBarChart);
+                tvDailyWordSample = findViewById(R.id.tvDailyWordSample);
                 
                 tvUsernameMain.setText(user.username);
                 updateGreeting();
@@ -94,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
 
                 MaterialButton btnWordChain = findViewById(R.id.btnWordChain);
                 btnWordChain.setOnClickListener(v -> startActivity(new Intent(this, WordChainActivity.class)));
+
+                MaterialButton btnWeeklyReport = findViewById(R.id.btnWeeklyReport);
+                btnWeeklyReport.setOnClickListener(v -> startActivity(new Intent(this, WeeklyReportActivity.class)));
 
                 loadUserData();
             });
@@ -136,59 +134,95 @@ public class MainActivity extends AppCompatActivity {
             double avgLevel = container.quizRepository.getGlobalAverageLevel(userId);
             int levelOneCount = container.quizRepository.countLevelOneWords(userId);
             double averageSuccessRate = container.quizRepository.getAverageSuccessRate(userId);
-            List<DayProgress> weeklyProgress = container.quizRepository.getWeeklyProgress(userId);
             
             final UserEntity finalUser = user;
             
             runOnUiThread(() -> {
                 showWordCount(summary);
                 updateAverageLevel(avgLevel);
-                updateWeeklyProgress(weeklyProgress);
+                loadDailyWord();
                 if (tvStreakValue != null && finalUser != null) {
-                    tvStreakValue.setText(finalUser.currentStreak + " Gün Seri");
+                    tvStreakValue.setText(finalUser.currentStreak + " Gün");
                 }
-                if (tvSuccessRateValue != null) tvSuccessRateValue.setText(String.format(Locale.US, "%%%.0f Başarı", averageSuccessRate));
-                if (tvWordCountValue != null) tvWordCountValue.setText(levelOneCount + " Kelime");
+                if (tvSuccessRateValue != null) tvSuccessRateValue.setText(String.format(Locale.US, "%%%d", (int)averageSuccessRate));
+                if (tvWordCountValue != null) tvWordCountValue.setText(String.valueOf(levelOneCount));
             });
+        });
+    }
+
+    private void loadDailyWord() {
+        AppExecutors.io().execute(() -> {
+            android.content.SharedPreferences prefs = getSharedPreferences("daily_word_prefs", android.content.Context.MODE_PRIVATE);
+            String today = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new java.util.Date());
+            String keyWord = "word_" + today + "_" + userId;
+            String keyMeaning = "meaning_" + today + "_" + userId;
+            String keySample = "sample_" + today + "_" + userId;
+
+            String savedWord = prefs.getString(keyWord, null);
+            String savedMeaning = prefs.getString(keyMeaning, null);
+            String savedSample = prefs.getString(keySample, null);
+
+            if (savedWord != null && savedMeaning != null) {
+                // Kelime var ama cümle bilgisi hiç yoksa (null ise), veritabanından çekip güncelle
+                if (savedSample == null) {
+                    com.samil.kelimequiz.data.local.AppDatabase db = com.samil.kelimequiz.data.local.AppDatabase.getInstance(this);
+                    com.samil.kelimequiz.data.local.entity.WordEntity word = db.wordDao().findByUserAndEnglishWord(userId, savedWord);
+                    if (word != null) {
+                        List<com.samil.kelimequiz.data.local.entity.WordSampleEntity> samples = db.wordSampleDao().listByWordId(word.wordId);
+                        String sampleText = (samples != null && !samples.isEmpty()) ? samples.get(0).sampleText : "";
+                        prefs.edit().putString(keySample, sampleText).apply();
+                        savedSample = sampleText;
+                    } else {
+                        savedSample = ""; // Kelime bulunamadıysa boş bırak
+                    }
+                }
+
+                final String finalSample = savedSample;
+                runOnUiThread(() -> {
+                    if (tvDailyWord != null) tvDailyWord.setText(savedWord);
+                    if (tvDailyWordMeaning != null) tvDailyWordMeaning.setText(savedMeaning);
+                    if (tvDailyWordSample != null) {
+                        if (finalSample != null && !finalSample.isEmpty()) {
+                            tvDailyWordSample.setText(finalSample);
+                            tvDailyWordSample.setVisibility(View.VISIBLE);
+                        } else {
+                            tvDailyWordSample.setVisibility(View.GONE);
+                        }
+                    }
+                });
+            } else {
+                com.samil.kelimequiz.data.local.AppDatabase db = com.samil.kelimequiz.data.local.AppDatabase.getInstance(this);
+                com.samil.kelimequiz.data.local.entity.WordEntity word = db.wordDao().getRandomWord(userId);
+                if (word != null) {
+                    List<com.samil.kelimequiz.data.local.entity.WordSampleEntity> samples = db.wordSampleDao().listByWordId(word.wordId);
+                    String sampleText = (samples != null && !samples.isEmpty()) ? samples.get(0).sampleText : "";
+
+                    prefs.edit()
+                            .putString(keyWord, word.engWord)
+                            .putString(keyMeaning, word.trWord)
+                            .putString(keySample, sampleText)
+                            .apply();
+                            
+                    runOnUiThread(() -> {
+                        if (tvDailyWord != null) tvDailyWord.setText(word.engWord);
+                        if (tvDailyWordMeaning != null) tvDailyWordMeaning.setText(word.trWord);
+                        if (tvDailyWordSample != null) {
+                            if (!sampleText.isEmpty()) {
+                                tvDailyWordSample.setText(sampleText);
+                                tvDailyWordSample.setVisibility(View.VISIBLE);
+                            } else {
+                                tvDailyWordSample.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+                }
+            }
         });
     }
 
     private void updateAverageLevel(double avgLevel) {
         if (tvAverageLevelValue != null) {
             tvAverageLevelValue.setText(String.format(Locale.US, "%.1f", avgLevel));
-        }
-        if (lpiAverageLevel != null) {
-            int progress = (int) ((avgLevel * 100) / 6.0);
-            lpiAverageLevel.setProgressCompat(progress, true);
-        }
-    }
-
-    private void updateWeeklyProgress(List<DayProgress> progressList) {
-        if (layoutBarChart == null) return;
-        layoutBarChart.removeAllViews();
-
-        for (DayProgress dp : progressList) {
-            View itemView = getLayoutInflater().inflate(R.layout.item_bar_chart, layoutBarChart, false);
-            View viewBar = itemView.findViewById(R.id.viewBar);
-            TextView tvDayName = itemView.findViewById(R.id.tvDayName);
-
-            tvDayName.setText(dp.day);
-
-            // Başarı oranına göre bar yüksekliğini ayarla (Max 100dp)
-            float density = getResources().getDisplayMetrics().density;
-            int maxHeightPx = (int) (100 * density);
-            int barHeight = (int) (dp.avgSuccess * maxHeightPx / 100.0);
-            
-            // Minimum görünürlük için 4dp
-            if (dp.avgSuccess > 0 && barHeight < (int)(4 * density)) {
-                barHeight = (int)(4 * density);
-            }
-
-            ViewGroup.LayoutParams params = viewBar.getLayoutParams();
-            params.height = barHeight;
-            viewBar.setLayoutParams(params);
-
-            layoutBarChart.addView(itemView);
         }
     }
 

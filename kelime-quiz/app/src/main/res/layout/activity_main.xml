@@ -1,550 +1,521 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_app_gradient"
-    android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_profile_hero"
-        android:orientation="vertical"
-        android:paddingHorizontal="24dp"
-        android:paddingTop="24dp"
-        android:paddingBottom="16dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvGreeting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Merhaba,"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tvUsernameMain"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_user_label"
-                    android:textColor="@color/primary"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvProfileImage"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="2dp"
-                app:strokeWidth="1.5dp"
-                app:strokeColor="@color/primary">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerInside"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_user"
-                    app:tint="@color/primary" />
-            </com.google.android.material.card.MaterialCardView>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvAverageLevelValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/zero_decimal"
-                android:textColor="@color/primary"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.progressindicator.LinearProgressIndicator
-                android:id="@+id/lpiAverageLevel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_weight="1"
-                app:indicatorColor="@color/primary"
-                app:trackColor="?attr/colorSurfaceVariant"
-                app:trackCornerRadius="4dp"
-                app:trackThickness="6dp" />
-        </LinearLayout>
-    </LinearLayout>
+    android:background="@drawable/bg_app_gradient">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="true"
-        android:clipToPadding="false"
-        android:paddingStart="24dp"
-        android:paddingTop="12dp"
-        android:paddingEnd="24dp"
-        android:paddingBottom="24dp">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_nav_container"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
 
-            <HorizontalScrollView
+            <!-- Profile Header (Now inside ScrollView) -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:scrollbars="none">
+                android:background="@drawable/bg_profile_hero"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:paddingHorizontal="24dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="16dp">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp">
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="12dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:stateListAnimator="@animator/card_click_animator"
-                        app:cardBackgroundColor="?attr/colorSurface"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp"
-                        app:strokeWidth="1dp"
-                        app:strokeColor="?attr/colorSurfaceVariant">
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="8dp">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="🔥"
-                                android:textSize="16sp" />
-                            <TextView
-                                android:id="@+id/tvStreakValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="6dp"
-                                android:text="5 Gün Seri"
-                                android:textColor="@color/text_primary"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="12dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:stateListAnimator="@animator/card_click_animator"
-                        app:cardBackgroundColor="?attr/colorSurface"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp"
-                        app:strokeWidth="1dp"
-                        app:strokeColor="?attr/colorSurfaceVariant">
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="8dp">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="🎯"
-                                android:textSize="16sp" />
-                            <TextView
-                                android:id="@+id/tvSuccessRateValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="6dp"
-                                android:text="%85 Başarı"
-                                android:textColor="@color/text_primary"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:stateListAnimator="@animator/card_click_animator"
-                        app:cardBackgroundColor="?attr/colorSurface"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp"
-                        app:strokeWidth="1dp"
-                        app:strokeColor="?attr/colorSurfaceVariant">
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="8dp">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="✅"
-                                android:textSize="16sp" />
-                            <TextView
-                                android:id="@+id/tvWordCountValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="6dp"
-                                android:text="120 Kelime"
-                                android:textColor="@color/text_primary"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                </LinearLayout>
-            </HorizontalScrollView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginHorizontal="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:stateListAnimator="@animator/card_click_animator"
-                app:cardBackgroundColor="?attr/colorSurface"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="4dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/colorSurfaceVariant">
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="💡 Günün Kelimesi"
-                        android:textColor="@color/primary"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvDailyWord"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Resilience"
-                        android:textColor="@color/text_primary"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvDailyWordMeaning"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Zorluklara karşı dayanıklılık, kendini toplama yeteneği."
-                        android:textColor="@color/text_secondary"
-                        android:textSize="14sp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:stateListAnimator="@animator/card_click_animator"
-                app:cardBackgroundColor="?attr/colorSurface"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="4dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/colorSurfaceVariant">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📈 Haftalık İlerleme"
-                        android:textColor="@color/primary"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:id="@+id/layoutBarChart"
-                        android:layout_width="match_parent"
-                        android:layout_height="120dp"
-                        android:layout_marginTop="16dp"
-                        android:gravity="bottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvGreeting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Merhaba,"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tvUsernameMain"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_user_label"
+                            android:textColor="@color/primary"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
-                        <!-- Bars will be added here programmatically or statically -->
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnWeeklyReport"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="Rapor"
+                            android:textColor="@color/primary"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:icon="@drawable/ic_info"
+                            app:iconSize="18dp"
+                            app:iconTint="@color/primary" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cvProfileImage"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="2dp"
+                            app:strokeWidth="1.5dp"
+                            app:strokeColor="@color/primary">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerInside"
+                                android:padding="8dp"
+                                android:src="@drawable/ic_user"
+                                app:tint="@color/primary" />
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <!-- Stats in Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tvStreakValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 Gün"
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Seri 🔥"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="24dp"
+                        android:background="?attr/colorSurfaceVariant" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tvSuccessRateValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="%0"
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Başarı 🎯"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="24dp"
+                        android:background="?attr/colorSurfaceVariant" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tvWordCountValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kelime ✅"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                    
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="24dp"
+                        android:background="?attr/colorSurfaceVariant" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tvAverageLevelValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.0"
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ort. Seviye"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp" />
                     </LinearLayout>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
-            <com.google.android.material.card.MaterialCardView
+            <!-- Cards Container -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:stateListAnimator="@animator/card_click_animator"
-                app:cardBackgroundColor="?attr/colorSurface"
-                app:cardCornerRadius="32dp"
-                app:cardElevation="8dp"
-                app:strokeWidth="0dp">
+                android:orientation="vertical"
+                android:paddingHorizontal="24dp"
+                android:paddingTop="12dp">
 
-                <RelativeLayout
+                <!-- Daily Word Card -->
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_home_card_quiz">
-
-                    <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="-10dp"
-                        android:layout_marginEnd="-20dp"
-                        android:alpha="0.3"
-                        android:src="@drawable/ic_quiz_graphic"
-                        android:scaleType="fitCenter" />
+                    android:layout_marginTop="8dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:stateListAnimator="@animator/card_click_animator"
+                    app:cardBackgroundColor="?attr/colorSurface"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="?attr/colorSurfaceVariant">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="24dp">
+                        android:padding="20dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/bg_level_badge"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="4dp"
-                            android:text="@string/home_card_one_badge"
-                            android:textColor="@color/primary_dark"
-                            android:textSize="12sp"
+                            android:text="💡 Günün Kelimesi"
+                            android:textColor="@color/primary"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:text="@string/home_card_one_title"
-                            android:textColor="@color/text_primary"
-                            android:textSize="24sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
+                            android:id="@+id/tvDailyWord"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="@string/home_card_one_subtitle"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="14sp"
-                            android:lineSpacingExtra="2dp" />
+                            android:text="Resilience"
+                            android:textColor="@color/text_primary"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnStartQuiz"
-                            style="@style/AppButtonPrimary"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tvDailyWordMeaning"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:text="@string/start_quiz_action"
-                            app:cornerRadius="16dp" />
+                            android:layout_marginTop="4dp"
+                            android:text="Zorluklara karşı dayanıklılık, kendini toplama yeteneği."
+                            android:textColor="@color/text_secondary"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tvDailyWordSample"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="She showed great resilience during the crisis."
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp"
+                            android:textStyle="italic"
+                            android:visibility="gone" />
                     </LinearLayout>
-                </RelativeLayout>
-            </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:stateListAnimator="@animator/card_click_animator"
-                app:cardBackgroundColor="?attr/colorSurface"
-                app:cardCornerRadius="32dp"
-                app:cardElevation="8dp"
-                app:strokeWidth="0dp">
-
-                <RelativeLayout
+                <!-- Quiz Card -->
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_home_card_wordle">
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:stateListAnimator="@animator/card_click_animator"
+                    app:cardBackgroundColor="?attr/colorSurface"
+                    app:cardCornerRadius="32dp"
+                    app:cardElevation="8dp"
+                    app:strokeWidth="0dp">
 
-                    <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="-10dp"
-                        android:layout_marginEnd="-20dp"
-                        android:alpha="0.3"
-                        android:src="@drawable/ic_wordle_graphic"
-                        android:scaleType="fitCenter" />
-
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="24dp">
+                        android:background="@drawable/bg_home_card_quiz">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_level_badge"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="4dp"
-                            android:text="@string/home_card_two_badge"
-                            android:textColor="@color/primary_dark"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="-10dp"
+                            android:layout_marginEnd="-20dp"
+                            android:alpha="0.3"
+                            android:src="@drawable/ic_quiz_graphic"
+                            android:scaleType="fitCenter" />
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:text="@string/home_card_two_title"
-                            android:textColor="@color/text_primary"
-                            android:textSize="24sp"
-                            android:textStyle="bold" />
+                            android:orientation="vertical"
+                            android:padding="24dp">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/home_card_two_subtitle"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="14sp"
-                            android:lineSpacingExtra="2dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_level_badge"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="4dp"
+                                android:text="@string/home_card_one_badge"
+                                android:textColor="@color/primary_dark"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnDailyWordle"
-                            style="@style/AppButtonPrimary"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:text="@string/wordle_button"
-                            app:cornerRadius="16dp" />
-                    </LinearLayout>
-                </RelativeLayout>
-            </com.google.android.material.card.MaterialCardView>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:text="@string/home_card_one_title"
+                                android:textColor="@color/text_primary"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:stateListAnimator="@animator/card_click_animator"
-                app:cardBackgroundColor="?attr/colorSurface"
-                app:cardCornerRadius="32dp"
-                app:cardElevation="8dp"
-                app:strokeWidth="0dp">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="@string/home_card_one_subtitle"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="14sp"
+                                android:lineSpacingExtra="2dp" />
 
-                <RelativeLayout
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnStartQuiz"
+                                style="@style/AppButtonPrimary"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:text="@string/start_quiz_action"
+                                app:cornerRadius="16dp" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Wordle Card -->
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_home_card_story">
+                    android:layout_marginTop="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:stateListAnimator="@animator/card_click_animator"
+                    app:cardBackgroundColor="?attr/colorSurface"
+                    app:cardCornerRadius="32dp"
+                    app:cardElevation="8dp"
+                    app:strokeWidth="0dp">
 
-                    <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="-10dp"
-                        android:layout_marginEnd="-20dp"
-                        android:alpha="0.3"
-                        android:src="@drawable/ic_llm_graphic"
-                        android:scaleType="fitCenter" />
-
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="24dp">
+                        android:background="@drawable/bg_home_card_wordle">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_level_badge"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="4dp"
-                            android:text="@string/home_card_three_badge"
-                            android:textColor="@color/primary_dark"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="-10dp"
+                            android:layout_marginEnd="-20dp"
+                            android:alpha="0.3"
+                            android:src="@drawable/ic_wordle_graphic"
+                            android:scaleType="fitCenter" />
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:text="@string/home_card_three_title"
-                            android:textColor="@color/text_primary"
-                            android:textSize="24sp"
-                            android:textStyle="bold" />
+                            android:orientation="vertical"
+                            android:padding="24dp">
 
-                        <TextView
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_level_badge"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="4dp"
+                                android:text="@string/home_card_two_badge"
+                                android:textColor="@color/primary_dark"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:text="@string/home_card_two_title"
+                                android:textColor="@color/text_primary"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="@string/home_card_two_subtitle"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="14sp"
+                                android:lineSpacingExtra="2dp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnDailyWordle"
+                                style="@style/AppButtonSecondary"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:text="@string/wordle_button"
+                                app:cornerRadius="16dp" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Word Chain Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:stateListAnimator="@animator/card_click_animator"
+                    app:cardBackgroundColor="?attr/colorSurface"
+                    app:cardCornerRadius="32dp"
+                    app:cardElevation="8dp"
+                    app:strokeWidth="0dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_home_card_story">
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="-10dp"
+                            android:layout_marginEnd="-20dp"
+                            android:alpha="0.3"
+                            android:src="@drawable/ic_llm_graphic"
+                            android:scaleType="fitCenter" />
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/home_card_three_subtitle"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="14sp"
-                            android:lineSpacingExtra="2dp" />
+                            android:orientation="vertical"
+                            android:padding="24dp">
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnWordChain"
-                            style="@style/AppButtonPrimary"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:text="@string/word_chain_button"
-                            app:cornerRadius="16dp" />
-                    </LinearLayout>
-                </RelativeLayout>
-            </com.google.android.material.card.MaterialCardView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_level_badge"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="4dp"
+                                android:text="Kelime Zinciri"
+                                android:textColor="@color/primary_dark"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:text="Kelime dağarcığını test et."
+                                android:textColor="@color/text_primary"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Verilen harfle başlayan en çok kelimeyi bulmaya çalış."
+                                android:textColor="@color/text_secondary"
+                                android:textSize="14sp"
+                                android:lineSpacingExtra="2dp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnWordChain"
+                                style="@style/AppButtonTertiary"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:text="Zinciri Başlat"
+                                app:cornerRadius="16dp" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <include layout="@layout/include_bottom_nav" />
-</LinearLayout>
+    <!-- Fixed Bottom Navigation Container -->
+    <FrameLayout
+        android:id="@+id/bottom_nav_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <include layout="@layout/include_bottom_nav" />
+    </FrameLayout>
+
+</RelativeLayout>
