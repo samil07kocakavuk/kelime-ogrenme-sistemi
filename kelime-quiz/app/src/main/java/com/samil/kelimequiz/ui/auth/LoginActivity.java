@@ -2,6 +2,7 @@ package com.samil.kelimequiz.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import com.samil.kelimequiz.util.PasswordVisibilityToggle;
 import com.samil.kelimequiz.util.SessionManager;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "LoginActivity";
+
     private TextInputEditText etUsername;
     private TextInputEditText etPassword;
     private TextInputLayout tilPassword;
@@ -67,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         AppContainer.from(this).wordSeedBootstrapper.ensureSeedWords(result.getUserId());
                     } catch (RuntimeException seedException) {
-                        seedException.printStackTrace();
+                        Log.e(TAG, "Seed words could not be imported.", seedException);
                     }
                 }
                 runOnUiThread(() -> handleAuthResult(result));

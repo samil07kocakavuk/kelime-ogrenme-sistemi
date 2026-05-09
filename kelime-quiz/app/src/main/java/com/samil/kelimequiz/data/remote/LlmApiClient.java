@@ -4,8 +4,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -19,85 +21,118 @@ public class LlmApiClient {
     private LlmApiClient() {
     }
 
-    public static String generateStory(List<String> words) throws Exception {
+    public static String generateStory(List<String> words) throws IOException {
         String wordList = String.join(", ", words);
         String systemPrompt = "Sen bir yardimci egitim asistanisin. Sana verilen 5 Ingilizce kelimeyi kullanarak kisa bir Turkce hikaye yazmalisin (3-4 cumle). Ingilizce kelimeleri hikaye icinde aynen koru, cevirme. Sadece hikayeyi yaz.";
         String userPrompt = "Kelimeler: " + wordList;
 
-        int maxRetries = 3;
-        Exception lastException = null;
-
-        for (int i = 0; i < maxRetries; i++) {
+        IOException lastException = null;
+        for (int i = 0; i < 3; i++) {
             try {
-                String encodedSystem = URLEncoder.encode(systemPrompt, "UTF-8").replace("+", "%20");
-                String encodedUser = URLEncoder.encode(userPrompt, "UTF-8").replace("+", "%20");
-                
-                // Pollinations API query parameters for better control
-                URL url = new URL(TEXT_URL + encodedUser + "?system=" + encodedSystem + "&model=openai");
-                
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                connection.setRequestProperty("User-Agent", "Mozilla/5.0"); // Add User-Agent to avoid blocks
-                connection.setConnectTimeout(15000);
-                connection.setReadTimeout(30000);
-
-                int responseCode = connection.getResponseCode();
-                if (responseCode == 200) {
-                    BufferedReader reader = new BufferedReader(
-                            new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
-                    StringBuilder storyBuilder = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        storyBuilder.append(line).append("\n");
+                HttpURLConnection connection = openConnection(
+                        new URL(TEXT_URL + encode(userPrompt) + "?system=" + encode(systemPrompt) + "&model=openai"),
+                        15000,
+                        30000
+                );
+                try {
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        try (BufferedReader reader = new BufferedReader(
+                                new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+                            StringBuilder storyBuilder = new StringBuilder();
+                            String line;
+                            while ((line = reader.readLine()) != null) {
+                                storyBuilder.append(line).append('\n');
+                            }
+                            String result = storyBuilder.toString().trim();
+                            if (!result.isEmpty()) {
+                                return result;
+                            }
+                        }
+                        lastException = new IOException("Hikaye metni bos geldi.");
+                    } else {
+                        lastException = new IOException("Beklenmeyen HTTP kodu: " + responseCode);
                     }
-                    reader.close();
-                    connection.disconnect();
-                    String result = storyBuilder.toString().trim();
-                    if (!result.isEmpty()) return result;
-                } else {
+                } finally {
                     connection.disconnect();
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 lastException = e;
-                // Wait a bit before retry
-                Thread.sleep(1000 * (i + 1));
+                if (i < 2) {
+                    sleepQuietly(1000L * (i + 1));
+                }
             }
         }
-        throw (lastException != null) ? lastException : new RuntimeException("Hikaye olusturulamadi (API Hatasi)");
+        if (lastException != null) {
+            throw lastException;
+        }
+        throw new IOException("Hikaye olusturulamadi (API Hatasi)");
     }
 
-    public static Bitmap generateImage(String storyDescription) throws Exception {
+    public static Bitmap generateImage(String storyDescription) throws IOException {
         String prompt = "colorful children book illustration, no text, " + storyDescription;
-        int maxRetries = 2;
-        Exception lastException = null;
 
-        for (int i = 0; i < maxRetries; i++) {
+        IOException lastException = null;
+        for (int i = 0; i < 2; i++) {
             try {
-                String encoded = URLEncoder.encode(prompt, "UTF-8").replace("+", "%20");
-                URL url = new URL(IMAGE_URL + encoded + "?width=512&height=512&nologo=true&model=flux");
-                
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                connection.setRequestProperty("User-Agent", "Mozilla/5.0");
-                connection.setConnectTimeout(20000);
-                connection.setReadTimeout(45000);
-                connection.setInstanceFollowRedirects(true);
-
-                int responseCode = connection.getResponseCode();
-                if (responseCode == 200) {
-                    InputStream inputStream = connection.getInputStream();
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    inputStream.close();
-                    connection.disconnect();
-                    if (bitmap != null) return bitmap;
-                } else {
+                HttpURLConnection connection = openConnection(
+                        new URL(IMAGE_URL + encode(prompt) + "?width=512&height=512&nologo=true&model=flux"),
+                        20000,
+                        45000
+                );
+                try {
+                    connection.setInstanceFollowRedirects(true);
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        try (InputStream inputStream = connection.getInputStream()) {
+                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                            if (bitmap != null) {
+                                return bitmap;
+                            }
+                        }
+                        lastException = new IOException("Gorsel cozulenemedi.");
+                    } else {
+                        lastException = new IOException("Beklenmeyen HTTP kodu: " + responseCode);
+                    }
+                } finally {
                     connection.disconnect();
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 lastException = e;
-                Thread.sleep(1500);
+                if (i < 1) {
+                    sleepQuietly(1500L);
+                }
             }
         }
-        throw (lastException != null) ? lastException : new RuntimeException("Gorsel olusturulamadi (API Hatasi)");
+        if (lastException != null) {
+            throw lastException;
+        }
+        throw new IOException("Gorsel olusturulamadi (API Hatasi)");
+    }
+
+    private static HttpURLConnection openConnection(URL url, int connectTimeoutMs, int readTimeoutMs) throws IOException {
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+        connection.setConnectTimeout(connectTimeoutMs);
+        connection.setReadTimeout(readTimeoutMs);
+        return connection;
+    }
+
+    private static String encode(String value) throws IOException {
+        try {
+            return URLEncoder.encode(value, "UTF-8").replace("+", "%20");
+        } catch (UnsupportedEncodingException e) {
+            throw new IOException("UTF-8 desteklenmiyor.", e);
+        }
+    }
+
+    private static void sleepQuietly(long millis) throws IOException {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new IOException("İstek kesildi.", e);
+        }
     }
 }

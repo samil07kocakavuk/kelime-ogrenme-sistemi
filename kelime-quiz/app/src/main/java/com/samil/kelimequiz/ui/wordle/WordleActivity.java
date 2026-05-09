@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -314,7 +315,7 @@ public class WordleActivity extends AppCompatActivity {
         btnEnter.setInsetBottom(0);
         btnEnter.setTextSize(10);
         btnEnter.setTypeface(null, Typeface.BOLD);
-        btnEnter.setText("GÖNDER");
+        btnEnter.setText(R.string.wordle_send_action);
         btnEnter.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.wordle_correct)));
         btnEnter.setTextColor(getColor(R.color.white));
         btnEnter.setCornerRadius(dpToPx(6));
@@ -533,7 +534,11 @@ public class WordleActivity extends AppCompatActivity {
         }
 
         // Modern BottomSheet Dialog
-        View dialogView = getLayoutInflater().inflate(R.layout.dialog_wordle_result, null);
+        View dialogView = getLayoutInflater().inflate(
+                R.layout.dialog_wordle_result,
+                (ViewGroup) findViewById(android.R.id.content),
+                false
+        );
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(dialogView);
 
@@ -552,7 +557,7 @@ public class WordleActivity extends AppCompatActivity {
             tvTitle.setTextColor(getColor(R.color.wordle_correct));
             
             int attempts = getSavedGuesses(selectedDate).size();
-            tvDesc.setText(getString(R.string.wordle_win_message_short, attempts));
+            tvDesc.setText(getResources().getQuantityString(R.plurals.wordle_win_message_short, attempts, attempts));
         } else {
             ivIcon.setImageResource(R.drawable.ic_info);
             ivIcon.setImageTintList(ColorStateList.valueOf(getColor(R.color.error)));

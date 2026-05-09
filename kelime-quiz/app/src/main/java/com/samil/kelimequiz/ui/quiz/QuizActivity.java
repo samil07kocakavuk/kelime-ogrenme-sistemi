@@ -271,22 +271,22 @@ public class QuizActivity extends AppCompatActivity {
 
         tvCorrectCount.setText(String.valueOf(correctCount));
         tvWrongCount.setText(String.valueOf(wrongCount));
-        tvSuccessRate.setText("%" + successPercent);
+        tvSuccessRate.setText(getString(R.string.quiz_success_rate_format, successPercent));
 
         // Başarı oranına göre mesaj ve başlık
         if (successPercent == 100) {
-            tvReportTitle.setText("Tebrikler! 🎉");
-            tvReportSubtitle.setText("Kusursuz bir sonuç! Tüm kelimeleri bildiniz.");
+            tvReportTitle.setText(R.string.quiz_result_title_perfect);
+            tvReportSubtitle.setText(R.string.quiz_result_subtitle_perfect);
             tvReportTitle.setTextColor(getColor(R.color.success));
         } else if (successPercent >= 70) {
-            tvReportTitle.setText("Harika İş! 🌟");
-            tvReportSubtitle.setText("Çok iyi bir performans sergilediniz.");
+            tvReportTitle.setText(R.string.quiz_result_title_great);
+            tvReportSubtitle.setText(R.string.quiz_result_subtitle_great);
         } else if (successPercent >= 40) {
-            tvReportTitle.setText("İyi Deneme 👍");
-            tvReportSubtitle.setText("Biraz daha pratikle mükemmelleşebilirsin.");
+            tvReportTitle.setText(R.string.quiz_result_title_good);
+            tvReportSubtitle.setText(R.string.quiz_result_subtitle_good);
         } else {
-            tvReportTitle.setText("Vazgeçme! 💪");
-            tvReportSubtitle.setText("Çalışmaya devam et, başaracaksın.");
+            tvReportTitle.setText(R.string.quiz_result_title_keep_going);
+            tvReportSubtitle.setText(R.string.quiz_result_subtitle_keep_going);
         }
 
         // Yanlış raporu - Sadece yanlış kelimeler ve doğruları

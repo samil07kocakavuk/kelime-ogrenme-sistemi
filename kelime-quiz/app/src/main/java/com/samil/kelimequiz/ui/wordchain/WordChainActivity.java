@@ -18,6 +18,7 @@ import com.samil.kelimequiz.util.AppExecutors;
 import com.samil.kelimequiz.util.NavigationHelper;
 import com.samil.kelimequiz.util.SessionManager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -108,7 +109,7 @@ public class WordChainActivity extends AppCompatActivity {
                     ivStoryImage.setVisibility(View.VISIBLE);
                     tvImageStatus.setVisibility(View.GONE);
                 });
-            } catch (Exception e) {
+            } catch (IOException e) {
                 runOnUiThread(() -> {
                     if (tvStoryText.getText().toString().equals(getString(R.string.word_chain_story_loading))) {
                         tvStoryText.setText(getString(R.string.word_chain_story_error, e.getMessage()));

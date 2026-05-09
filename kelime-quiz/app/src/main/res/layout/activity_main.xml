@@ -33,6 +33,7 @@
                 android:layout_height="18dp"
                 android:layout_marginEnd="6dp"
                 android:src="@drawable/ic_user"
+                android:contentDescription="@string/home_profile_image_content_description"
                 app:tint="@color/primary" />
 
             <TextView
@@ -41,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Kullanıcı"
+                android:text="@string/home_user_label"
                 android:textColor="@color/text_primary"
                 android:textSize="13sp"
                 android:textStyle="bold" />
@@ -66,7 +67,7 @@
                     android:id="@+id/tvAverageLevelLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Seviye"
+                    android:text="@string/home_level_label"
                     android:textColor="@color/text_secondary"
                     android:textSize="11sp"
                     android:textStyle="bold" />
@@ -76,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="0.0"
+                    android:text="@string/zero_decimal"
                     android:textColor="@color/primary"
                     android:textSize="11sp"
                     android:textStyle="bold" />

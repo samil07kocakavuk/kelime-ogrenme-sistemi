@@ -6,9 +6,11 @@ import android.content.SharedPreferences;
 import com.samil.kelimequiz.data.repository.WordRepository;
 import com.samil.kelimequiz.domain.model.WordLevel;
 
+import org.json.JSONException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,12 +74,12 @@ public class WordSeedBootstrapper {
              Scanner scanner = new Scanner(inputStream).useDelimiter("\\A")) {
             String json = scanner.hasNext() ? scanner.next() : "[]";
             return parseSeedWords(json);
-        } catch (Exception e) {
+        } catch (IOException | JSONException e) {
             throw new IllegalStateException("Hazir kelime havuzu yuklenemedi.", e);
         }
     }
 
-    private List<SeedWord> parseSeedWords(String json) throws Exception {
+    private List<SeedWord> parseSeedWords(String json) throws JSONException {
         JSONArray items = new JSONArray(json);
         List<SeedWord> words = new ArrayList<>();
         for (int i = 0; i < items.length(); i++) {
