@@ -10,6 +10,7 @@ import com.samil.kelimequiz.domain.model.QuizAnswerResult;
 import com.samil.kelimequiz.domain.model.QuizQuestion;
 import com.samil.kelimequiz.domain.model.QuizSummary;
 import com.samil.kelimequiz.testsupport.TestDoubles.InMemoryQuizProgressDao;
+import com.samil.kelimequiz.testsupport.TestDoubles.InMemoryQuizResultDao;
 import com.samil.kelimequiz.testsupport.TestDoubles.InMemoryWordDao;
 
 import java.util.List;
@@ -21,7 +22,8 @@ public class QuizRepositoryTest {
     public void startQuizPrioritizesDueWordsAndFillsWithNewWords() {
         InMemoryWordDao wordDao = new InMemoryWordDao();
         InMemoryQuizProgressDao progressDao = new InMemoryQuizProgressDao();
-        QuizRepository repository = new QuizRepository(wordDao, progressDao);
+        InMemoryQuizResultDao resultDao = new InMemoryQuizResultDao();
+        QuizRepository repository = new QuizRepository(wordDao, progressDao, resultDao);
 
         WordEntity dueWord = word(1, 1, "apple", "elma", "Yiyecekler");
         WordEntity newWord = word(2, 1, "doctor", "doktor", "Meslekler");
@@ -48,7 +50,8 @@ public class QuizRepositoryTest {
     public void answerQuestionAdvancesAndResetsProgress() {
         InMemoryWordDao wordDao = new InMemoryWordDao();
         InMemoryQuizProgressDao progressDao = new InMemoryQuizProgressDao();
-        QuizRepository repository = new QuizRepository(wordDao, progressDao);
+        InMemoryQuizResultDao resultDao = new InMemoryQuizResultDao();
+        QuizRepository repository = new QuizRepository(wordDao, progressDao, resultDao);
 
         WordEntity word = word(1, 1, "apple", "elma", "Yiyecekler");
         wordDao.put(word);
@@ -69,7 +72,8 @@ public class QuizRepositoryTest {
     public void summaryAndAverageUseStoredProgress() {
         InMemoryWordDao wordDao = new InMemoryWordDao();
         InMemoryQuizProgressDao progressDao = new InMemoryQuizProgressDao();
-        QuizRepository repository = new QuizRepository(wordDao, progressDao);
+        InMemoryQuizResultDao resultDao = new InMemoryQuizResultDao();
+        QuizRepository repository = new QuizRepository(wordDao, progressDao, resultDao);
 
         WordEntity first = word(1, 1, "apple", "elma", "Yiyecekler");
         WordEntity second = word(2, 1, "doctor", "doktor", "Meslekler");

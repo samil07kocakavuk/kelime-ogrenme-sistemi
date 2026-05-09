@@ -4,7 +4,9 @@ import com.samil.kelimequiz.data.local.dao.QuizProgressDao;
 import com.samil.kelimequiz.data.local.dao.UserDao;
 import com.samil.kelimequiz.data.local.dao.WordDao;
 import com.samil.kelimequiz.data.local.dao.WordSampleDao;
+import com.samil.kelimequiz.data.local.dao.QuizResultDao;
 import com.samil.kelimequiz.data.local.entity.QuizProgressEntity;
+import com.samil.kelimequiz.data.local.entity.QuizResultEntity;
 import com.samil.kelimequiz.data.local.entity.UserEntity;
 import com.samil.kelimequiz.data.local.entity.WordEntity;
 import com.samil.kelimequiz.data.local.entity.WordSampleEntity;
@@ -59,6 +61,16 @@ public final class TestDoubles {
             return user == null ? null : copy(user);
         }
 
+        @Override
+        public void updateStreak(int userId, int streak, long lastLogin) {
+            UserEntity user = byId.get(userId);
+            if (user != null) {
+                user.currentStreak = streak;
+                user.lastLoginDate = lastLogin;
+                byUsername.put(normalize(user.username), copy(user));
+            }
+        }
+
         public void put(UserEntity user) {
             byId.put(user.userId, copy(user));
             byUsername.put(normalize(user.username), copy(user));
@@ -76,6 +88,8 @@ public final class TestDoubles {
             copy.passwordSalt = source.passwordSalt;
             copy.passwordIterations = source.passwordIterations;
             copy.createdAt = source.createdAt;
+            copy.currentStreak = source.currentStreak;
+            copy.lastLoginDate = source.lastLoginDate;
             return copy;
         }
     }
@@ -176,6 +190,16 @@ public final class TestDoubles {
             for (WordEntity word : words.values()) {
                 if (word.userId == userId && word.engWord != null && word.engWord.length() >= minLen && word.engWord.length() <= maxLen) {
                     return word.engWord;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public WordEntity getRandomWord(int userId) {
+            for (WordEntity word : words.values()) {
+                if (word.userId == userId) {
+                    return copy(word);
                 }
             }
             return null;
@@ -376,6 +400,17 @@ public final class TestDoubles {
             return count == 0 ? null : (double) total / count;
         }
 
+        @Override
+        public int countLevelOneWords(int userId) {
+            int count = 0;
+            for (QuizProgressEntity progress : progressByWordId.values()) {
+                if (progress.userId == userId && progress.level == 1) {
+                    count++;
+                }
+            }
+            return count;
+        }
+
         private static QuizProgressEntity copy(QuizProgressEntity source) {
             QuizProgressEntity copy = new QuizProgressEntity();
             copy.progressId = source.progressId;
@@ -398,6 +433,61 @@ public final class TestDoubles {
             copy.category = source.category;
             copy.cefrLevel = source.cefrLevel;
             copy.createdAt = source.createdAt;
+            return copy;
+        }
+    }
+
+    public static final class InMemoryQuizResultDao implements QuizResultDao {
+        private final List<QuizResultEntity> results = new ArrayList<>();
+
+        @Override
+        public void insert(QuizResultEntity result) {
+            results.add(copy(result));
+        }
+
+        @Override
+        public Double getAverageSuccessRate(int userId) {
+            double total = 0;
+            int count = 0;
+            for (QuizResultEntity res : results) {
+                if (res.userId == userId) {
+                    total += res.successRate;
+                    count++;
+                }
+            }
+            return count == 0 ? null : total / count;
+        }
+
+        @Override
+        public List<QuizResultEntity> listByUser(int userId) {
+            List<QuizResultEntity> userResults = new ArrayList<>();
+            for (QuizResultEntity res : results) {
+                if (res.userId == userId) {
+                    userResults.add(copy(res));
+                }
+            }
+            return userResults;
+        }
+
+        @Override
+        public List<QuizResultEntity> getRecentResults(int userId, long since) {
+            List<QuizResultEntity> userResults = new ArrayList<>();
+            for (QuizResultEntity res : results) {
+                if (res.userId == userId && res.completedAt >= since) {
+                    userResults.add(copy(res));
+                }
+            }
+            return userResults;
+        }
+
+        private static QuizResultEntity copy(QuizResultEntity source) {
+            QuizResultEntity copy = new QuizResultEntity();
+            copy.resultId = source.resultId;
+            copy.userId = source.userId;
+            copy.totalQuestions = source.totalQuestions;
+            copy.correctAnswers = source.correctAnswers;
+            copy.successRate = source.successRate;
+            copy.completedAt = source.completedAt;
             return copy;
         }
     }
