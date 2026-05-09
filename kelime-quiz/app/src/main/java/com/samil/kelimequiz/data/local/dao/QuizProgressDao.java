@@ -50,4 +50,7 @@ public interface QuizProgressDao {
             + "INNER JOIN words w ON qp.wordId = w.wordId "
             + "WHERE qp.userId = :userId AND w.category = :category")
     Double getAverageLevelByCategory(int userId, String category);
+
+    @Query("SELECT AVG(level) FROM quiz_progress WHERE userId = :userId")
+    Double getGlobalAverageLevel(int userId);
 }

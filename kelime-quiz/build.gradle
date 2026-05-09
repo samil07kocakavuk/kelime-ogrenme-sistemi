@@ -1,3 +1,22 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.bouncycastle:bcprov-jdk18on:1.78.1"
+        classpath "org.bouncycastle:bcpkix-jdk18on:1.78.1"
+    }
+}
+
 plugins {
     id 'com.android.application' version '8.5.2' apply false
+    id "org.sonarqube" version "7.3.0.8198"
+}
+
+sonar {
+    properties {
+        property "sonar.projectKey", "samil07kocakavuk_kelime-quiz"
+        property "sonar.organization", "samilkocakavuk"
+    }
 }

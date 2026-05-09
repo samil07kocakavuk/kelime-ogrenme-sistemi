@@ -50,6 +50,7 @@
                     android:padding="24dp">
 
                     <TextView
+                        android:id="@+id/tvWordLevelLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/english_word_hint"
@@ -71,7 +72,12 @@
                             android:text="@string/quiz_word_placeholder"
                             android:textColor="@color/text_primary"
                             android:textSize="34sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:maxLines="1"
+                            app:autoSizeMaxTextSize="34sp"
+                            app:autoSizeMinTextSize="18sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:autoSizeTextType="uniform" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnHint"
@@ -80,6 +86,10 @@
                             android:layout_height="wrap_content"
                             android:text="@string/hint_action"
                             android:textSize="12sp"
+                            app:icon="@drawable/ic_lightbulb"
+                            app:iconGravity="start"
+                            app:iconPadding="4dp"
+                            app:iconSize="18dp"
                             android:visibility="gone" />
                     </LinearLayout>
 
