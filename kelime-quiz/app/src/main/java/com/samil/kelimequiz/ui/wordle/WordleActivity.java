@@ -176,6 +176,9 @@ public class WordleActivity extends AppCompatActivity {
     }
 
     private void replayGuess(String guess) {
+        if (!isGuessLengthValid(guess)) {
+            return;
+        }
         int wordLen = targetWord.length();
         LinearLayout row = gridRows.get(currentAttempt);
         for (int i = 0; i < wordLen && i < guess.length(); i++) {
@@ -381,6 +384,9 @@ public class WordleActivity extends AppCompatActivity {
     }
 
     private void updateKeyboardColors(String guess) {
+        if (!isGuessLengthValid(guess)) {
+            return;
+        }
         int[] result = evaluateGuess(guess);
         for (int i = 0; i < guess.length(); i++) {
             String letter = String.valueOf(guess.charAt(i));
@@ -472,6 +478,9 @@ public class WordleActivity extends AppCompatActivity {
     // ─── RENK DEĞERLENDİRME ───
 
     private void applyColors(int rowIndex, String guess) {
+        if (!isGuessLengthValid(guess)) {
+            return;
+        }
         LinearLayout row = gridRows.get(rowIndex);
         int len = targetWord.length();
         int[] result = evaluateGuess(guess);
@@ -490,6 +499,9 @@ public class WordleActivity extends AppCompatActivity {
     private int[] evaluateGuess(String guess) {
         int len = targetWord.length();
         int[] result = new int[len];
+        if (!isGuessLengthValid(guess)) {
+            return result;
+        }
         boolean[] targetUsed = new boolean[len];
         boolean[] guessUsed = new boolean[len];
 
@@ -588,5 +600,9 @@ public class WordleActivity extends AppCompatActivity {
 
     private int dpToPx(int dp) {
         return Math.round(dp * getResources().getDisplayMetrics().density);
+    }
+
+    private boolean isGuessLengthValid(String guess) {
+        return targetWord != null && guess != null && guess.length() == targetWord.length();
     }
 }

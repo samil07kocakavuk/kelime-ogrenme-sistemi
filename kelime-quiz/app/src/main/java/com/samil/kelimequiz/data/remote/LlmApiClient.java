@@ -2,15 +2,14 @@ package com.samil.kelimequiz.data.remote;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -29,11 +28,7 @@ public class LlmApiClient {
         IOException lastException = null;
         for (int i = 0; i < 3; i++) {
             try {
-                HttpURLConnection connection = openConnection(
-                        new URL(TEXT_URL + encode(userPrompt) + "?system=" + encode(systemPrompt) + "&model=openai"),
-                        15000,
-                        30000
-                );
+                HttpURLConnection connection = openConnection(buildTextUrl(userPrompt, systemPrompt), 15000, 30000);
                 try {
                     int responseCode = connection.getResponseCode();
                     if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -75,11 +70,7 @@ public class LlmApiClient {
         IOException lastException = null;
         for (int i = 0; i < 2; i++) {
             try {
-                HttpURLConnection connection = openConnection(
-                        new URL(IMAGE_URL + encode(prompt) + "?width=512&height=512&nologo=true&model=flux"),
-                        20000,
-                        45000
-                );
+                HttpURLConnection connection = openConnection(buildImageUrl(prompt), 20000, 45000);
                 try {
                     connection.setInstanceFollowRedirects(true);
                     int responseCode = connection.getResponseCode();
@@ -110,6 +101,26 @@ public class LlmApiClient {
         throw new IOException("Gorsel olusturulamadi (API Hatasi)");
     }
 
+    private static URL buildTextUrl(String userPrompt, String systemPrompt) throws IOException {
+        Uri uri = Uri.parse(TEXT_URL).buildUpon()
+                .appendPath(userPrompt)
+                .appendQueryParameter("system", systemPrompt)
+                .appendQueryParameter("model", "openai")
+                .build();
+        return new URL(uri.toString());
+    }
+
+    private static URL buildImageUrl(String prompt) throws IOException {
+        Uri uri = Uri.parse(IMAGE_URL).buildUpon()
+                .appendPath(prompt)
+                .appendQueryParameter("width", "512")
+                .appendQueryParameter("height", "512")
+                .appendQueryParameter("nologo", "true")
+                .appendQueryParameter("model", "flux")
+                .build();
+        return new URL(uri.toString());
+    }
+
     private static HttpURLConnection openConnection(URL url, int connectTimeoutMs, int readTimeoutMs) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
@@ -117,14 +128,6 @@ public class LlmApiClient {
         connection.setConnectTimeout(connectTimeoutMs);
         connection.setReadTimeout(readTimeoutMs);
         return connection;
-    }
-
-    private static String encode(String value) throws IOException {
-        try {
-            return URLEncoder.encode(value, "UTF-8").replace("+", "%20");
-        } catch (UnsupportedEncodingException e) {
-            throw new IOException("UTF-8 desteklenmiyor.", e);
-        }
     }
 
     private static void sleepQuietly(long millis) throws IOException {

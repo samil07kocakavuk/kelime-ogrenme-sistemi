@@ -83,12 +83,43 @@ public class WordReportHtmlBuilder {
     private void appendTable(StringBuilder sb, List<WordWithLevel> words) {
         sb.append("<table><tr><th>İngilizce</th><th>Türkçe</th><th>Kategori</th><th>CEFR</th><th>Quiz Seviyesi</th></tr>");
         for (WordWithLevel word : words) {
-            sb.append("<tr><td>").append(word.word.engWord).append("</td>")
-                    .append("<td>").append(word.word.trWord).append("</td>")
-                    .append("<td>").append(word.word.category != null ? word.word.category : "-").append("</td>")
-                    .append("<td>").append(word.word.cefrLevel != null ? word.word.cefrLevel : "-").append("</td>")
+            sb.append("<tr><td>").append(escapeHtml(word.word.engWord)).append("</td>")
+                    .append("<td>").append(escapeHtml(word.word.trWord)).append("</td>")
+                    .append("<td>").append(escapeHtml(word.word.category != null ? word.word.category : "-")).append("</td>")
+                    .append("<td>").append(escapeHtml(word.word.cefrLevel != null ? word.word.cefrLevel : "-")).append("</td>")
                     .append("<td>").append(word.level).append("/6</td></tr>");
         }
         sb.append("</table>");
+    }
+
+    private String escapeHtml(String value) {
+        if (value == null || value.isEmpty()) {
+            return "";
+        }
+        StringBuilder escaped = new StringBuilder(value.length());
+        for (int i = 0; i < value.length(); i++) {
+            char ch = value.charAt(i);
+            switch (ch) {
+                case '&':
+                    escaped.append("&amp;");
+                    break;
+                case '<':
+                    escaped.append("&lt;");
+                    break;
+                case '>':
+                    escaped.append("&gt;");
+                    break;
+                case '"':
+                    escaped.append("&quot;");
+                    break;
+                case '\'':
+                    escaped.append("&#39;");
+                    break;
+                default:
+                    escaped.append(ch);
+                    break;
+            }
+        }
+        return escaped.toString();
     }
 }
