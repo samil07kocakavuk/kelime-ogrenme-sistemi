@@ -271,13 +271,18 @@ public class WordleActivity extends AppCompatActivity {
     }
 
     private TextView createCell() {
-        int size = dpToPx(48);
+        int wordLen = targetWord != null ? targetWord.length() : 5;
+        int screenWidthPx = getResources().getDisplayMetrics().widthPixels;
+        // Kenar boşluklarını çıkar (12dp + 12dp padding + extra safety)
+        int availableWidth = screenWidthPx - dpToPx(40);
+        int cellSize = Math.min(dpToPx(48), (availableWidth / wordLen) - dpToPx(6));
+
         TextView cell = new TextView(this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(cellSize, cellSize);
         params.setMargins(dpToPx(3), dpToPx(3), dpToPx(3), dpToPx(3));
         cell.setLayoutParams(params);
         cell.setGravity(Gravity.CENTER);
-        cell.setTextSize(22);
+        cell.setTextSize(cellSize > dpToPx(40) ? 22 : 18);
         cell.setTypeface(null, Typeface.BOLD);
         cell.setTextColor(getColor(R.color.text_primary));
         cell.setBackgroundResource(R.drawable.bg_wordle_empty);
@@ -301,13 +306,13 @@ public class WordleActivity extends AppCompatActivity {
 
         // GÖNDER butonu - belirgin
         MaterialButton btnEnter = new MaterialButton(this);
-        LinearLayout.LayoutParams enterParams = new LinearLayout.LayoutParams(dpToPx(72), dpToPx(54));
+        LinearLayout.LayoutParams enterParams = new LinearLayout.LayoutParams(dpToPx(68), dpToPx(48));
         enterParams.setMargins(dpToPx(2), dpToPx(3), dpToPx(2), dpToPx(3));
         btnEnter.setLayoutParams(enterParams);
         btnEnter.setPadding(0, 0, 0, 0);
         btnEnter.setInsetTop(0);
         btnEnter.setInsetBottom(0);
-        btnEnter.setTextSize(11);
+        btnEnter.setTextSize(10);
         btnEnter.setTypeface(null, Typeface.BOLD);
         btnEnter.setText("GÖNDER");
         btnEnter.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.wordle_correct)));
@@ -322,7 +327,7 @@ public class WordleActivity extends AppCompatActivity {
 
         // SİL butonu
         MaterialButton btnDel = new MaterialButton(this);
-        LinearLayout.LayoutParams delParams = new LinearLayout.LayoutParams(dpToPx(54), dpToPx(54));
+        LinearLayout.LayoutParams delParams = new LinearLayout.LayoutParams(dpToPx(48), dpToPx(48));
         delParams.setMargins(dpToPx(2), dpToPx(3), dpToPx(2), dpToPx(3));
         btnDel.setLayoutParams(delParams);
         btnDel.setPadding(0, 0, 0, 0);
@@ -357,7 +362,7 @@ public class WordleActivity extends AppCompatActivity {
 
     private MaterialButton createLetterKey(String letter) {
         MaterialButton btn = new MaterialButton(this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, dpToPx(54), 1f);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, dpToPx(48), 1f);
         params.setMargins(dpToPx(2), dpToPx(3), dpToPx(2), dpToPx(3));
         btn.setLayoutParams(params);
         btn.setPadding(0, 0, 0, 0);
