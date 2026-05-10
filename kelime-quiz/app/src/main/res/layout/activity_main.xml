@@ -37,13 +37,14 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
+                        android:layout_toStartOf="@id/layoutHeaderActions"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tvGreeting"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Merhaba,"
+                            android:text="@string/home_greeting"
                             android:textColor="@color/text_secondary"
                             android:textSize="14sp" />
 
@@ -58,6 +59,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/layoutHeaderActions"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -71,7 +73,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="Rapor"
+                            android:text="@string/home_report_action"
                             android:textColor="@color/primary"
                             android:textSize="12sp"
                             android:textStyle="bold"
@@ -89,12 +91,13 @@
                             app:strokeColor="@color/primary">
 
                             <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerInside"
-                                android:padding="8dp"
-                                android:src="@drawable/ic_user"
-                                app:tint="@color/primary" />
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerInside"
+                            android:padding="8dp"
+                            android:src="@drawable/ic_user"
+                            android:contentDescription="@string/home_profile_image_content_description"
+                            app:tint="@color/primary" />
                         </com.google.android.material.card.MaterialCardView>
                     </LinearLayout>
                 </RelativeLayout>
@@ -117,14 +120,14 @@
                             android:id="@+id/tvStreakValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0 Gün"
+                            android:text="@string/zero_day_count"
                             android:textColor="@color/text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Seri 🔥"
+                            android:text="@string/streak_label"
                             android:textColor="@color/text_secondary"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -144,14 +147,14 @@
                             android:id="@+id/tvSuccessRateValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="%0"
+                            android:text="@string/zero_percent_display"
                             android:textColor="@color/text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Başarı 🎯"
+                            android:text="@string/success_label"
                             android:textColor="@color/text_secondary"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -171,14 +174,14 @@
                             android:id="@+id/tvWordCountValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/zero_value"
                             android:textColor="@color/text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Kelime ✅"
+                            android:text="@string/word_label"
                             android:textColor="@color/text_secondary"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -198,14 +201,14 @@
                             android:id="@+id/tvAverageLevelValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0.0"
+                            android:text="@string/zero_decimal"
                             android:textColor="@color/text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Ort. Seviye"
+                            android:text="@string/average_level_label"
                             android:textColor="@color/text_secondary"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -244,7 +247,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="💡 Günün Kelimesi"
+                            android:text="@string/daily_word_label"
                             android:textColor="@color/primary"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -254,7 +257,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Resilience"
+                            android:text="@string/daily_word_term"
                             android:textColor="@color/text_primary"
                             android:textSize="22sp"
                             android:textStyle="bold" />
@@ -264,7 +267,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Zorluklara karşı dayanıklılık, kendini toplama yeteneği."
+                            android:text="@string/daily_word_meaning"
                             android:textColor="@color/text_secondary"
                             android:textSize="14sp" />
 
@@ -273,7 +276,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="She showed great resilience during the crisis."
+                            android:text="@string/daily_word_sample"
                             android:textColor="@color/text_secondary"
                             android:textSize="13sp"
                             android:textStyle="italic"
@@ -307,6 +310,7 @@
                             android:layout_marginEnd="-20dp"
                             android:alpha="0.3"
                             android:src="@drawable/ic_quiz_graphic"
+                            android:contentDescription="@string/home_quiz_graphic_content_description"
                             android:scaleType="fitCenter" />
 
                         <LinearLayout
@@ -382,6 +386,7 @@
                             android:layout_marginEnd="-20dp"
                             android:alpha="0.3"
                             android:src="@drawable/ic_wordle_graphic"
+                            android:contentDescription="@string/home_wordle_graphic_content_description"
                             android:scaleType="fitCenter" />
 
                         <LinearLayout
@@ -457,6 +462,7 @@
                             android:layout_marginEnd="-20dp"
                             android:alpha="0.3"
                             android:src="@drawable/ic_llm_graphic"
+                            android:contentDescription="@string/home_story_graphic_content_description"
                             android:scaleType="fitCenter" />
 
                         <LinearLayout
@@ -471,7 +477,7 @@
                                 android:background="@drawable/bg_level_badge"
                                 android:paddingHorizontal="12dp"
                                 android:paddingVertical="4dp"
-                                android:text="Kelime Zinciri"
+                                android:text="@string/word_chain_card_badge"
                                 android:textColor="@color/primary_dark"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -480,7 +486,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="12dp"
-                                android:text="Kelime dağarcığını test et."
+                                android:text="@string/word_chain_card_title"
                                 android:textColor="@color/text_primary"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -489,7 +495,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Verilen harfle başlayan en çok kelimeyi bulmaya çalış."
+                                android:text="@string/word_chain_card_subtitle"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="14sp"
                                 android:lineSpacingExtra="2dp" />
@@ -500,7 +506,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="20dp"
-                                android:text="Zinciri Başlat"
+                                android:text="@string/story_card_button"
                                 app:cornerRadius="16dp" />
                         </LinearLayout>
                     </RelativeLayout>

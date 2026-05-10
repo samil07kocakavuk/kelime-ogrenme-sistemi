@@ -21,6 +21,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Locale;
 
 public class QuizRepository {
     private static final int OPTION_COUNT = 4;
@@ -117,7 +118,7 @@ public class QuizRepository {
         for (QuizResultEntity res : results) {
             Calendar resCal = Calendar.getInstance();
             resCal.setTimeInMillis(res.completedAt);
-            String dayKey = String.format("%02d/%02d", resCal.get(Calendar.DAY_OF_MONTH), resCal.get(Calendar.MONTH) + 1);
+            String dayKey = String.format(Locale.US, "%02d/%02d", resCal.get(Calendar.DAY_OF_MONTH), resCal.get(Calendar.MONTH) + 1);
             if (!grouped.containsKey(dayKey)) grouped.put(dayKey, new ArrayList<>());
             grouped.get(dayKey).add(res.successRate);
         }
@@ -127,7 +128,7 @@ public class QuizRepository {
         current.setTimeInMillis(since);
 
         for (int i = 0; i < 7; i++) {
-            String dayKey = String.format("%02d/%02d", current.get(Calendar.DAY_OF_MONTH), current.get(Calendar.MONTH) + 1);
+            String dayKey = String.format(Locale.US, "%02d/%02d", current.get(Calendar.DAY_OF_MONTH), current.get(Calendar.MONTH) + 1);
             double avg = 0;
             if (grouped.containsKey(dayKey)) {
                 List<Double> rates = grouped.get(dayKey);

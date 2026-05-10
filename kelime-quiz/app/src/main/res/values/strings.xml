@@ -116,17 +116,36 @@
     <string name="level_default_label">0/6. Seviye</string>
     <string name="word_meta_format">%1$s · %2$s</string>
     <string name="home_user_label">Kullanıcı</string>
-    <string name="home_level_label">Seviye</string>
+    <string name="home_profile_image_content_description">Kullanıcı simgesi</string>
+    <string name="home_greeting">Merhaba,</string>
+    <string name="home_report_action">Rapor</string>
+    <string name="zero_day_count">0 Gün</string>
+    <string name="zero_percent_display">0%%</string>
     <string name="zero_decimal">0.0</string>
+    <string name="streak_label">Seri 🔥</string>
+    <string name="success_label">Başarı 🎯</string>
+    <string name="word_label">Kelime ✅</string>
+    <string name="average_level_label">Ort. Seviye</string>
     <string name="home_card_one_badge">Quiz</string>
     <string name="home_card_one_title">Bugünün tekrarını tamamla.</string>
     <string name="home_card_one_subtitle">Tekrar zamanı gelen kelimeler önce gelir, eksik kalanlar yeni havuzdan eklenir.</string>
     <string name="home_card_two_badge">Wordle</string>
     <string name="home_card_two_title">Günün kelimesini yakala.</string>
     <string name="home_card_two_subtitle">Günlük kelimeyi tahmin et, ipuçlarını verimli kullan.</string>
-    <string name="home_card_three_badge">LLM Modülü</string>
-    <string name="home_card_three_title">Beş kelimeden kısa bir hikaye üret.</string>
-    <string name="home_card_three_subtitle">Seçilen kelimelerle yapay zeka destekli metin ve görsel oluşturulur.</string>
+    <string name="daily_word_label">Günün Kelimesi</string>
+    <string name="daily_word_term">Resilience</string>
+    <string name="daily_word_meaning">Zorluklara karşı dayanıklılık, kendini toplama yeteneği.</string>
+    <string name="daily_word_sample">She showed great resilience during the crisis.</string>
+    <string name="word_chain_card_badge">Kelime Zinciri</string>
+    <string name="word_chain_card_title">Kelime dağarcığını test et.</string>
+    <string name="word_chain_card_subtitle">Verilen harfle başlayan en çok kelimeyi bulmaya çalış.</string>
+    <string name="story_card_button">LLM Hikaye Oluştur</string>
+    <string name="weekly_report_title">Haftalık İlerleme Raporu</string>
+    <string name="weekly_report_graph_title">📈 Haftalık Başarı Grafiği</string>
+    <string name="weekly_report_graph_subtitle">Son 7 gündeki quiz performansın.</string>
+    <string name="weekly_report_analysis_title">💡 Analiz</string>
+    <string name="weekly_report_loading">Veriler yükleniyor…</string>
+    <string name="day_monday_short">Pzt</string>
 
     <string name="wordle_title">Günlük Wordle</string>
     <string name="hint_action">İpucu (%1$d)</string>
@@ -147,11 +166,12 @@
     <string name="wordle_target_word_label">Kelime:</string>
     <string name="wordle_target_word_placeholder">APPLE</string>
     <string name="wordle_no_words">Wordle için yeterli kelime yok. Önce kelime ekleyin.</string>
-    <string name="home_profile_image_content_description">Kullanıcı simgesi</string>
+    <string name="home_quiz_graphic_content_description">Quiz kartı görseli</string>
+    <string name="home_wordle_graphic_content_description">Wordle kartı görseli</string>
+    <string name="home_story_graphic_content_description">LLM kartı görseli</string>
     <string name="wordle_result_icon_content_description">Wordle sonuç simgesi</string>
 
     <string name="word_chain_title">LLM Modülü</string>
-    <string name="word_chain_button">LLM Hikaye Oluştur</string>
     <string name="word_chain_info">Rastgele seçilen 5 kelimeden LLM destekli bir hikaye ve görsel oluşturulur.</string>
     <string name="word_chain_words_label">Kelimeler: %1$s</string>
     <string name="word_chain_generate">Hikaye Oluştur</string>
@@ -162,4 +182,5 @@
     <string name="word_chain_story_error">Hikaye oluşturulamadı: %1$s</string>
     <string name="word_chain_no_words">Kelime havuzunda en az 5 kelime gerekli.</string>
     <string name="word_chain_image_content_description">LLM tarafından oluşturulan hikaye görseli</string>
+    <string name="day_count_format">%1$d Gün</string>
 </resources>

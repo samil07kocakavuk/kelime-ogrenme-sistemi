@@ -41,8 +41,6 @@
     <color name="feedback_neutral_bg">#121B1F</color>
     <color name="feedback_success_bg">#1B2E20</color>
     <color name="feedback_error_bg">#2E1B1B</color>
-    <color name="quiz_option_bg">#0C1418</color>
-    <color name="quiz_option_stroke">#2A3942</color>
     <color name="quiz_option_text">#E0E0E0</color>
     <color name="quiz_option_feedback_text">#FFFFFF</color>
 

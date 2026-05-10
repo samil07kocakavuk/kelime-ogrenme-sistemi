@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 updateAverageLevel(avgLevel);
                 loadDailyWord();
                 if (tvStreakValue != null && finalUser != null) {
-                    tvStreakValue.setText(finalUser.currentStreak + " Gün");
+                    tvStreakValue.setText(getString(R.string.day_count_format, finalUser.currentStreak));
                 }
                 if (tvSuccessRateValue != null) tvSuccessRateValue.setText(String.format(Locale.US, "%%%d", (int)averageSuccessRate));
                 if (tvWordCountValue != null) tvWordCountValue.setText(String.valueOf(levelOneCount));
