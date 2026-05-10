@@ -365,9 +365,9 @@ public class QuizActivity extends AppCompatActivity {
         for (MaterialButton button : optionButtons) {
             String option = button.getText().toString();
             if (option.equals(correctAnswer)) {
-                applyOptionStyle(button, R.drawable.bg_quiz_option_success, R.color.text_on_primary);
+                applyOptionStyle(button, R.drawable.bg_quiz_option_success, R.color.quiz_option_feedback_text);
             } else if (!correct && option.equals(lastSelectedAnswer)) {
-                applyOptionStyle(button, R.drawable.bg_quiz_option_error, R.color.text_on_primary);
+                applyOptionStyle(button, R.drawable.bg_quiz_option_error, R.color.quiz_option_feedback_text);
             }
         }
     }

@@ -44,6 +44,7 @@
     <color name="quiz_option_bg">#0C1418</color>
     <color name="quiz_option_stroke">#2A3942</color>
     <color name="quiz_option_text">#E0E0E0</color>
+    <color name="quiz_option_feedback_text">#FFFFFF</color>
 
     <!-- Wordle Colors -->
     <color name="wordle_correct">#6AAA64</color>
