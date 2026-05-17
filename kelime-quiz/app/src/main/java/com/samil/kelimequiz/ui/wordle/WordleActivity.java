@@ -35,6 +35,7 @@ public class WordleActivity extends AppCompatActivity {
     private static final int MAX_ATTEMPTS = 5;
     private static final int MIN_WORD_LENGTH = 4;
     private static final int MAX_WORD_LENGTH = 6;
+    private static final int MIN_STARTED_LEVEL = 1;
     private static final String PREFS_NAME = "wordle_prefs";
 
     private LinearLayout llWordleGrid;
@@ -200,7 +201,12 @@ public class WordleActivity extends AppCompatActivity {
         if (saved != null) return saved;
 
         AppDatabase db = AppDatabase.getInstance(this);
-        String word = db.wordDao().getRandomWordForWordle(userId, MIN_WORD_LENGTH, MAX_WORD_LENGTH);
+        String word = db.wordDao().getRandomStartedWordForWordle(
+                userId,
+                MIN_WORD_LENGTH,
+                MAX_WORD_LENGTH,
+                MIN_STARTED_LEVEL
+        );
         if (word != null) {
             word = word.toUpperCase(Locale.ENGLISH);
             prefs.edit().putString(key, word).apply();

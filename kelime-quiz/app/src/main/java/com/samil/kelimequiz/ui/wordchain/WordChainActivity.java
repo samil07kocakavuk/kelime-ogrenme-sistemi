@@ -25,6 +25,7 @@ import java.util.List;
 
 public class WordChainActivity extends AppCompatActivity {
     private static final int WORD_COUNT = 5;
+    private static final int MIN_STARTED_LEVEL = 1;
 
     private TextView tvWords;
     private TextView tvStoryText;
@@ -67,7 +68,9 @@ public class WordChainActivity extends AppCompatActivity {
 
     private void pickRandomWords() {
         AppExecutors.io().execute(() -> {
-            List<WordEntity> words = AppDatabase.getInstance(this).wordDao().listByUserSimple(userId);
+            List<WordEntity> words = AppDatabase.getInstance(this)
+                    .wordDao()
+                    .listStartedWords(userId, MIN_STARTED_LEVEL);
             Collections.shuffle(words);
             List<String> picked = new ArrayList<>();
             for (int i = 0; i < Math.min(WORD_COUNT, words.size()); i++) {

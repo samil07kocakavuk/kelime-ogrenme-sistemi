@@ -96,6 +96,7 @@ public final class TestDoubles {
 
     public static final class InMemoryWordDao implements WordDao {
         private final Map<Integer, WordEntity> words = new HashMap<>();
+        private final Map<Integer, QuizProgressEntity> progressByWordId = new HashMap<>();
         private int nextId = 1;
 
         @Override
@@ -196,6 +197,23 @@ public final class TestDoubles {
         }
 
         @Override
+        public String getRandomStartedWordForWordle(int userId, int minLen, int maxLen, int minLevel) {
+            for (WordEntity word : words.values()) {
+                QuizProgressEntity progress = progressByWordId.get(word.wordId);
+                if (word.userId == userId
+                        && word.engWord != null
+                        && word.engWord.length() >= minLen
+                        && word.engWord.length() <= maxLen
+                        && progress != null
+                        && progress.userId == userId
+                        && progress.level >= minLevel) {
+                    return word.engWord;
+                }
+            }
+            return null;
+        }
+
+        @Override
         public WordEntity getRandomWord(int userId) {
             for (WordEntity word : words.values()) {
                 if (word.userId == userId) {
@@ -214,6 +232,25 @@ public final class TestDoubles {
                 }
             }
             return result;
+        }
+
+        @Override
+        public List<WordEntity> listStartedWords(int userId, int minLevel) {
+            List<WordEntity> result = new ArrayList<>();
+            for (WordEntity word : words.values()) {
+                QuizProgressEntity progress = progressByWordId.get(word.wordId);
+                if (word.userId == userId
+                        && progress != null
+                        && progress.userId == userId
+                        && progress.level >= minLevel) {
+                    result.add(copy(word));
+                }
+            }
+            return result;
+        }
+
+        public void putProgress(QuizProgressEntity progress) {
+            progressByWordId.put(progress.wordId, InMemoryQuizProgressDao.copy(progress));
         }
 
         public void put(WordEntity word) {

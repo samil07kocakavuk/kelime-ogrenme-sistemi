@@ -49,9 +49,24 @@ public interface WordDao {
     @Query("SELECT engWord FROM words WHERE userId = :userId AND LENGTH(engWord) BETWEEN :minLen AND :maxLen ORDER BY RANDOM() LIMIT 1")
     String getRandomWordForWordle(int userId, int minLen, int maxLen);
 
+    @Query("SELECT words.engWord FROM words " +
+            "INNER JOIN quiz_progress ON words.wordId = quiz_progress.wordId AND quiz_progress.userId = :userId " +
+            "WHERE words.userId = :userId " +
+            "AND LENGTH(words.engWord) BETWEEN :minLen AND :maxLen " +
+            "AND quiz_progress.level >= :minLevel " +
+            "ORDER BY RANDOM() LIMIT 1")
+    String getRandomStartedWordForWordle(int userId, int minLen, int maxLen, int minLevel);
+
     @Query("SELECT * FROM words WHERE userId = :userId ORDER BY RANDOM() LIMIT 1")
     WordEntity getRandomWord(int userId);
 
     @Query("SELECT * FROM words WHERE userId = :userId ORDER BY RANDOM()")
     List<WordEntity> listByUserSimple(int userId);
+
+    @Query("SELECT words.* FROM words " +
+            "INNER JOIN quiz_progress ON words.wordId = quiz_progress.wordId AND quiz_progress.userId = :userId " +
+            "WHERE words.userId = :userId " +
+            "AND quiz_progress.level >= :minLevel " +
+            "ORDER BY RANDOM()")
+    List<WordEntity> listStartedWords(int userId, int minLevel);
 }
