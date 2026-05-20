@@ -355,8 +355,7 @@ public class QuizActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(picturePath)
                 .thumbnail(0.25f)
-                .override(320, 240)
-                .centerCrop()
+                .fitCenter()
                 .dontAnimate()
                 .into(ivQuizWordImage);
     }

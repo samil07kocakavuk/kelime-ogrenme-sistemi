@@ -160,7 +160,21 @@ public class QuizRepository {
     private QuizQuestion toQuestion(int userId, WordEntity word) {
         Set<String> uniqueOptions = new LinkedHashSet<>();
         uniqueOptions.add(word.trWord);
-        uniqueOptions.addAll(wordDao.listRandomTranslationsExcluding(userId, word.wordId, OPTION_COUNT - 1));
+        String excludedCategory = word.category;
+        uniqueOptions.addAll(wordDao.listRandomTranslationsExcludingCategory(
+                userId,
+                word.wordId,
+                excludedCategory,
+                OPTION_COUNT - 1
+        ));
+
+        if (uniqueOptions.size() < OPTION_COUNT) {
+            uniqueOptions.addAll(wordDao.listRandomTranslationsExcluding(
+                    userId,
+                    word.wordId,
+                    OPTION_COUNT - uniqueOptions.size()
+            ));
+        }
 
         List<String> options = new ArrayList<>(uniqueOptions);
         Collections.shuffle(options);

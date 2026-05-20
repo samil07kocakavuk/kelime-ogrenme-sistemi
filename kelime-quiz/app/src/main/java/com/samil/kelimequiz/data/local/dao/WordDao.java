@@ -40,6 +40,9 @@ public interface WordDao {
     @Query("SELECT trWord FROM words WHERE userId = :userId AND wordId != :excludedWordId ORDER BY RANDOM() LIMIT :limit")
     List<String> listRandomTranslationsExcluding(int userId, int excludedWordId, int limit);
 
+    @Query("SELECT trWord FROM words WHERE userId = :userId AND wordId != :excludedWordId AND category IS NOT NULL AND category != :excludedCategory ORDER BY RANDOM() LIMIT :limit")
+    List<String> listRandomTranslationsExcludingCategory(int userId, int excludedWordId, String excludedCategory, int limit);
+
     @Query("SELECT DISTINCT category FROM words WHERE userId = :userId AND category IS NOT NULL ORDER BY category")
     List<String> listCategories(int userId);
 

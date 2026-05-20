@@ -171,6 +171,20 @@ public final class TestDoubles {
         }
 
         @Override
+        public List<String> listRandomTranslationsExcludingCategory(int userId, int excludedWordId, String excludedCategory, int limit) {
+            List<String> translations = new ArrayList<>();
+            for (WordEntity word : words.values()) {
+                if (word.userId == userId
+                        && word.wordId != excludedWordId
+                        && word.category != null
+                        && !word.category.equals(excludedCategory)) {
+                    translations.add(word.trWord);
+                }
+            }
+            return new ArrayList<>(translations.subList(0, Math.min(limit, translations.size())));
+        }
+
+        @Override
         public List<String> listCategories(int userId) {
             return Collections.emptyList();
         }
